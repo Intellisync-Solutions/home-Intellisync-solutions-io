@@ -21,10 +21,10 @@ import {
   ShoppingCart,
   
 } from 'lucide-react';
-import { Button } from '../../components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "../../components/ui/dialog";
-import { useToast } from "../../components/ui/use-toast";
-import { StreamingText } from '../../components/features/StreamingText';
+import { Button } from '../../../components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "../../../components/ui/dialog";
+import { useToast } from "../../../components/ui/use-toast";
+import { StreamingText } from '../../../components/features/StreamingText';
 
 const ButtonShowcase = () => {
   const { toast } = useToast();

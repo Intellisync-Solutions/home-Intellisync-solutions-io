@@ -8,21 +8,21 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
 import Work from './pages/Work';
-import ButtonShowcase from './pages/work/ButtonShowcase';
-import CardShowcase from './pages/work/CardShowcase';
-import FormShowcase from './pages/work/FormShowcase';
-import NavigationShowcase from './pages/work/NavigationShowcase';
-import PageShowcase from './pages/work/PageShowcase';
-import PageDesignDetail from './pages/work/PageDesignDetail';
+import ButtonShowcase from './pages/work/ButtonShowcase/ButtonShowcase';
+import CardShowcase from './pages/work/CardShowcase/CardShowcase';
+import FormShowcase from './pages/work/FormShowcase/FormShowcase';
+import NavigationShowcase from './pages/work/NavigationShowcase/NavigationShowcase';
+import PageShowcase from './pages/work/PageDesignShowcase/PagesShowcase/PageShowcase';
+import PageDesignDetail from './pages/work/PageDesignShowcase/PageDesignDetail';
 import Contact from './pages/Contact';
-import SaasDashboard from './pages/work/SaasDashboard';
+import SaasDashboard from './pages/work/PageDesignShowcase/SaasShowcase/SaasDashboard';
 
 const App = () => {
   return (
     <ThemeProvider>
       <ToastProvider>
         <Router>
-          <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
+          <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 overflow-x-hidden">
             <Header />
             <main className="flex-grow overflow-auto pb-8">
               <Routes>
@@ -35,8 +35,8 @@ const App = () => {
                 <Route path="/work/forms" element={<FormShowcase />} />
                 <Route path="/work/navigation" element={<NavigationShowcase />} />
                 <Route path="/work/pages" element={<PageShowcase />} />
-                <Route path="/work/pages/saas-dashboard" element={<SaasDashboard />} />
                 <Route path="/work/pages/:id" element={<PageDesignDetail />} />
+                <Route path="/work/pages/saas-dashboard" element={<SaasDashboard />} />
                 <Route path="/contact" element={<Contact />} />
               </Routes>
             </main>

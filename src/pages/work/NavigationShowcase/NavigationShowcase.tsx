@@ -15,7 +15,7 @@ import {
   MoreVertical
 } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
-import { Button } from '../../components/ui/button';
+import { Button } from '../../../components/ui/button';
 
 const NavigationShowcase = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Code, Paintbrush, LineChart } from 'lucide-react';
 import Card from '../components/Card';
 import { Link } from 'react-router-dom';
+import { HomePageHero } from '../components/PageSections/HeroSection/HomePageHero';
+import { FeaturedProjects } from '../components/PageSections/FeaturedProjects';
 
 const Home = () => {
   const features = [
@@ -23,41 +25,16 @@ const Home = () => {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="w-full">
+      <HomePageHero />
+      <FeaturedProjects />
+      
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="flex flex-col items-center gap-12"
+        className="flex flex-col items-center gap-12 w-full"
       >
-        <div className="text-center max-w-3xl">
-          <motion.h1
-            className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-purple-500 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent"
-            animate={{ scale: [1, 1.02, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            Transform Your Digital Presence
-          </motion.h1>
-          
-          <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
-            We create modern, responsive, and user-friendly digital experiences 
-            that help your business stand out.
-          </p>
-
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-full font-medium"
-            >
-              Get Started
-              <ArrowRight size={20} />
-            </Link>
-          </motion.div>
-        </div>
-
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl">
           {features.map((feature, index) => (
             <motion.div

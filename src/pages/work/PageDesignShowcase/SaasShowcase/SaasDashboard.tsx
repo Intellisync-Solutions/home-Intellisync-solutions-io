@@ -1,5 +1,4 @@
-import { motion } from 'framer-motion';
-import { Button } from '../../components/ui/button';
+import { Button } from '../../../../components/ui/button';
 import { 
   ArrowRight, 
   BarChart2, 
@@ -12,12 +11,6 @@ import {
 } from 'lucide-react';
 
 const SaasDashboard = () => {
-  const fadeInUp = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.5 }
-  };
-
   const features = [
     {
       icon: <BarChart2 className="w-6 h-6 text-indigo-500" />,
@@ -83,12 +76,7 @@ const SaasDashboard = () => {
       {/* Hero Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <motion.div 
-            className="text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+          <div className="text-center">
             <h1 className="text-4xl sm:text-6xl font-bold text-white mb-6">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
                 Transform Your Workflow
@@ -114,15 +102,10 @@ const SaasDashboard = () => {
                 Watch Demo
               </Button>
             </div>
-          </motion.div>
+          </div>
 
           {/* Dashboard Preview */}
-          <motion.div
-            className="mt-20 relative"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-          >
+          <div className="mt-20 relative">
             <div className="relative mx-auto max-w-5xl">
               <div className="bg-slate-800/50 backdrop-blur-xl rounded-xl border border-slate-700 shadow-2xl p-2">
                 <img
@@ -132,33 +115,27 @@ const SaasDashboard = () => {
                 />
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Features Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-800/50">
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            className="text-center mb-16"
-            {...fadeInUp}
-          >
+          <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
               Everything you need to succeed
             </h2>
             <p className="text-slate-300 text-lg max-w-2xl mx-auto">
               Our comprehensive suite of features helps you stay ahead of the competition
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
-              <motion.div
+            {features.map((feature) => (
+              <div
                 key={feature.title}
                 className="bg-slate-800 rounded-xl p-6 border border-slate-700"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <div className="bg-slate-700/50 rounded-lg p-3 inline-block mb-4">
                   {feature.icon}
@@ -169,7 +146,7 @@ const SaasDashboard = () => {
                 <p className="text-slate-300">
                   {feature.description}
                 </p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -179,11 +156,7 @@ const SaasDashboard = () => {
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-            >
+            <div>
               <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
                 Built by developers,
                 <br />
@@ -202,26 +175,18 @@ const SaasDashboard = () => {
                   "Used by Fortune 500 companies",
                   "99.99% uptime guarantee",
                   "24/7 dedicated support"
-                ].map((item, index) => (
-                  <motion.li
+                ].map((item) => (
+                  <li
                     key={item}
                     className="flex items-center text-slate-300"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
                   >
                     <CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />
                     {item}
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
-            </motion.div>
-            <motion.div
-              className="relative"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-            >
+            </div>
+            <div className="relative">
               <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-xl p-1">
                 <div className="bg-slate-900 rounded-lg p-8">
                   <div className="grid grid-cols-2 gap-4">
@@ -248,7 +213,7 @@ const SaasDashboard = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -256,28 +221,22 @@ const SaasDashboard = () => {
       {/* Pricing Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-800/50">
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            className="text-center mb-16"
-            {...fadeInUp}
-          >
+          <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
               Simple, transparent pricing
             </h2>
             <p className="text-slate-300 text-lg max-w-2xl mx-auto">
               Choose the perfect plan for your team's needs
             </p>
-          </motion.div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {pricingPlans.map((plan, index) => (
-              <motion.div
+            {pricingPlans.map((plan) => (
+              <div
                 key={plan.name}
                 className={`relative bg-slate-800 rounded-xl p-8 border ${
                   plan.popular ? 'border-indigo-500' : 'border-slate-700'
                 }`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
@@ -306,7 +265,7 @@ const SaasDashboard = () => {
                 >
                   Get Started
                 </Button>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

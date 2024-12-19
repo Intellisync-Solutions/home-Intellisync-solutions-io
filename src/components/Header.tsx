@@ -16,7 +16,7 @@ const Header = () => {
   }, [location.pathname]);
 
   return (
-    <header className="sticky top-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 backdrop-blur-sm bg-white/80 dark:bg-gray-900/80">
+    <header className="sticky top-0 z-50 bg-white/90 dark:bg-gray-900/90 border-b border-gray-200 dark:border-gray-800 backdrop-blur-md">
       <div className="container mx-auto px-4 py-4">
         <nav className="flex items-center justify-between">
           <Link to="/" className="text-xl font-semibold text-gray-800 dark:text-gray-200">
@@ -125,8 +125,8 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute left-0 right-0 top-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
-            <div className="container mx-auto px-4 py-4 space-y-4">
+          <div className="md:hidden fixed left-0 right-0 top-[73px] bg-white/90 dark:bg-gray-900/90 border-b border-gray-200 dark:border-gray-800 backdrop-blur-md h-[calc(100vh-73px)] overflow-y-auto transition-all duration-300 ease-in-out">
+            <div className="container mx-auto px-4 py-6 space-y-6">
               <Link 
                 to="/"
                 className="block text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"

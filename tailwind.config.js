@@ -8,9 +8,19 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: {
+        DEFAULT: '1rem',
+        sm: '2rem',
+        lg: '4rem',
+        xl: '5rem',
+        '2xl': '6rem',
+      },
       screens: {
-        "2xl": "1400px",
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+        '2xl': '1800px',
       },
     },
     extend: {
@@ -18,6 +28,7 @@ export default {
         'fade-in': 'fadeIn 0.5s ease-in-out',
         'slide-up': 'slideUp 0.5s ease-in-out',
         blob: "blob 7s infinite",
+        'glow': 'glow 1.5s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -27,6 +38,17 @@ export default {
         slideUp: {
           '0%': { transform: 'translateY(20px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        glow: {
+          '0%': {
+            boxShadow: '0 0 0 rgba(var(--primary), 0.6)',
+          },
+          '50%': {
+            boxShadow: '0 0 30px rgba(var(--primary), 0.8)',
+          },
+          '100%': {
+            boxShadow: '0 0 0 rgba(var(--primary), 0.6)',
+          },
         },
         blob: {
           "0%": {
