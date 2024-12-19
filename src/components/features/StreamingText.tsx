@@ -10,7 +10,7 @@ interface StreamingTextProps {
   delay?: number; // initial delay before starting
 }
 
-export const StreamingText = ({
+const StreamingText = ({
   text,
   speed = 900,
   className = '',
@@ -69,3 +69,5 @@ export const StreamingText = ({
     </span>
   );
 };
+
+export { StreamingText };

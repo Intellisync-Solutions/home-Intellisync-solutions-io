@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Button } from '../../../../components/ui/button';
+import { Button } from '../../../../components/ui/Button/button';
 import { Download, Share2, Trash2 } from 'lucide-react';
 
 const ActionButtons = () => {

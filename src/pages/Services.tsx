@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Code, Paintbrush, Smartphone, Globe, Database, LineChart } from 'lucide-react';
-import Card from '../components/Card';
+import Card from '../components/ui/card';
 
 const Services = () => {
   const services = [

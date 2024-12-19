@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
-import { Toaster } from "./components/ui/toaster";
-import { ToastProvider } from "./components/ui/toast";
+import { Toaster } from "./components/ui/Toast/toaster";
+import { ToastProvider } from "./components/ui/Toast/toast";
+import { ScrollToTop } from './components/ScrollToTop';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -22,6 +23,7 @@ const App = () => {
     <ThemeProvider>
       <ToastProvider>
         <Router>
+          <ScrollToTop />
           <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 overflow-x-hidden">
             <Header />
             <main className="flex-grow overflow-auto pb-8">

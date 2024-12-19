@@ -21,13 +21,12 @@ import {
   ShoppingCart,
   
 } from 'lucide-react';
-import { Button } from '../../../components/ui/button';
+import { Button } from '../../../components/ui/Button/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "../../../components/ui/dialog";
-import { useToast } from "../../../components/ui/use-toast";
+import { toast } from 'sonner';
 import { StreamingText } from '../../../components/features/StreamingText';
 
 const ButtonShowcase = () => {
-  const { toast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
@@ -46,109 +45,67 @@ const ButtonShowcase = () => {
     try {
       if (navigator.share) {
         await navigator.share(shareData);
-        toast({
-          title: "Shared Successfully!",
-          description: "Content has been shared",
-        });
+        toast.success("Content has been shared successfully");
       } else {
         await navigator.clipboard.writeText(shareData.url);
-        toast({
-          title: "Link Copied!",
-          description: "URL copied to clipboard",
-        });
+        toast.success("Content copied to clipboard");
       }
     } catch {
-      toast({
-        title: "Failed to share",
-        description: "Please try again",
-        variant: "destructive",
-      });
+      toast.error("Failed to share");
     }
   };
 
   const handleLike = () => {
     const newLikedState = !isLiked;
     setIsLiked(newLikedState);
-    toast({
-      title: newLikedState ? "Liked!" : "Unliked",
-      description: newLikedState ? "Added to your likes" : "Removed from your likes",
-    });
+    toast.success(newLikedState ? "Added to your likes" : "Removed from your likes");
   };
 
   const openModal = () => {
     setIsOpen(true);
-    toast({
-      title: "Welcome to my creative space!",
-      description: "Let me share my passion for design with you.",
+    toast("Let me share my passion for design with you", {
       duration: 3000,
     });
   };
 
   const simulateLoading = () => {
     setIsLoading(true);
-    toast({
-      title: "Processing...",
-      description: "Your request is being processed",
-    });
+    toast.loading("Your request is being processed");
     setTimeout(() => {
       setIsLoading(false);
-      toast({
-        title: "Complete!",
-        description: "Your request has been processed successfully",
-      });
+      toast.success("Your request has been processed successfully");
     }, 2000);
   };
 
   const handleNotification = () => {
     setNotificationCount(prev => prev + 1);
-    toast({
-      title: "New Notification",
-      description: `You have ${notificationCount + 1} unread messages`,
-    });
+    toast(`You have ${notificationCount + 1} unread messages`);
   };
 
   const handleDelete = () => {
     console.log('Delete button clicked');
     setShowConfirmModal(true);
-    toast({
-      title: "Confirm Deletion",
-      description: "Please confirm if you want to delete this item.",
-      variant: "destructive",
-    });
+    toast.error("Please confirm if you want to delete this item");
   };
 
   const confirmDelete = () => {
-    toast({
-      title: "Deleted!",
-      description: "The item has been deleted successfully.",
-      variant: "destructive",
-    });
+    toast.success("The item has been deleted successfully");
     setShowConfirmModal(false);
   };
 
   const handleApprove = () => {
     console.log('Approve button clicked');
-    toast({
-      title: "Action Approved!",
-      description: "The requested action has been approved successfully.",
-    });
+    toast.success("The requested action has been approved successfully");
   };
 
   const handleDecline = () => {
     console.log('Decline button clicked');
-    toast({
-      title: "Action Rejected",
-      description: "The requested action has been rejected.",
-      variant: "destructive",
-    });
+    toast.error("The requested action has been rejected");
   };
 
   const handleSend = () => {
     console.log('Send button clicked');
-    toast({
-      title: "Message Sent!",
-      description: "Your message has been sent successfully. We'll get back to you soon!",
-    });
+    toast.success("Your message has been sent successfully. We'll get back to you soon!");
   };
 
   return (
@@ -276,10 +233,7 @@ const ButtonShowcase = () => {
             </Button>
             <Button
               onClick={() => {
-                toast({
-                  title: "Let's create something amazing together! ",
-                  description: "I'm excited to collaborate on your next project.",
-                });
+                toast.success("I'm excited to collaborate on your next project.");
                 setIsOpen(false);
               }}
               className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600 text-white transition-all duration-300"
@@ -408,10 +362,7 @@ const ButtonShowcase = () => {
                   className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 group relative"
                   onClick={() => {
                     setCartCount(prev => prev + 1);
-                    toast({
-                      title: "Added to Cart!",
-                      description: "Item has been added to your cart",
-                    });
+                    toast.success("Item has been added to your cart");
                   }}
                 >
                   <motion.span 
@@ -565,10 +516,7 @@ const ButtonShowcase = () => {
                   <Button 
                     className="w-full bg-gradient-to-r from-violet-500 to-purple-500 hover:from-violet-600 hover:to-purple-600"
                     onClick={() => {
-                      toast({
-                        title: "Animation in Action!",
-                        description: "Hover and click effects demonstration",
-                      });
+                      toast.success("Hover and click effects demonstration");
                     }}
                   >
                     <motion.div
@@ -589,10 +537,7 @@ const ButtonShowcase = () => {
                   <Button 
                     className="w-full backdrop-blur-sm bg-white/10 border border-white/20 hover:bg-white/20"
                     onClick={() => {
-                      toast({
-                        title: "Bouncy!",
-                        description: "Watch me bounce on hover",
-                      });
+                      toast.success("Watch me bounce on hover");
                     }}
                   >
                     <motion.div
@@ -620,10 +565,7 @@ const ButtonShowcase = () => {
                   <Button 
                     className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600"
                     onClick={() => {
-                      toast({
-                        title: "Shake it!",
-                        description: "Watch the shake animation on hover",
-                      });
+                      toast.success("Watch the shake animation on hover");
                     }}
                   >
                     <motion.div 
@@ -719,10 +661,7 @@ const ButtonShowcase = () => {
                     Close
                   </Button>
                   <Button onClick={() => {
-                    toast({
-                      title: "Success!",
-                      description: "Action completed successfully.",
-                    });
+                    toast.success("Action completed successfully.");
                     setShowModal(false);
                   }}>
                     Save Changes

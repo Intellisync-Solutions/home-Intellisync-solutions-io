@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Code, Brain, Heart, Users, Clock, Calculator } from 'lucide-react';
+import {  Code, Brain, Heart, Users, Clock, Calculator } from 'lucide-react';
 import { useState } from 'react';
 import { ProjectFeaturesModal } from '../../Modals/ProjectFeaturesModal';
+import { StreamingText } from '../../features/StreamingText';
+import { InfiniteCarousel } from '../../ui/InfiniteCarousel/InfiniteCarousel';
+import { ProjectCard } from '../../ui/ProjectCard/ProjectCard';
 import type { Project } from './types';
 
 const projects: Project[] = [
@@ -266,64 +269,37 @@ export const FeaturedProjects = () => {
   };
 
   return (
-    <section className="w-full py-20 bg-background">
-      <div className="container mx-auto px-4">
+    <section className="py-20 relative overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-transparent via-blue-50/30 to-purple-50/30 dark:via-blue-950/30 dark:to-purple-950/30" />
+      
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
+          className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl font-bold mb-4">Featured Projects</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Explore some of my recent work and projects that showcase my skills and expertise
-          </p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            Featured Projects
+          </h2>
+          <StreamingText
+            text="At Intellisync Solutions we build Communities. We believe that great work comes from sharing a Passion, not just the technical requirements, but the human stories behind every project."
+            speed={50}
+            className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+          />
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <InfiniteCarousel speed={0.2} className="py-8">
           {projects.map((project, index) => (
-            <motion.div
+            <ProjectCard
               key={project.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative bg-card rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
-            >
-              <button
-                onClick={() => handleProjectClick(project)}
-                className="block w-full text-left"
-              >
-                <div className="aspect-video relative overflow-hidden">
-                  <img
-                    src={project.imageUrl}
-                    alt={project.title}
-                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-muted-foreground mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 text-sm bg-muted rounded-full text-muted-foreground"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex items-center text-primary font-medium">
-                    View Project
-                    <ArrowRight className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </div>
-              </button>
-            </motion.div>
+              project={project}
+              onClick={handleProjectClick}
+              index={index}
+            />
           ))}
-        </div>
+        </InfiniteCarousel>
       </div>
 
       <ProjectFeaturesModal

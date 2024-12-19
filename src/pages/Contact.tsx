@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin } from 'lucide-react';
-import Card from '../components/Card';
+import Card from '../components/ui/card';
 
 const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {

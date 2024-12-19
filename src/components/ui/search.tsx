@@ -2,7 +2,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Input } from "./input"
 import { Search as SearchIcon, X } from "lucide-react"
-import { Button } from "./button"
+import { Button } from "./Button/button"
 
 export interface SearchProps extends React.InputHTMLAttributes<HTMLInputElement> {
   onSearch?: (value: string) => void

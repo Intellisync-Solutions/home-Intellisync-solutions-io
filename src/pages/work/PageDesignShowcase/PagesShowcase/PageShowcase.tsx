@@ -1,5 +1,5 @@
 import { ExternalLink } from 'lucide-react';
-import { Button } from '../../../../components/ui/button';
+import { Button } from '../../../../components/ui/Button/button';
 import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Badge } from '../../../../components/ui/badge';

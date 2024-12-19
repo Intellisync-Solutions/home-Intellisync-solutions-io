@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Users, Target, Heart } from 'lucide-react';
-import Card from '../components/Card';
+import Card from '../components/ui/card';
 
 const About = () => {
   return (

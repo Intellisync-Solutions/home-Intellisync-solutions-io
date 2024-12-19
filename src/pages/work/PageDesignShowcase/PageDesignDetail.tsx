@@ -1,5 +1,5 @@
 import { ExternalLink, ArrowLeft } from 'lucide-react';
-import { Button } from '../../../components/ui/button';
+import { Button } from '../../../components/ui/Button/button';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { StreamingText } from '../../../components/features/StreamingText';
