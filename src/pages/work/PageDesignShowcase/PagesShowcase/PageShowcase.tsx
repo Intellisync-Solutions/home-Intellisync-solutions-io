@@ -29,7 +29,7 @@ const pageDesigns: PageDesign[] = [
     demoUrl: '/work/pages/saas-dashboard',
     category: 'Dashboard',
     tags: ['SaaS', 'Modern', 'Dashboard'],
-    featured: true
+    featured: false
   },
   {
     id: 'modern-portfolio',
@@ -39,7 +39,7 @@ const pageDesigns: PageDesign[] = [
     demoUrl: '/work/pages/modern-portfolio',
     category: 'Portfolio',
     tags: ['Portfolio', 'Modern', 'Responsive'],
-    featured: true
+    featured: false
   },
   {
     id: 'ecommerce-platform',
@@ -49,7 +49,7 @@ const pageDesigns: PageDesign[] = [
     demoUrl: '/work/pages/ecommerce-platform',
     category: 'E-commerce',
     tags: ['E-commerce', 'Shopping', 'Responsive'],
-    featured: true
+    featured: false
   },
   {
     id: 'blog-platform',
@@ -59,7 +59,7 @@ const pageDesigns: PageDesign[] = [
     demoUrl: '/work/pages/blog-platform',
     category: 'Blog',
     tags: ['Content', 'Social', 'Personal'],
-    featured: true
+    featured: false
   },
   {
     id: 'business-one',
@@ -69,7 +69,7 @@ const pageDesigns: PageDesign[] = [
     demoUrl: '/work/business-one',
     category: 'Business',
     tags: ['React', 'TypeScript', 'Firebase'],
-    featured: true
+    featured: false
   },
   {
     id: 'serenity',
@@ -79,7 +79,7 @@ const pageDesigns: PageDesign[] = [
     demoUrl: '/work/serenity',
     category: 'Health & Wellness',
     tags: ['React', 'TypeScript', 'Node.js', 'Firebase'],
-    featured: true
+    featured: false
   },
   {
     id: 'teen-minds-matter',
@@ -89,7 +89,7 @@ const pageDesigns: PageDesign[] = [
     demoUrl: '/work/teen-minds-matter',
     category: 'Social',
     tags: ['React', 'TypeScript', 'Supabase', 'Node.js'],
-    featured: true
+    featured: false
   },
   {
     id: 'education-one',
@@ -99,7 +99,7 @@ const pageDesigns: PageDesign[] = [
     demoUrl: '/work/education-one',
     category: 'Education',
     tags: ['React', 'TypeScript', 'Node.js', 'Firebase', 'OpenAI'],
-    featured: true
+    featured: false
   },
   {
     id: 'time-capsule',
@@ -109,7 +109,7 @@ const pageDesigns: PageDesign[] = [
     demoUrl: '/work/time-capsule',
     category: 'Media',
     tags: ['React', 'TypeScript', 'Node.js', 'Firebase', 'OpenAI'],
-    featured: true
+    featured: false
   },
   {
     id: 'personal-one',
@@ -119,7 +119,7 @@ const pageDesigns: PageDesign[] = [
     demoUrl: '/work/personal-one',
     category: 'Finance',
     tags: ['React', 'TypeScript', 'Node.js', 'Firebase', 'OpenAI'],
-    featured: true
+    featured: false
   },
   {
     id: "real-estate-platform",
@@ -129,7 +129,7 @@ const pageDesigns: PageDesign[] = [
     demoUrl: "/work/pages/real-estate-platform",
     category: "Real Estate",
     tags: ["Real Estate", "Property", "Responsive"],
-    featured: true
+    featured: false
   },
   {
     id: "restaurant-platform",
@@ -139,7 +139,7 @@ const pageDesigns: PageDesign[] = [
     demoUrl: "/work/pages/restaurant-platform",
     category: "Restaurant",
     tags: ["Restaurant", "Food", "Responsive"],
-    featured: true
+    featured: false
   }
 ];
 
@@ -193,19 +193,9 @@ const PageShowcase = () => {
         onClose={() => setIsContactModalOpen(false)}
       />
 
-      {/* Floating Action Button */}
-      <Button
-        onClick={() => setIsContactModalOpen(true)}
-        className="fixed bottom-8 right-8 rounded-full size-16 shadow-xl shadow-primary/20 bg-primary hover:bg-primary/90 text-primary-foreground z-50"
-      >
-        <span className="absolute inset-0 flex items-center justify-center">
-          Start
-        </span>
-      </Button>
-
       {/* Filter Section - Vertical */}
-      <div className="fixed left-0 top-0 bottom-0 w-64 border-r bg-background/95 backdrop-blur-sm z-40 overflow-y-auto">
-        <div className="p-6">
+      <div className="fixed left-0 top-0 bottom-0 w-64 border-r bg-background/95 backdrop-blur-sm z-40">
+        <div className="sticky top-0 p-6">
           <h2 className="text-lg font-semibold mb-4">Filters</h2>
           <MenuBar
             onFilterChange={setSelectedFilters}
