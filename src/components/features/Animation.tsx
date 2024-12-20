@@ -224,8 +224,7 @@ const animations: { [key: string]: AnimationVariant } = {
         duration: 0.5,
         delay: custom * 0.1,
         repeat: Infinity
-      },
-      type: "tween"
+      }
     })
   },
   blur: {
@@ -281,8 +280,7 @@ const animations: { [key: string]: AnimationVariant } = {
         duration: 1,
         repeat: Infinity,
         ease: "easeOut"
-      },
-      type: "tween"
+      }
     }
   },
   highlight: {
@@ -291,8 +289,7 @@ const animations: { [key: string]: AnimationVariant } = {
       transition: {
         duration: 1.5,
         repeat: Infinity
-      },
-      type: "tween"
+      }
     }
   },
   skew: {
@@ -317,8 +314,7 @@ const animations: { [key: string]: AnimationVariant } = {
         duration: 2,
         repeat: Infinity,
         ease: "easeInOut"
-      },
-      type: "tween"
+      }
     }
   },
   glow: {
@@ -331,8 +327,7 @@ const animations: { [key: string]: AnimationVariant } = {
       transition: {
         duration: 1.5,
         repeat: Infinity
-      },
-      type: "tween"
+      }
     }
   },
   curtain: {
@@ -359,8 +354,7 @@ const animations: { [key: string]: AnimationVariant } = {
         type: "spring",
         stiffness: 50,
         damping: 20
-      },
-      type: "tween"
+      }
     })
   },
   "3d-rotate": {
@@ -394,8 +388,7 @@ const animations: { [key: string]: AnimationVariant } = {
         duration: 0.4,
         delay: custom * 0.1,
         ease: "easeOut"
-      },
-      type: "tween"
+      }
     })
   }
 };

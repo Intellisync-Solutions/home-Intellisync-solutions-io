@@ -1,48 +1,187 @@
-import { Home, MessageSquare, Calendar, Mail, MoreVertical, Settings, X } from 'lucide-react';
+import { Home, MessageSquare, Calendar, Mail, Settings, X, Users, BarChart, FileText, Layout, ChevronRight } from 'lucide-react';
+import { Button } from '../../../../components/ui/Button/button';
+import Card from '../../../../components/ui/card';
+import { cn } from '../../../../lib/utils';
+import { useState } from 'react';
 
 const SideNavigation = () => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [activeTab, setActiveTab] = useState('dashboard');
+
   return (
-    <section>
-      <h2 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-200">
-        Sidebar Navigation
-      </h2>
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg w-64">
-        <div className="p-4">
-          <div className="flex items-center justify-between mb-6">
-            <span className="text-xl font-semibold text-gray-800 dark:text-gray-200">Dashboard</span>
-            <button className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">
-              <X size={20} />
-            </button>
+    <div className="space-y-6">
+      {/* Classic Side Navigation */}
+      <Card>
+        <Card.Header>
+          <Card.Title>Classic Side Navigation</Card.Title>
+        </Card.Header>
+        <Card.Content>
+          <div className="h-[400px] w-64 rounded-lg border bg-card text-card-foreground shadow-sm">
+            <div className="p-4 flex flex-col h-full">
+              <div className="flex items-center justify-between mb-6">
+                <span className="text-xl font-semibold">Menu</span>
+                <Button variant="ghost" size="icon">
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+              <nav className="space-y-2">
+                <Button variant="ghost" className="w-full justify-start">
+                  <Home className="mr-2 h-4 w-4" />
+                  Home
+                </Button>
+                <Button variant="ghost" className="w-full justify-start">
+                  <MessageSquare className="mr-2 h-4 w-4" />
+                  Messages
+                </Button>
+                <Button variant="ghost" className="w-full justify-start">
+                  <Calendar className="mr-2 h-4 w-4" />
+                  Calendar
+                </Button>
+                <Button variant="ghost" className="w-full justify-start">
+                  <Mail className="mr-2 h-4 w-4" />
+                  Email
+                </Button>
+              </nav>
+              <div className="mt-auto">
+                <Button variant="ghost" className="w-full justify-start">
+                  <Settings className="mr-2 h-4 w-4" />
+                  Settings
+                </Button>
+              </div>
+            </div>
           </div>
-          <nav className="space-y-2">
-            <a href="#" className="flex items-center space-x-3 px-3 py-2 rounded-lg bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-200">
-              <Home size={20} />
-              <span>Home</span>
-            </a>
-            <a href="#" className="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">
-              <MessageSquare size={20} />
-              <span>Messages</span>
-            </a>
-            <a href="#" className="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">
-              <Calendar size={20} />
-              <span>Calendar</span>
-            </a>
-            <a href="#" className="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">
-              <Mail size={20} />
-              <span>Mail</span>
-            </a>
-            <a href="#" className="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">
-              <MoreVertical size={20} />
-              <span>More</span>
-            </a>
-            <a href="#" className="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">
-              <Settings size={20} />
-              <span>Settings</span>
-            </a>
-          </nav>
-        </div>
-      </div>
-    </section>
+        </Card.Content>
+      </Card>
+
+      {/* Collapsible Side Navigation */}
+      <Card>
+        <Card.Header>
+          <Card.Title>Collapsible Navigation</Card.Title>
+        </Card.Header>
+        <Card.Content>
+          <div className={cn(
+            "h-[400px] rounded-lg border bg-card text-card-foreground shadow-sm transition-all duration-300",
+            isCollapsed ? "w-16" : "w-64"
+          )}>
+            <div className="p-4 flex flex-col h-full">
+              <Button 
+                variant="ghost" 
+                size="icon"
+                onClick={() => setIsCollapsed(!isCollapsed)}
+                className="mb-6 ml-auto"
+              >
+                {isCollapsed ? <ChevronRight className="h-4 w-4" /> : <X className="h-4 w-4" />}
+              </Button>
+              <nav className="space-y-2">
+                <Button 
+                  variant="ghost" 
+                  className={cn(
+                    "w-full",
+                    isCollapsed ? "justify-center px-2" : "justify-start"
+                  )}
+                >
+                  <BarChart className={cn("h-4 w-4", !isCollapsed && "mr-2")} />
+                  {!isCollapsed && "Analytics"}
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  className={cn(
+                    "w-full",
+                    isCollapsed ? "justify-center px-2" : "justify-start"
+                  )}
+                >
+                  <Users className={cn("h-4 w-4", !isCollapsed && "mr-2")} />
+                  {!isCollapsed && "Team"}
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  className={cn(
+                    "w-full",
+                    isCollapsed ? "justify-center px-2" : "justify-start"
+                  )}
+                >
+                  <FileText className={cn("h-4 w-4", !isCollapsed && "mr-2")} />
+                  {!isCollapsed && "Documents"}
+                </Button>
+              </nav>
+            </div>
+          </div>
+        </Card.Content>
+      </Card>
+
+      {/* Modern Side Navigation */}
+      <Card>
+        <Card.Header>
+          <Card.Title>Modern Navigation</Card.Title>
+        </Card.Header>
+        <Card.Content>
+          <div className="h-[400px] w-64 rounded-lg border bg-card text-card-foreground shadow-sm">
+            <div className="p-6 flex flex-col h-full">
+              <div className="flex items-center space-x-3 mb-8">
+                <div className="h-8 w-8 rounded-lg bg-primary" />
+                <span className="text-xl font-bold">Brand</span>
+              </div>
+              <nav className="space-y-6">
+                <div>
+                  <h3 className="text-sm font-medium text-muted-foreground mb-2">Overview</h3>
+                  <div className="space-y-1">
+                    <Button 
+                      variant="ghost" 
+                      className={cn(
+                        "w-full justify-start",
+                        activeTab === 'dashboard' && "bg-muted"
+                      )}
+                      onClick={() => setActiveTab('dashboard')}
+                    >
+                      <Layout className="mr-2 h-4 w-4" />
+                      Dashboard
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      className={cn(
+                        "w-full justify-start",
+                        activeTab === 'analytics' && "bg-muted"
+                      )}
+                      onClick={() => setActiveTab('analytics')}
+                    >
+                      <BarChart className="mr-2 h-4 w-4" />
+                      Analytics
+                    </Button>
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-sm font-medium text-muted-foreground mb-2">Workspace</h3>
+                  <div className="space-y-1">
+                    <Button 
+                      variant="ghost" 
+                      className={cn(
+                        "w-full justify-start",
+                        activeTab === 'projects' && "bg-muted"
+                      )}
+                      onClick={() => setActiveTab('projects')}
+                    >
+                      <FileText className="mr-2 h-4 w-4" />
+                      Projects
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      className={cn(
+                        "w-full justify-start",
+                        activeTab === 'team' && "bg-muted"
+                      )}
+                      onClick={() => setActiveTab('team')}
+                    >
+                      <Users className="mr-2 h-4 w-4" />
+                      Team
+                    </Button>
+                  </div>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </Card.Content>
+      </Card>
+    </div>
   );
 };
 

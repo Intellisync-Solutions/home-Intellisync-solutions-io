@@ -11,7 +11,7 @@ const projects: Project[] = [
   {
     title: "Intellisync Solutions - BusinessOne",
     description: "A comprehensive suite of tools and calculators designed to assist entrepreneurs and seasoned business professionals in making data-driven decisions.",
-    imageUrl: "/projects/business-one.png",
+    imageUrl: "/images/business-one.png",
     link: "/work/business-one",
     tags: ["React", "TypeScript", "Firebase"],
     features: [
@@ -60,7 +60,7 @@ const projects: Project[] = [
   {
     title: "Serenity",
     description: "An interactive mental health and wellness platform featuring mood tracking, daily affirmations, journaling, guided meditation, and sleep tracking.",
-    imageUrl: "/projects/serenity.png",
+    imageUrl: "/images/serenity.png",
     link: "/work/serenity",
     tags: ["React", "TypeScript", "Node.js", "Firebase"],
     features: [
@@ -99,7 +99,7 @@ const projects: Project[] = [
   {
     title: "Teen Minds Matter",
     description: "A social networking platform for youth mental health, featuring community groups, peer-led tutoring, and gamified interactions for ages 10-18.",
-    imageUrl: "/projects/teen-minds.png",
+    imageUrl: "/images/teen-minds.png",
     link: "/work/teen-minds-matter",
     tags: ["React", "TypeScript", "Supabase", "Node.js"],
     features: [
@@ -138,7 +138,7 @@ const projects: Project[] = [
   {
     title: "Intellisync Solutions - EducationOne",
     description: "A comprehensive AI-powered educational platform featuring expert AI tutors across multiple subjects, with specialized dashboards for students, parents, teachers, and administrators.",
-    imageUrl: "/projects/education-one.png",
+    imageUrl: "/images/education-one.png",
     link: "/work/education-one",
     tags: ["React", "TypeScript", "Node.js", "Firebase", "OpenAI"],
     features: [
@@ -177,7 +177,7 @@ const projects: Project[] = [
   {
     title: "Intellisync Solutions - TimeCapsule",
     description: "AI-enhanced photo sharing platform with smart albums, family sharing, and interactive AI storytelling for preserving and sharing memories.",
-    imageUrl: "/projects/time-capsule.png",
+    imageUrl: "/images/time-capsule.png",
     link: "/work/time-capsule",
     tags: ["React", "TypeScript", "Node.js", "Firebase", "OpenAI"],
     features: [
@@ -216,7 +216,7 @@ const projects: Project[] = [
   {
     title: "Intellisync Solutions - PersonalOne",
     description: "A comprehensive personal finance platform offering advanced tools for wealth management, investment planning, tax projections, and retirement planning.",
-    imageUrl: "/projects/personal-one.png",
+    imageUrl: "/images/personal-one.png",
     link: "/work/personal-one",
     tags: ["React", "TypeScript", "Node.js", "Firebase", "OpenAI"],
     features: [

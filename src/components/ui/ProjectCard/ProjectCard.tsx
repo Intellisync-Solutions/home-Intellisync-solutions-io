@@ -24,14 +24,15 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         onClick={() => onClick(project)}
         className="block w-full text-left"
       >
-        <div className="aspect-[16/7] relative overflow-hidden">
+        <div className="aspect-[4/3] relative overflow-hidden">
           <img
             src={project.imageUrl}
             alt={project.title}
             className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
-        <div className="p-6 pt-10 px-8">
+        <div className="p-6 pt-8 px-8 -mt-4 relative bg-card rounded-t-3xl">
           <h3 className="text-xl font-semibold mb-4 group-hover:text-primary transition-colors">
             {project.title}
           </h3>

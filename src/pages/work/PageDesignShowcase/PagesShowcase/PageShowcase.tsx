@@ -194,8 +194,8 @@ const PageShowcase = () => {
       />
 
       {/* Filter Section - Vertical */}
-      <div className="fixed left-0 top-0 bottom-0 w-64 border-r bg-background/95 backdrop-blur-sm z-40">
-        <div className="sticky top-0 p-6">
+      <div className="fixed left-0 top-16 bottom-0 w-64 border-r bg-background/95 backdrop-blur-sm z-40">
+        <div className="h-full p-6 overflow-y-auto">
           <h2 className="text-lg font-semibold mb-4">Filters</h2>
           <MenuBar
             onFilterChange={setSelectedFilters}

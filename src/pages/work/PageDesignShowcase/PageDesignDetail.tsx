@@ -253,38 +253,40 @@ const PageDesignDetail = () => {
 
   if (!design) {
     return (
-      <div className="container mx-auto px-4 py-24 text-center">
-        <div
-          className="space-y-6"
-        >
-          <h1 className="text-4xl font-bold text-gray-800 dark:text-gray-200 mb-4">
-            <StreamingText 
-              text="Yikes, How did you get here? 🤔" 
-              speed={40}
-            />
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
-            <StreamingText 
-              text="This design seems to have wandered off into the digital void."
-              speed={30}
-              delay={1500}
-            />
-          </p>
-          <p className="text-xl text-gray-600 dark:text-gray-400">
-            <StreamingText 
-              text="✨ That was a neat animation effect"
-              speed={40}
-              delay={3000}
-            />
-          </p>
+      <div className="min-h-screen bg-background">
+        <div className="container mx-auto px-4 py-8 pl-[280px]">
           <div
+            className="space-y-6"
           >
-            <Button 
-              onClick={() => navigate('/work/pages')}
-              className="text-lg px-6 py-3"
+            <h1 className="text-4xl font-bold text-gray-800 dark:text-gray-200 mb-4">
+              <StreamingText 
+                text="Yikes, How did you get here? 🤔" 
+                speed={40}
+              />
+            </h1>
+            <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
+              <StreamingText 
+                text="This design seems to have wandered off into the digital void."
+                speed={30}
+                delay={1500}
+              />
+            </p>
+            <p className="text-xl text-gray-600 dark:text-gray-400">
+              <StreamingText 
+                text="✨ That was a neat animation effect"
+                speed={40}
+                delay={3000}
+              />
+            </p>
+            <div
             >
-              Take Me Back to Safety
-            </Button>
+              <Button 
+                onClick={() => navigate('/work/pages')}
+                className="text-lg px-6 py-3"
+              >
+                Take Me Back to Safety
+              </Button>
+            </div>
           </div>
         </div>
       </div>
@@ -292,116 +294,118 @@ const PageDesignDetail = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <div
-      >
-        <Button
-          variant="ghost"
-          className="mb-6 flex items-center gap-2"
-          onClick={() => navigate('/work/pages')}
+    <div className="min-h-screen bg-background">
+      <div className="container mx-auto px-4 py-8 pl-[280px]">
+        <div
         >
-          <ArrowLeft size={16} />
-          Back to Designs
-        </Button>
+          <Button
+            variant="ghost"
+            className="mb-6 flex items-center gap-2"
+            onClick={() => navigate('/work/pages')}
+          >
+            <ArrowLeft size={16} />
+            Back to Designs
+          </Button>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div>
-            <h1 className="text-4xl font-bold text-gray-800 dark:text-gray-200 mb-4">
-              {design.title}
-            </h1>
-            
-            <div className="flex flex-wrap gap-2 mb-6">
-              {design.tags.map((tag, index) => (
-                <span
-                  key={index}
-                  className="inline-block px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full"
-                >
-                  {tag}
-                </span>
-              ))}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div>
+              <h1 className="text-4xl font-bold text-gray-800 dark:text-gray-200 mb-4">
+                {design.title}
+              </h1>
+              
+              <div className="flex flex-wrap gap-2 mb-6">
+                {design.tags.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="inline-block px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <p className="text-gray-600 dark:text-gray-400 text-lg mb-8">
+                {design.fullDescription || design.description}
+              </p>
+
+              {design.features && (
+                <div className="mb-8">
+                  <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
+                    Features
+                  </h2>
+                  <ul className="space-y-2">
+                    {design.features.map((feature, index) => (
+                      <li key={index} className="flex items-start">
+                        <span className="inline-block w-2 h-2 rounded-full bg-blue-500 mt-2 mr-3" />
+                        <span className="text-gray-600 dark:text-gray-400">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {design.technologies && (
+                <div className="mb-8">
+                  <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
+                    Technologies Used
+                  </h2>
+                  <div className="flex flex-wrap gap-2">
+                    {design.technologies.map((tech, index) => (
+                      <span
+                        key={index}
+                        className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-full text-sm"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <Button
+                className="flex items-center gap-2"
+                onClick={() => window.open(design.demoUrl, '_blank')}
+              >
+                View Live Demo
+                <ExternalLink size={16} />
+              </Button>
             </div>
 
-            <p className="text-gray-600 dark:text-gray-400 text-lg mb-8">
-              {design.fullDescription || design.description}
-            </p>
-
-            {design.features && (
-              <div className="mb-8">
-                <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
-                  Features
-                </h2>
-                <ul className="space-y-2">
-                  {design.features.map((feature, index) => (
-                    <li key={index} className="flex items-start">
-                      <span className="inline-block w-2 h-2 rounded-full bg-blue-500 mt-2 mr-3" />
-                      <span className="text-gray-600 dark:text-gray-400">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {design.technologies && (
-              <div className="mb-8">
-                <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
-                  Technologies Used
-                </h2>
-                <div className="flex flex-wrap gap-2">
-                  {design.technologies.map((tech, index) => (
-                    <span
-                      key={index}
-                      className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-full text-sm"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+            <div>
+              {design.screenshots && (
+                <div className="space-y-6">
+                  <div className="relative aspect-video overflow-hidden rounded-lg shadow-lg">
+                    <img
+                      src={design.screenshots[activeImage].url}
+                      alt={design.screenshots[activeImage].caption}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-4">
+                    {design.screenshots.map((screenshot, index) => (
+                      <button
+                        key={index}
+                        className={`relative aspect-video rounded-lg overflow-hidden ${
+                          index === activeImage ? 'ring-2 ring-blue-500' : ''
+                        }`}
+                        onClick={() => setActiveImage(index)}
+                      >
+                        <img
+                          src={screenshot.url}
+                          alt={screenshot.caption}
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                  
+                  <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
+                    {design.screenshots[activeImage].caption}
+                  </p>
                 </div>
-              </div>
-            )}
-
-            <Button
-              className="flex items-center gap-2"
-              onClick={() => window.open(design.demoUrl, '_blank')}
-            >
-              View Live Demo
-              <ExternalLink size={16} />
-            </Button>
-          </div>
-
-          <div>
-            {design.screenshots && (
-              <div className="space-y-6">
-                <div className="relative aspect-video overflow-hidden rounded-lg shadow-lg">
-                  <img
-                    src={design.screenshots[activeImage].url}
-                    alt={design.screenshots[activeImage].caption}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                
-                <div className="grid grid-cols-3 gap-4">
-                  {design.screenshots.map((screenshot, index) => (
-                    <button
-                      key={index}
-                      className={`relative aspect-video rounded-lg overflow-hidden ${
-                        index === activeImage ? 'ring-2 ring-blue-500' : ''
-                      }`}
-                      onClick={() => setActiveImage(index)}
-                    >
-                      <img
-                        src={screenshot.url}
-                        alt={screenshot.caption}
-                        className="w-full h-full object-cover"
-                      />
-                    </button>
-                  ))}
-                </div>
-                
-                <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
-                  {design.screenshots[activeImage].caption}
-                </p>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>

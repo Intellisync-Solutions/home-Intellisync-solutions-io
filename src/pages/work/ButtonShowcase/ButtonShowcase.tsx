@@ -109,7 +109,7 @@ const ButtonShowcase = () => {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-900 via-slate-900 to-black text-white p-6 overflow-hidden">
+    <div className="relative flex flex-col items-center justify-center min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-900 via-slate-900 to-black text-white pt-24 pb-6 px-6 overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 w-full h-full">
         <div className="absolute top-10 left-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
@@ -252,7 +252,7 @@ const ButtonShowcase = () => {
       </div>
 
       {/* Button Showcase Section */}
-      <div className="container mx-auto px-4 py-12 mt-12">
+      <div className="container mx-auto px-4 pt-24 pb-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

@@ -1,56 +1,142 @@
-import { Search, Bell, User, Menu } from 'lucide-react';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Menu, Search, Bell, User, MessageSquare, Settings, ChevronDown } from 'lucide-react';
+import { Button } from '../../../../components/ui/Button/button';
+import Card from '../../../../components/ui/card';
 
 const TopNavigation = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const variants = {
+    open: { opacity: 1, height: 'auto' },
+    closed: { opacity: 0, height: 0 }
+  };
 
   return (
-    <section>
-      <h2 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-200">
-        Top Navigation Bar
-      </h2>
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg">
-        <div className="px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <span className="text-xl font-semibold text-gray-800 dark:text-gray-200">Logo</span>
-            <div className="hidden md:flex space-x-4">
-              <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">Home</a>
-              <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">About</a>
-              <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">Services</a>
-              <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">Contact</a>
+    <div className="space-y-6">
+      {/* Classic Top Navigation */}
+      <Card>
+        <Card.Header>
+          <Card.Title>Classic Navigation</Card.Title>
+        </Card.Header>
+        <Card.Content>
+          <nav className="flex items-center justify-between p-4 bg-background">
+            <div className="flex items-center space-x-4">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="md:hidden"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                <Menu className="h-5 w-5" />
+              </Button>
+              <h1 className="text-xl font-semibold">Logo</h1>
+              <div className="hidden md:flex items-center space-x-4">
+                <Button variant="ghost">Dashboard</Button>
+                <Button variant="ghost">Projects</Button>
+                <Button variant="ghost">Team</Button>
+              </div>
             </div>
-          </div>
-          <div className="flex items-center space-x-4">
-            <button className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">
-              <Search size={20} />
-            </button>
-            <button className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">
-              <Bell size={20} />
-            </button>
-            <button className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200">
-              <User size={20} />
-            </button>
-            <button 
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
-            >
-              <Menu size={20} />
-            </button>
-          </div>
-        </div>
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              <a href="#" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-gray-900 hover:bg-gray-50 dark:hover:bg-gray-700">Home</a>
-              <a href="#" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-gray-900 hover:bg-gray-50 dark:hover:bg-gray-700">About</a>
-              <a href="#" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-gray-900 hover:bg-gray-50 dark:hover:bg-gray-700">Services</a>
-              <a href="#" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-gray-900 hover:bg-gray-50 dark:hover:bg-gray-700">Contact</a>
+            <div className="flex items-center space-x-2">
+              <Button variant="ghost" size="icon">
+                <Search className="h-5 w-5" />
+              </Button>
+              <Button variant="ghost" size="icon">
+                <MessageSquare className="h-5 w-5" />
+              </Button>
+              <Button variant="ghost" size="icon">
+                <Bell className="h-5 w-5" />
+              </Button>
+              <Button variant="ghost" size="icon">
+                <Settings className="h-5 w-5" />
+              </Button>
+              <Button variant="ghost" size="icon">
+                <User className="h-5 w-5" />
+              </Button>
             </div>
+          </nav>
+
+          <motion.div
+            animate={isOpen ? "open" : "closed"}
+            variants={variants}
+            className="md:hidden"
+          >
+            <div className="p-4 space-y-2">
+              <Button variant="ghost" className="w-full justify-start">Dashboard</Button>
+              <Button variant="ghost" className="w-full justify-start">Projects</Button>
+              <Button variant="ghost" className="w-full justify-start">Team</Button>
+            </div>
+          </motion.div>
+        </Card.Content>
+      </Card>
+
+      {/* Modern Centered Navigation */}
+      <Card>
+        <Card.Header>
+          <Card.Title>Centered Navigation</Card.Title>
+        </Card.Header>
+        <Card.Content>
+          <nav className="flex flex-col items-center space-y-4 p-4 bg-background">
+            <h1 className="text-2xl font-bold">Brand</h1>
+            <div className="flex items-center space-x-6">
+              <Button variant="link">Home</Button>
+              <Button variant="link">Products</Button>
+              <Button variant="link">About</Button>
+              <Button variant="link">Contact</Button>
+            </div>
+            <div className="flex items-center space-x-4">
+              <Button variant="outline" size="sm">Sign In</Button>
+              <Button size="sm">Get Started</Button>
+            </div>
+          </nav>
+        </Card.Content>
+      </Card>
+
+      {/* Enterprise Navigation */}
+      <Card>
+        <Card.Header>
+          <Card.Title>Enterprise Navigation</Card.Title>
+        </Card.Header>
+        <Card.Content>
+          <div className="space-y-2">
+            {/* Top bar */}
+            <div className="flex items-center justify-between p-2 bg-muted/50">
+              <div className="flex items-center space-x-4">
+                <Button variant="ghost" size="sm">Support</Button>
+                <Button variant="ghost" size="sm">Documentation</Button>
+              </div>
+              <div className="flex items-center space-x-4">
+                <Button variant="ghost" size="sm">Contact Sales</Button>
+                <Button variant="ghost" size="sm">Login</Button>
+              </div>
+            </div>
+            
+            {/* Main navigation */}
+            <nav className="flex items-center justify-between p-4 bg-background border-t">
+              <div className="flex items-center space-x-6">
+                <h1 className="text-xl font-semibold">Enterprise</h1>
+                <div className="hidden md:flex items-center space-x-1">
+                  <Button variant="ghost" className="flex items-center">
+                    Products <ChevronDown className="ml-1 h-4 w-4" />
+                  </Button>
+                  <Button variant="ghost" className="flex items-center">
+                    Solutions <ChevronDown className="ml-1 h-4 w-4" />
+                  </Button>
+                  <Button variant="ghost">Resources</Button>
+                  <Button variant="ghost">Pricing</Button>
+                </div>
+              </div>
+              <div className="flex items-center space-x-4">
+                <Button variant="ghost" size="icon">
+                  <Search className="h-5 w-5" />
+                </Button>
+                <Button>Start Free Trial</Button>
+              </div>
+            </nav>
           </div>
-        )}
-      </div>
-    </section>
+        </Card.Content>
+      </Card>
+    </div>
   );
 };
 

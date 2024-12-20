@@ -40,7 +40,7 @@ const App = () => {
           <SplashPage show={showSplash} onEnter={handleEnter} />
           <div className={`min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 overflow-x-hidden transition-opacity duration-1000 ${showSplash ? 'opacity-0' : 'opacity-100'}`}>
             <Header />
-            <main className="flex-grow overflow-auto pb-8">
+            <main className="flex-grow overflow-auto pt-16 pb-8">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />

@@ -1,132 +1,173 @@
 import { motion } from 'framer-motion';
-import { Share2, MoreVertical, User, Calendar, MessageCircle, ThumbsUp } from 'lucide-react';
+import { Badge } from '../../../../components/ui/badge';
 import { Button } from '../../../../components/ui/Button/button';
+import { Heart, Share2, MessageCircle, ArrowUpRight, Sparkles, Star } from 'lucide-react';
+import { useState } from 'react';
 
 const InteractiveCards = () => {
+  const [liked1, setLiked1] = useState(false);
+  const [liked2, setLiked2] = useState(false);
+
   return (
     <section>
-      <h2 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-200">
+      <h2 className="text-2xl font-semibold mb-8 text-gray-800 dark:text-gray-200">
         Interactive Cards
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Social Card */}
         <motion.div
           whileHover={{ y: -5 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden"
+          className="group bg-card rounded-xl shadow-lg overflow-hidden border border-border/40"
         >
-          <img
-            src="https://source.unsplash.com/random/800x600"
-            alt="Random"
-            className="w-full h-48 object-cover"
-          />
-          <div className="p-4 sm:p-6">
-            <div className="flex items-center mb-4">
-              <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                <User className="w-6 h-6 text-gray-500 dark:text-gray-400" />
-              </div>
-              <div className="ml-3">
-                <p className="text-sm font-medium text-gray-800 dark:text-gray-200">John Doe</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">@johndoe</p>
-              </div>
-              <div className="ml-auto">
-                <Button variant="ghost" size="icon">
-                  <MoreVertical className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
-            <p className="text-gray-600 dark:text-gray-400 mb-4">
-              Just shared an amazing photo! Check it out and let me know what you think.
-            </p>
-            <div className="flex items-center justify-between text-gray-500 dark:text-gray-400">
-              <Button variant="ghost" size="sm">
-                <ThumbsUp className="h-4 w-4 mr-1" />
-                <span>24</span>
-              </Button>
-              <Button variant="ghost" size="sm">
-                <MessageCircle className="h-4 w-4 mr-1" />
-                <span>12</span>
-              </Button>
-              <Button variant="ghost" size="sm">
-                <Share2 className="h-4 w-4 mr-1" />
-                <span>Share</span>
-              </Button>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Event Card */}
-        <motion.div
-          whileHover={{ y: -5 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden"
-        >
-          <div className="p-4 sm:p-6">
+          <div className="p-6">
             <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center">
-                <Calendar className="w-5 h-5 text-blue-500" />
-                <span className="ml-2 text-sm text-gray-500 dark:text-gray-400">Tomorrow</span>
-              </div>
-              <Button variant="ghost" size="icon">
-                <MoreVertical className="h-4 w-4" />
+              <Badge variant="secondary">Social</Badge>
+              <Button variant="ghost" size="icon" className="h-8 w-8">
+                <Share2 className="h-4 w-4" />
               </Button>
             </div>
-            <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-200">
-              Team Meeting
+            <h3 className="text-lg font-semibold mb-2 text-foreground">
+              Social Interaction
             </h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-4">
-              Discuss project updates and plan next sprint activities.
+            <p className="text-muted-foreground mb-4">
+              A card with social interaction features like likes and comments.
             </p>
-            <div className="flex items-center justify-between">
-              <div className="flex -space-x-2">
-                {[1, 2, 3].map((i) => (
-                  <div
-                    key={i}
-                    className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 border-2 border-white dark:border-gray-800 flex items-center justify-center"
-                  >
-                    <User className="w-4 h-4 text-gray-500 dark:text-gray-400" />
-                  </div>
-                ))}
-                <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-600 border-2 border-white dark:border-gray-800 flex items-center justify-center">
-                  <span className="text-xs text-gray-600 dark:text-gray-300">+2</span>
-                </div>
-              </div>
-              <Button variant="outline" size="sm">
-                Join
+            <div className="flex items-center gap-4 mt-4">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="flex items-center gap-2"
+                onClick={() => setLiked1(!liked1)}
+              >
+                <Heart className={`h-4 w-4 ${liked1 ? 'fill-red-500 text-red-500' : ''}`} />
+                <span>{liked1 ? '1,024' : '1,023'}</span>
+              </Button>
+              <Button variant="ghost" size="sm" className="flex items-center gap-2">
+                <MessageCircle className="h-4 w-4" />
+                <span>128</span>
               </Button>
             </div>
           </div>
         </motion.div>
 
-        {/* Notification Card */}
+        {/* Hover Reveal Card */}
         <motion.div
           whileHover={{ y: -5 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden"
+          className="group relative bg-card rounded-xl shadow-lg overflow-hidden border border-border/40"
         >
-          <div className="p-4 sm:p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center">
-                <div className="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
-                  <ThumbsUp className="w-5 h-5 text-green-500" />
-                </div>
-                <div className="ml-3">
-                  <p className="text-sm font-medium text-gray-800 dark:text-gray-200">New Achievement</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">Just now</p>
-                </div>
-              </div>
-              <Button variant="ghost" size="icon">
-                <MoreVertical className="h-4 w-4" />
-              </Button>
-            </div>
-            <p className="text-gray-600 dark:text-gray-400 mb-4">
-              Congratulations! You've reached 1,000 followers.
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="relative p-6">
+            <Badge variant="secondary" className="mb-4">Reveal</Badge>
+            <h3 className="text-lg font-semibold mb-2 text-foreground group-hover:text-white transition-colors">
+              Hover Reveal
+            </h3>
+            <p className="text-muted-foreground group-hover:text-white/90 transition-colors">
+              Hover over this card to reveal additional content and styling.
             </p>
-            <div className="flex justify-end space-x-2">
-              <Button variant="ghost" size="sm">
-                Dismiss
-              </Button>
-              <Button size="sm">
-                View Details
-              </Button>
+            <ArrowUpRight className="absolute bottom-6 right-6 h-5 w-5 text-muted-foreground group-hover:text-white transition-colors" />
+          </div>
+        </motion.div>
+
+        {/* Animated Button Card */}
+        <motion.div
+          whileHover={{ y: -5 }}
+          className="group bg-card rounded-xl shadow-lg overflow-hidden border border-border/40"
+        >
+          <div className="p-6">
+            <Badge variant="secondary" className="mb-4">Interactive</Badge>
+            <h3 className="text-lg font-semibold mb-2 text-foreground">
+              Animated Button
+            </h3>
+            <p className="text-muted-foreground mb-4">
+              A card with an animated button that responds to user interaction.
+            </p>
+            <Button className="w-full group/button overflow-hidden relative">
+              <span className="relative z-10">Try Me</span>
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary"
+                initial={{ x: '-100%' }}
+                whileHover={{ x: 0 }}
+                transition={{ duration: 0.3 }}
+              />
+            </Button>
+          </div>
+        </motion.div>
+
+        {/* Rating Card */}
+        <motion.div
+          whileHover={{ y: -5 }}
+          className="group bg-card rounded-xl shadow-lg overflow-hidden border border-border/40"
+        >
+          <div className="p-6">
+            <Badge variant="secondary" className="mb-4">Rating</Badge>
+            <h3 className="text-lg font-semibold mb-2 text-foreground">
+              Star Rating
+            </h3>
+            <p className="text-muted-foreground mb-4">
+              Interactive star rating system with hover effects.
+            </p>
+            <div className="flex gap-1">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <Button
+                  key={star}
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 hover:text-yellow-500"
+                >
+                  <Star className="h-4 w-4" />
+                </Button>
+              ))}
             </div>
+          </div>
+        </motion.div>
+
+        {/* Sparkle Effect Card */}
+        <motion.div
+          whileHover={{ y: -5 }}
+          className="group bg-card rounded-xl shadow-lg overflow-hidden border border-border/40"
+        >
+          <div className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <Badge variant="secondary">Effects</Badge>
+              <Sparkles className="h-5 w-5 text-yellow-500 animate-pulse" />
+            </div>
+            <h3 className="text-lg font-semibold mb-2 text-foreground">
+              Sparkle Effects
+            </h3>
+            <p className="text-muted-foreground">
+              A card with animated sparkle effects and interactions.
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Like Animation Card */}
+        <motion.div
+          whileHover={{ y: -5 }}
+          className="group bg-card rounded-xl shadow-lg overflow-hidden border border-border/40"
+        >
+          <div className="p-6">
+            <Badge variant="secondary" className="mb-4">Animation</Badge>
+            <h3 className="text-lg font-semibold mb-2 text-foreground">
+              Like Animation
+            </h3>
+            <p className="text-muted-foreground mb-4">
+              Click the heart to see a smooth animation effect.
+            </p>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-12 w-12"
+              onClick={() => setLiked2(!liked2)}
+            >
+              <motion.div
+                animate={liked2 ? {
+                  scale: [1, 1.2, 0.9, 1.1, 1],
+                  transition: { duration: 0.5 }
+                } : {}}
+              >
+                <Heart className={`h-6 w-6 ${liked2 ? 'fill-red-500 text-red-500' : ''}`} />
+              </motion.div>
+            </Button>
           </div>
         </motion.div>
       </div>

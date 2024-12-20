@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader } from '../ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '../ui/dialog';
 import { Button } from '../ui/Button/button';
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
@@ -89,6 +89,12 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({ isOpen, onClose }) 
             >
               <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
+                  <DialogTitle className="text-2xl font-bold text-center mb-2">
+                    Start Your Project
+                  </DialogTitle>
+                  <DialogDescription className="text-center text-gray-600 dark:text-gray-300">
+                    Tell us about your project and we'll get back to you within 24 hours.
+                  </DialogDescription>
                   <div className="mb-6">
                     <StreamingText 
                       text="Let's Build Something Amazing" 

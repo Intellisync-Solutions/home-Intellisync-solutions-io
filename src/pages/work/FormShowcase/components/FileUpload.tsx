@@ -1,55 +1,185 @@
-import { Upload, Check, X } from 'lucide-react';
 import { useState } from 'react';
+import { Label } from '../../../../components/ui/label';
+import { Button } from '../../../../components/ui/Button/button';
+import { Progress } from '../../../../components/ui/progress';
+import { Badge } from '../../../../components/ui/badge';
+import { Upload, X, File, Image, FileText, Film } from 'lucide-react';
+import { cn } from '../../../../lib/utils';
+
+interface FileWithPreview extends File {
+  preview?: string;
+}
 
 const FileUpload = () => {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [files, setFiles] = useState<FileWithPreview[]>([]);
+  const [dragActive, setDragActive] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+
+  const handleDrag = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.type === 'dragenter' || e.type === 'dragover') {
+      setDragActive(true);
+    } else if (e.type === 'dragleave') {
+      setDragActive(false);
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+
+    const droppedFiles = Array.from(e.dataTransfer.files);
+    handleFiles(droppedFiles);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const selectedFiles = Array.from(e.target.files);
+      handleFiles(selectedFiles);
+    }
+  };
+
+  const handleFiles = (newFiles: File[]) => {
+    const processedFiles = newFiles.map(file => {
+      if (file.type.startsWith('image/')) {
+        return Object.assign(file, {
+          preview: URL.createObjectURL(file)
+        });
+      }
+      return file;
+    });
+    
+    setFiles(prev => [...prev, ...processedFiles]);
+    simulateUpload();
+  };
+
+  const removeFile = (index: number) => {
+    setFiles(prev => {
+      const newFiles = [...prev];
+      if (newFiles[index].preview) {
+        URL.revokeObjectURL(newFiles[index].preview!);
+      }
+      newFiles.splice(index, 1);
+      return newFiles;
+    });
+  };
+
+  const simulateUpload = () => {
+    setUploadProgress(0);
+    const interval = setInterval(() => {
+      setUploadProgress(prev => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          return 100;
+        }
+        return prev + 10;
+      });
+    }, 500);
+  };
+
+  const getFileIcon = (file: File) => {
+    if (file.type.startsWith('image/')) return <Image className="h-5 w-5" />;
+    if (file.type.startsWith('video/')) return <Film className="h-5 w-5" />;
+    if (file.type.startsWith('text/')) return <FileText className="h-5 w-5" />;
+    return <File className="h-5 w-5" />;
+  };
 
   return (
-    <section>
-      <h2 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-gray-200">
-        File Upload
-      </h2>
-      <div className="max-w-xl">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-4">
-          Upload File
-        </label>
-        <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-lg">
-          <div className="space-y-1 text-center">
-            <Upload className="mx-auto h-12 w-12 text-gray-400" />
-            <div className="flex text-sm text-gray-600 dark:text-gray-400">
-              <label
-                htmlFor="file-upload"
-                className="relative cursor-pointer rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500"
-              >
-                <span>Upload a file</span>
-                <input
-                  id="file-upload"
-                  name="file-upload"
-                  type="file"
-                  className="sr-only"
-                  onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
-                />
-              </label>
-              <p className="pl-1">or drag and drop</p>
-            </div>
-            <p className="text-xs text-gray-500 dark:text-gray-400">
-              PNG, JPG, GIF up to 10MB
+    <section className="space-y-8">
+      <div>
+        <h2 className="text-2xl font-semibold mb-4">File Upload</h2>
+        <p className="text-muted-foreground mb-6">
+          Drag and drop file upload with preview and progress.
+        </p>
+      </div>
+
+      <div
+        className={cn(
+          'relative rounded-lg border-2 border-dashed p-8 text-center',
+          dragActive
+            ? 'border-primary bg-primary/5'
+            : 'border-border hover:border-primary/50'
+        )}
+        onDragEnter={handleDrag}
+        onDragLeave={handleDrag}
+        onDragOver={handleDrag}
+        onDrop={handleDrop}
+      >
+        <input
+          type="file"
+          multiple
+          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+          onChange={handleChange}
+        />
+        <div className="space-y-4">
+          <div className="flex justify-center">
+            <Upload className="h-10 w-10 text-muted-foreground" />
+          </div>
+          <div className="space-y-2">
+            <p className="text-lg font-medium">
+              Drop files here or click to upload
             </p>
-            {selectedFile && (
-              <div className="mt-2 flex items-center text-sm text-gray-600 dark:text-gray-400">
-                <Check className="mr-1 h-4 w-4 text-green-500" />
-                {selectedFile.name}
-                <button
-                  onClick={() => setSelectedFile(null)}
-                  className="ml-2 text-red-500 hover:text-red-600"
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              </div>
-            )}
+            <p className="text-sm text-muted-foreground">
+              Support for images, videos, and documents
+            </p>
           </div>
         </div>
       </div>
+
+      {/* File List */}
+      {files.length > 0 && (
+        <div className="space-y-4">
+          <Label>Uploaded Files</Label>
+          <div className="space-y-2">
+            {files.map((file, index) => (
+              <div
+                key={index}
+                className="flex items-center justify-between p-3 rounded-lg border bg-card"
+              >
+                <div className="flex items-center gap-3">
+                  {file.preview ? (
+                    <img
+                      src={file.preview}
+                      alt={file.name}
+                      className="h-10 w-10 rounded object-cover"
+                    />
+                  ) : (
+                    getFileIcon(file)
+                  )}
+                  <div className="space-y-1">
+                    <p className="text-sm font-medium leading-none">{file.name}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {(file.size / 1024 / 1024).toFixed(2)} MB
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Badge variant="secondary">
+                    {uploadProgress === 100 ? 'Uploaded' : 'Uploading...'}
+                  </Badge>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => removeFile(index)}
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+          {uploadProgress < 100 && (
+            <div className="space-y-2">
+              <Progress value={uploadProgress} />
+              <p className="text-sm text-muted-foreground text-right">
+                {uploadProgress}%
+              </p>
+            </div>
+          )}
+        </div>
+      )}
     </section>
   );
 };
