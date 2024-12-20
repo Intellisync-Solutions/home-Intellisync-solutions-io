@@ -4,6 +4,9 @@ import { ReactNode } from 'react';
 interface CardRootProps {
   className?: string;
   children?: ReactNode;
+  title?: string;
+  description?: string;
+  icon?: ReactNode;
 }
 
 interface CardHeaderProps {
@@ -21,12 +24,28 @@ interface CardContentProps {
   children?: ReactNode;
 }
 
-const CardRoot = ({ className = '', children }: CardRootProps) => {
+const CardRoot = ({ className = '', children, title, description, icon }: CardRootProps) => {
+  if (title || description || icon) {
+    return (
+      <motion.div
+        className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 ${className}`}
+        whileHover={{ y: -5 }}
+        transition={{ duration: 0.2 }}
+      >
+        <div className="flex flex-col items-center text-center">
+          {icon && <div className="text-primary mb-4">{icon}</div>}
+          {title && <h3 className="text-xl font-semibold mb-2">{title}</h3>}
+          {description && <p className="text-gray-600 dark:text-gray-400">{description}</p>}
+        </div>
+      </motion.div>
+    );
+  }
+
   return (
     <motion.div
-      className={`p-6 rounded-xl bg-white dark:bg-gray-800 shadow-lg ${className}`}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+      className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg ${className}`}
+      whileHover={{ y: -5 }}
+      transition={{ duration: 0.2 }}
     >
       {children}
     </motion.div>
@@ -34,15 +53,15 @@ const CardRoot = ({ className = '', children }: CardRootProps) => {
 };
 
 const CardHeader = ({ className = '', children }: CardHeaderProps) => {
-  return <div className={`space-y-1.5 ${className}`}>{children}</div>;
+  return <div className={`p-6 ${className}`}>{children}</div>;
 };
 
 const CardTitle = ({ className = '', children }: CardTitleProps) => {
-  return <h3 className={`text-2xl font-semibold leading-none tracking-tight ${className}`}>{children}</h3>;
+  return <h3 className={`text-xl font-semibold ${className}`}>{children}</h3>;
 };
 
 const CardContent = ({ className = '', children }: CardContentProps) => {
-  return <div className={`mt-4 ${className}`}>{children}</div>;
+  return <div className={`px-6 pb-6 ${className}`}>{children}</div>;
 };
 
 const Card = Object.assign(CardRoot, {
