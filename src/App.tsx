@@ -17,14 +17,28 @@ import PageShowcase from './pages/work/PageDesignShowcase/PagesShowcase/PageShow
 import PageDesignDetail from './pages/work/PageDesignShowcase/PageDesignDetail';
 import Contact from './pages/Contact';
 import SaasDashboard from './pages/work/PageDesignShowcase/SaasShowcase/SaasDashboard';
+import ModernPortfolio from './pages/work/PageDesignShowcase/PortfolioShowcase/ModernPortfolio';
+import EcommercePlatform from './pages/work/PageDesignShowcase/EcommerceShowcase/EcommercePlatform';
+import RealEstatePlatform from './pages/work/PageDesignShowcase/RealEstateShowcase/RealEstatePlatform';
+import RestaurantPlatform from './pages/work/PageDesignShowcase/RestaurantShowcase/RestaurantPlatform';
+import BlogPlatform from './pages/work/PageDesignShowcase/BlogShowcase/BlogPlatform';
+import { useState } from 'react';
+import SplashPage from './components/PageSections/SplashPage/SplashPage';
 
 const App = () => {
+  const [showSplash, setShowSplash] = useState(true);
+
+  const handleEnter = () => {
+    setShowSplash(false);
+  };
+
   return (
     <ThemeProvider>
       <ToastProvider>
         <Router>
           <ScrollToTop />
-          <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 overflow-x-hidden">
+          <SplashPage show={showSplash} onEnter={handleEnter} />
+          <div className={`min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 overflow-x-hidden transition-opacity duration-1000 ${showSplash ? 'opacity-0' : 'opacity-100'}`}>
             <Header />
             <main className="flex-grow overflow-auto pb-8">
               <Routes>
@@ -39,6 +53,11 @@ const App = () => {
                 <Route path="/work/pages" element={<PageShowcase />} />
                 <Route path="/work/pages/:id" element={<PageDesignDetail />} />
                 <Route path="/work/pages/saas-dashboard" element={<SaasDashboard />} />
+                <Route path="/work/pages/modern-portfolio" element={<ModernPortfolio />} />
+                <Route path="/work/pages/ecommerce-platform" element={<EcommercePlatform />} />
+                <Route path="/work/pages/real-estate-platform" element={<RealEstatePlatform />} />
+                <Route path="/work/pages/restaurant-platform" element={<RestaurantPlatform />} />
+                <Route path="/work/pages/blog-platform" element={<BlogPlatform />} />
                 <Route path="/contact" element={<Contact />} />
               </Routes>
             </main>

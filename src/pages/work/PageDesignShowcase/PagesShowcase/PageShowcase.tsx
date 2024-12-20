@@ -5,6 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import { Badge } from '../../../../components/ui/badge';
 import MenuBar from '../../../../components/Navigation/MenuBar';
 import Animation from '../../../../components/features/Animation';
+import ContactFormModal from '../../../../components/Modals/ContactFormModal';
+import { ChevronRight } from 'lucide-react';
+import { cn } from '../../../../lib/utils';
 
 interface PageDesign {
   id: string;
@@ -31,49 +34,32 @@ const pageDesigns: PageDesign[] = [
   {
     id: 'modern-portfolio',
     title: 'Modern Portfolio',
-    description: 'A sleek and modern portfolio design for creative professionals, featuring smooth animations and dynamic content loading.',
-    image: 'https://placehold.co/600x400/2563eb/ffffff?text=Portfolio+Design',
-    demoUrl: '#',
+    description: 'A clean and modern portfolio design showcasing projects and skills',
+    image: '/images/portfolio-preview.jpg',
+    demoUrl: '/work/pages/modern-portfolio',
     category: 'Portfolio',
-    tags: ['Creative', 'Modern', 'Personal'],
+    tags: ['Portfolio', 'Modern', 'Responsive'],
     featured: true
   },
   {
-    id: 'e-commerce-landing',
-    title: 'E-commerce Landing',
-    description: 'High-converting e-commerce landing page with product showcases and seamless checkout integration.',
-    image: 'https://placehold.co/600x400/2563eb/ffffff?text=E-commerce+Design',
-    demoUrl: '#',
+    id: 'ecommerce-platform',
+    title: 'E-commerce Platform',
+    description: 'A modern e-commerce platform with a clean UI and smooth shopping experience',
+    image: '/images/ecommerce-preview.jpg',
+    demoUrl: '/work/pages/ecommerce-platform',
     category: 'E-commerce',
-    tags: ['Shop', 'Business', 'Modern']
+    tags: ['E-commerce', 'Shopping', 'Responsive'],
+    featured: true
   },
   {
     id: 'blog-platform',
     title: 'Blog Platform',
-    description: 'Modern blog platform design with rich content editing and social sharing features.',
-    image: 'https://placehold.co/600x400/2563eb/ffffff?text=Blog+Design',
-    demoUrl: '#',
+    description: 'Modern blog platform design with rich content editing and social sharing features',
+    image: '/images/blog-preview.jpg',
+    demoUrl: '/work/pages/blog-platform',
     category: 'Blog',
     tags: ['Content', 'Social', 'Personal'],
     featured: true
-  },
-  {
-    id: 'real-estate-listing',
-    title: 'Real Estate Listing',
-    description: 'Property listing page with advanced search filters and interactive map integration.',
-    image: 'https://placehold.co/600x400/2563eb/ffffff?text=Real+Estate+Design',
-    demoUrl: '#',
-    category: 'Real Estate',
-    tags: ['Business', 'Search', 'Map']
-  },
-  {
-    id: 'restaurant-menu',
-    title: 'Restaurant Menu',
-    description: 'Digital menu system for restaurants with beautiful food photography and online ordering.',
-    image: 'https://placehold.co/600x400/2563eb/ffffff?text=Restaurant+Design',
-    demoUrl: '#',
-    category: 'Restaurant',
-    tags: ['Food', 'Business', 'Menu']
   },
   {
     id: 'business-one',
@@ -134,6 +120,26 @@ const pageDesigns: PageDesign[] = [
     category: 'Finance',
     tags: ['React', 'TypeScript', 'Node.js', 'Firebase', 'OpenAI'],
     featured: true
+  },
+  {
+    id: "real-estate-platform",
+    title: "Real Estate Platform",
+    description: "A modern real estate platform for property listings, agent profiles, and viewing schedules",
+    image: "/images/real-estate-preview.jpg",
+    demoUrl: "/work/pages/real-estate-platform",
+    category: "Real Estate",
+    tags: ["Real Estate", "Property", "Responsive"],
+    featured: true
+  },
+  {
+    id: "restaurant-platform",
+    title: "Restaurant Platform",
+    description: "An elegant restaurant website featuring menu showcase, reservations, and special events",
+    image: "/images/restaurant-preview.jpg",
+    demoUrl: "/work/pages/restaurant-platform",
+    category: "Restaurant",
+    tags: ["Restaurant", "Food", "Responsive"],
+    featured: true
   }
 ];
 
@@ -141,6 +147,7 @@ const PageShowcase = () => {
   const navigate = useNavigate();
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   
   // Filter designs based on selected filters and search
   const filteredDesigns = useMemo(() => {
@@ -172,14 +179,34 @@ const PageShowcase = () => {
       'teen-minds-matter',
       'education-one',
       'time-capsule',
-      'personal-one'
+      'personal-one',
+      'ecommerce-platform',
+      'real-estate-platform',
+      'restaurant-platform'
     ].includes(id);
   };
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="border-b">
-        <div className="container mx-auto">
+      <ContactFormModal 
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
+      />
+
+      {/* Floating Action Button */}
+      <Button
+        onClick={() => setIsContactModalOpen(true)}
+        className="fixed bottom-8 right-8 rounded-full size-16 shadow-xl shadow-primary/20 bg-primary hover:bg-primary/90 text-primary-foreground z-50"
+      >
+        <span className="absolute inset-0 flex items-center justify-center">
+          Start
+        </span>
+      </Button>
+
+      {/* Filter Section - Vertical */}
+      <div className="fixed left-0 top-0 bottom-0 w-64 border-r bg-background/95 backdrop-blur-sm z-40 overflow-y-auto">
+        <div className="p-6">
+          <h2 className="text-lg font-semibold mb-4">Filters</h2>
           <MenuBar
             onFilterChange={setSelectedFilters}
             searchValue={searchQuery}
@@ -187,101 +214,127 @@ const PageShowcase = () => {
           />
         </div>
       </div>
-      
-      <div className="container mx-auto px-4 py-8">
-        {/* Results count */}
-        <p className="text-sm text-muted-foreground mb-6">
-          Showing {filteredDesigns.length} of {pageDesigns.length} designs
-        </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredDesigns.map((design) => (
-            <div
-              key={design.id}
-              className="group relative bg-card rounded-lg overflow-visible border shadow-sm hover:shadow-md transition-shadow"
-            >
-              {design.featured && (
-                <div className="absolute -top-3 inset-x-0 flex justify-center" style={{ zIndex: 50 }}>
-                  <Animation type="pulse" delay={0.1}>
-                    <div className="rounded-full px-4 py-1.5 text-xs font-semibold bg-gradient-to-r from-primary/90 to-primary text-primary-foreground border-2 border-background shadow-lg shadow-primary/20 animate-glow">
-                      ✨ Featured
+      {/* Main Content - Offset for sidebar */}
+      <div className="ml-64">
+        {/* Masonry Layout */}
+        <div className="p-8">
+          <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+            {filteredDesigns.map((design, index) => (
+              <div
+                key={design.id}
+                className={cn(
+                  "break-inside-avoid group relative",
+                  index % 3 === 0 && "mt-12",
+                  index % 3 === 1 && "mt-24",
+                )}
+              >
+                {/* Design Card */}
+                <div className="relative bg-card border rounded-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+                  {/* Featured Badge */}
+                  {design.featured && (
+                    <div className="absolute top-4 right-4 z-20">
+                      <Animation type="pulse" delay={0.1}>
+                        <div className="rounded-full px-3 py-1 text-xs font-semibold bg-primary text-primary-foreground shadow-lg">
+                          Featured ✨
+                        </div>
+                      </Animation>
                     </div>
-                  </Animation>
-                </div>
-              )}
-              {!hasDetailPage(design.id) && (
-                <div className="absolute -top-3 right-3" style={{ zIndex: 50 }}>
-                  <Animation type="fade" delay={0.2}>
-                    <div className="rounded-full px-4 py-1 text-xs font-medium bg-muted text-muted-foreground border border-background">
-                      Coming Soon
+                  )}
+
+                  {/* Image with Parallax Effect */}
+                  <div className="relative overflow-hidden">
+                    <div className="aspect-[4/3] transform transition-transform duration-500 group-hover:scale-105">
+                      <img
+                        src={design.image}
+                        alt={design.title}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
-                  </Animation>
-                </div>
-              )}
-              <div className="overflow-hidden rounded-lg">
-                <div className="aspect-video relative overflow-hidden">
-                  <img
-                    src={design.image}
-                    alt={design.title}
-                    className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
-                    {hasDetailPage(design.id) ? (
+                    
+                    {/* Floating Action Buttons */}
+                    <div className="absolute bottom-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                       <Button
-                        variant="secondary"
                         size="sm"
-                        onClick={() => navigate(`/work/pages/${design.id}`)}
+                        variant="secondary"
+                        className="rounded-full shadow-lg"
+                        onClick={() => hasDetailPage(design.id) ? navigate(design.demoUrl) : window.open(design.demoUrl, '_blank')}
                       >
-                        View Details
+                        {hasDetailPage(design.id) ? (
+                          <ChevronRight className="h-4 w-4" />
+                        ) : (
+                          <ExternalLink className="h-4 w-4" />
+                        )}
                       </Button>
-                    ) : null}
-                    {design.demoUrl && (
                       <Button
-                        variant="secondary"
                         size="sm"
-                        onClick={() => window.open(design.demoUrl, '_blank')}
+                        variant="default"
+                        className="rounded-full shadow-lg"
+                        onClick={() => setIsContactModalOpen(true)}
                       >
-                        Live Demo <ExternalLink className="w-4 h-4 ml-1" />
+                        Inquire
                       </Button>
-                    )}
+                    </div>
                   </div>
-                </div>
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold mb-2">{design.title}</h3>
-                  <p className="text-muted-foreground text-sm mb-4">
-                    {design.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="secondary">{design.category}</Badge>
-                    {design.tags.map((tag) => (
-                      <Badge key={tag} variant="outline">
-                        {tag}
+
+                  {/* Content */}
+                  <div className="p-6">
+                    <div className="flex items-start gap-4 mb-4">
+                      <div className="flex-1">
+                        <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
+                          {design.title}
+                        </h3>
+                        <p className="text-sm text-muted-foreground line-clamp-2">
+                          {design.description}
+                        </p>
+                      </div>
+                      <Badge variant="outline" className="shrink-0">
+                        {design.category}
                       </Badge>
-                    ))}
+                    </div>
+
+                    {/* Interactive Tags */}
+                    <div className="flex flex-wrap gap-2">
+                      {design.tags.map((tag) => (
+                        <Badge
+                          key={tag}
+                          variant="secondary"
+                          className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
+                          onClick={() => {
+                            if (!selectedFilters.includes(tag)) {
+                              setSelectedFilters([...selectedFilters, tag]);
+                            }
+                          }}
+                        >
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-
-        {filteredDesigns.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground">
-              No designs found matching your criteria.
-            </p>
-            <Button
-              variant="link"
-              onClick={() => {
-                setSearchQuery('');
-                setSelectedFilters([]);
-              }}
-              className="mt-2"
-            >
-              Clear all filters
-            </Button>
+            ))}
           </div>
-        )}
+
+          {/* Empty State */}
+          {filteredDesigns.length === 0 && (
+            <div className="flex flex-col items-center justify-center py-24">
+              <p className="text-lg text-muted-foreground mb-4">
+                No designs match your criteria
+              </p>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setSearchQuery('');
+                  setSelectedFilters([]);
+                }}
+              >
+                Clear Filters
+              </Button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

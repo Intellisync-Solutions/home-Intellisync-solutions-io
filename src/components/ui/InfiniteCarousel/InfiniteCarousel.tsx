@@ -53,22 +53,22 @@ export const InfiniteCarousel: React.FC<InfiniteCarouselProps> = ({
       onMouseLeave={() => setIsPaused(false)}
     >
       {/* Fade overlay */}
-      <div className="absolute top-8 bottom-8 left-0 right-0 pointer-events-none dark:hidden z-10 rounded-3xl" style={{
+      <div className="absolute top-8 bottom-8 -left-4 -right-4 pointer-events-none dark:hidden z-10 rounded-[24px]" style={{
         background: `linear-gradient(90deg, 
           rgba(255,255,255,1) 0%, 
-          rgba(255,255,255,0.9) 5%,
+          rgba(255,255,255,1) 8%,
           rgba(255,255,255,0) 25%, 
           rgba(255,255,255,0) 75%, 
-          rgba(255,255,255,0.9) 95%,
+          rgba(255,255,255,1) 92%,
           rgba(255,255,255,1) 100%)`
       }} />
-      <div className="absolute top-8 bottom-8 left-0 right-0 pointer-events-none hidden dark:block z-10 rounded-3xl" style={{
+      <div className="absolute top-8 bottom-8 -left-4 -right-4 pointer-events-none hidden dark:block z-10 rounded-[24px]" style={{
         background: `linear-gradient(90deg, 
           rgb(2,6,23) 0%,
-          rgba(2,6,23,0.9) 5%,
+          rgb(2,6,23) 8%,
           rgba(2,6,23,0) 25%, 
           rgba(2,6,23,0) 75%, 
-          rgba(2,6,23,0.9) 95%,
+          rgb(2,6,23) 92%,
           rgb(2,6,23) 100%)`
       }} />
       <motion.div

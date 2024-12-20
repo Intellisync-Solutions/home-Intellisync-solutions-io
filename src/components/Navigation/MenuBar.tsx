@@ -44,7 +44,6 @@ const MenuBar: React.FC<MenuBarProps> = ({
   onSearch
 }) => {
   const [selectedFilters, setSelectedFilters] = React.useState<string[]>([]);
-  const [activeCategory, setActiveCategory] = React.useState<string | null>(null);
 
   const handleFilterToggle = (item: string) => {
     const newFilters = selectedFilters.includes(item)
@@ -56,72 +55,75 @@ const MenuBar: React.FC<MenuBarProps> = ({
   };
 
   return (
-    <div className={cn("w-full bg-background", className)}>
-      <div className="container mx-auto">
-        {/* Categories and Search */}
-        <div className="flex items-center space-x-4 overflow-x-auto py-2 scrollbar-hide">
-          {menuCategories.map((category) => (
-            <div key={category.label} className="relative">
-              <button
-                className={cn(
-                  "px-4 py-2 text-sm font-medium rounded-md whitespace-nowrap",
-                  "hover:bg-accent transition-colors",
-                  activeCategory === category.label ? "bg-accent" : "bg-transparent"
-                )}
-                onClick={() => setActiveCategory(
-                  activeCategory === category.label ? null : category.label
-                )}
-              >
-                {category.label}
-              </button>
-              
-              {activeCategory === category.label && (
-                <div className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-popover ring-1 ring-black ring-opacity-5 z-50">
-                  <div className="py-1" role="menu">
-                    {category.items.map((item) => (
-                      <button
-                        key={item}
-                        className={cn(
-                          "block w-full text-left px-4 py-2 text-sm",
-                          "hover:bg-accent transition-colors",
-                          selectedFilters.includes(item) 
-                            ? "bg-accent/50 text-accent-foreground" 
-                            : "text-foreground"
-                        )}
-                        onClick={() => handleFilterToggle(item)}
-                      >
-                        {item}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
+    <div className={cn("w-full", className)}>
+      {/* Search Input */}
+      <div className="mb-6">
+        <SearchInput
+          value={searchValue}
+          onSearch={onSearch}
+          onClear={() => onSearch?.('')}
+          placeholder="Search designs..."
+        />
+      </div>
+
+      {/* Filter Categories */}
+      <div className="space-y-6">
+        {menuCategories.map((category) => (
+          <div key={category.label} className="space-y-3">
+            <h3 className="text-sm font-medium text-muted-foreground">
+              {category.label}
+            </h3>
+            <div className="space-y-1.5">
+              {category.items.map((item) => (
+                <button
+                  key={item}
+                  className={cn(
+                    "w-full text-left px-3 py-1.5 text-sm rounded-md",
+                    "hover:bg-accent/50 transition-colors",
+                    selectedFilters.includes(item)
+                      ? "bg-primary/10 text-primary font-medium"
+                      : "text-foreground"
+                  )}
+                  onClick={() => handleFilterToggle(item)}
+                >
+                  <span className="flex items-center">
+                    <span className={cn(
+                      "w-2 h-2 rounded-full mr-2",
+                      selectedFilters.includes(item)
+                        ? "bg-primary"
+                        : "bg-muted"
+                    )} />
+                    {item}
+                  </span>
+                </button>
+              ))}
             </div>
-          ))}
-
-          {/* Search Input */}
-          <div className="flex-1 max-w-md">
-            <SearchInput
-              value={searchValue}
-              onSearch={onSearch}
-              onClear={() => onSearch?.('')}
-              placeholder="Search by title, description, or tags..."
-            />
           </div>
-        </div>
+        ))}
+      </div>
 
-        {/* Selected Filters */}
-        {selectedFilters.length > 0 && (
-          <div className="flex flex-wrap gap-2 py-2 border-t border-border">
+      {/* Selected Filters */}
+      {selectedFilters.length > 0 && (
+        <div className="mt-6 pt-6 border-t">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-sm text-muted-foreground">Active Filters</span>
+            <button
+              onClick={() => onFilterChange?.([])}
+              className="text-xs text-primary hover:text-primary/80"
+            >
+              Clear All
+            </button>
+          </div>
+          <div className="flex flex-wrap gap-2">
             {selectedFilters.map((filter) => (
               <span
                 key={filter}
-                className="inline-flex items-center px-3 py-1 rounded-full 
-                  text-sm font-medium bg-accent/20 text-accent-foreground"
+                className="group inline-flex items-center px-2 py-1 rounded-md
+                  text-xs font-medium bg-primary/10 text-primary"
               >
                 {filter}
                 <button
-                  className="ml-2 text-muted-foreground hover:text-accent-foreground"
+                  className="ml-1.5 opacity-60 group-hover:opacity-100"
                   onClick={() => handleFilterToggle(filter)}
                 >
                   ×
@@ -129,8 +131,8 @@ const MenuBar: React.FC<MenuBarProps> = ({
               </span>
             ))}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

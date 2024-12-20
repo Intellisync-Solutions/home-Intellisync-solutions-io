@@ -18,7 +18,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group relative bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 min-w-[400px] max-w-[400px]"
+      className="group relative bg-card rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 min-w-[400px] max-w-[400px]"
     >
       <button
         onClick={() => onClick(project)}
@@ -31,8 +31,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
           />
         </div>
-        <div className="p-5">
-          <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
+        <div className="p-6 pt-10 px-8">
+          <h3 className="text-xl font-semibold mb-4 group-hover:text-primary transition-colors">
             {project.title}
           </h3>
           <p className="text-muted-foreground mb-3 line-clamp-2">{project.description}</p>

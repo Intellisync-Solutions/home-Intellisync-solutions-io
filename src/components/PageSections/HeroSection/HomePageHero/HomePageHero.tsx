@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import Animation from '../../../features/Animation';
-import { StreamingText } from '../../../features/StreamingText';
 
 const HomePageHero = () => {
   return (
@@ -16,16 +15,20 @@ const HomePageHero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Building Digital Excellence
+            Building Personalized Digital Experiences
           </motion.h1>
           
-          <div className="mb-8">
-            <StreamingText
-              text="We build digital dreams. From Ideas to Concept each step is a Journey toward Innovation."
-              speed={50}
-              className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
-            />
-          </div>
+          <motion.div 
+            className="mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              We build digital dreams.<br/><br/>
+              From Concept to Completion, each step is a Journey toward Innovation.
+            </p>
+          </motion.div>
 
           <div className="flex justify-center gap-16 mt-16">
             <Animation type="3d-rotate" delay={0.4} duration={0.8}>
@@ -45,7 +48,7 @@ const HomePageHero = () => {
             <Animation type="3d-rotate" delay={0.8} duration={0.8}>
               <div className="w-32 h-32 bg-transparent rounded-lg flex flex-col items-center justify-center">
                 <span className="text-3xl font-bold text-indigo-600 dark:text-indigo-400">100%</span>
-                <span className="text-sm text-gray-600 dark:text-gray-400 mt-2">Support</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400 mt-2">Satisfaction</span>
               </div>
             </Animation>
           </div>

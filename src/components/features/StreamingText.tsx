@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 
 interface StreamingTextProps {
   text: string;
@@ -12,58 +12,95 @@ interface StreamingTextProps {
 
 const StreamingText = ({
   text,
-  speed = 900,
+  speed = 50,
   className = '',
   onComplete,
   cursor = true,
-  delay = 500
+  delay = 0
 }: StreamingTextProps) => {
-  const [displayedText, setDisplayedText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState<number>(-1);
   const [isComplete, setIsComplete] = useState(false);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { 
+    once: true,
+    margin: "100px 0px 0px 0px"
+  });
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout;
-    let currentIndex = 0;
+    if (!isInView) return;
 
-    // Reset state when text changes
-    setDisplayedText('');
+    let timeout: NodeJS.Timeout;
+    
+    // Reset state when text changes or comes into view
+    setCurrentIndex(-1);
     setIsComplete(false);
-    currentIndex = 0;
 
     // Initial delay before starting
     timeout = setTimeout(() => {
       const streamText = () => {
-        if (currentIndex <= text.length) {
-          setDisplayedText(text.slice(0, currentIndex));
-          currentIndex++;
-
-          if (currentIndex <= text.length) {
-            timeout = setTimeout(streamText, speed);
+        setCurrentIndex(prev => {
+          const next = prev + 1;
+          if (next < text.length) {
+            // Calculate dynamic speed based on position in text
+            const progress = next / text.length;
+            const dynamicSpeed = Math.min(
+              speed,
+              speed * (1 + progress * 2) // Speed increases gradually
+            );
+            
+            timeout = setTimeout(streamText, dynamicSpeed);
+            return next;
           } else {
             setIsComplete(true);
-            onComplete?.();
+            if (onComplete) onComplete();
+            return prev;
           }
-        }
+        });
       };
-
       streamText();
     }, delay);
 
-    return () => clearTimeout(timeout);
-  }, [text, speed, delay, onComplete]);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [text, speed, delay, isInView, onComplete]);
 
   return (
-    <span className={`inline-block ${className}`}>
-      {displayedText}
-      <AnimatePresence>
+    <span ref={ref} className={className}>
+      {text.split('').map((char, index) => (
+        <motion.span
+          key={`${char}-${index}-${text}`}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ 
+            opacity: index <= currentIndex ? 1 : 0,
+            y: index <= currentIndex ? 0 : 10,
+          }}
+          transition={{ 
+            duration: 0.4,
+            ease: [0.23, 1, 0.32, 1], // Custom easing for smoother animation
+            opacity: { duration: 0.3 },
+            y: { duration: 0.4 }
+          }}
+        >
+          {char}
+        </motion.span>
+      ))}
+      <AnimatePresence mode="wait">
         {cursor && !isComplete && (
           <motion.span
-            initial={{ opacity: 1 }}
-            animate={{ opacity: 0 }}
+            key="cursor"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 1, 0] }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5, repeat: Infinity, repeatType: 'reverse' }}
-            className="inline-block w-[2px] h-[1.2em] bg-current ml-[2px] align-middle"
-          />
+            transition={{ 
+              duration: 1,
+              repeat: Infinity,
+              repeatType: "reverse"
+            }}
+            className="inline-block ml-[1px] -translate-y-[2px]"
+          >
+            |
+          </motion.span>
         )}
       </AnimatePresence>
     </span>

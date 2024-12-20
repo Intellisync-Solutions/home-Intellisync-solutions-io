@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import {  Code, Brain, Heart, Users, Clock, Calculator } from 'lucide-react';
 import { useState } from 'react';
 import { ProjectFeaturesModal } from '../../Modals/ProjectFeaturesModal';
-import { StreamingText } from '../../features/StreamingText';
+
 import { InfiniteCarousel } from '../../ui/InfiniteCarousel/InfiniteCarousel';
 import { ProjectCard } from '../../ui/ProjectCard/ProjectCard';
 import type { Project } from './types';
@@ -283,14 +283,12 @@ export const FeaturedProjects = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             Featured Projects
           </h2>
-          <StreamingText
-            text="At Intellisync Solutions we build Communities. We believe that great work comes from sharing a Passion, not just the technical requirements, but the human stories behind every project."
-            speed={50}
-            className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
-          />
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            At Intellisync Solutions we build Communities. We believe that great work comes from sharing a Passion, not just the technical requirements, but the human stories that live behind every project.
+          </p>
         </motion.div>
 
-        <InfiniteCarousel speed={0.2} className="py-8">
+        <InfiniteCarousel speed={0.1} className="py-8">
           {projects.map((project, index) => (
             <ProjectCard
               key={project.title}

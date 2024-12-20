@@ -44,7 +44,7 @@ const Work = () => {
             Our Approach to Excellence
           </h1>
           <StreamingText
-            text="At Intellisync Solutions, we believe that great work comes from understanding not just the technical requirements, but the human stories behind every project."
+            text="At Intellisync Solutions, we believe that every project is more than just technical requirements—it’s a story waiting to be told. By capturing the emotion and purpose behind your vision, we craft solutions that inspire action and create meaningful connections."
             className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
             speed={50}
           />
