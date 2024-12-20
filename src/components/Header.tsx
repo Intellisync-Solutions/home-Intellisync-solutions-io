@@ -60,14 +60,14 @@ const Header = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
               >
-                Chris
+                Intellisync
               </motion.span>
               <motion.span 
                 className="text-muted-foreground"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
               >
-                June
+                Solutions
               </motion.span>
             </motion.div>
           </Link>
@@ -77,6 +77,7 @@ const Header = () => {
             <NavLink to="/">Home</NavLink>
             <NavLink to="/about">About</NavLink>
             <NavLink to="/services">Services</NavLink>
+            <NavLink to="/ai">AI</NavLink>
             
             {/* Work Dropdown */}
             <div className="relative group">
@@ -117,8 +118,8 @@ const Header = () => {
                       <WorkDropdownLink to="/work/pages">Page Designs</WorkDropdownLink>
                       <WorkDropdownLink to="/work/buttons">Button Designs</WorkDropdownLink>
                       <WorkDropdownLink to="/work/cards">Card Designs</WorkDropdownLink>
-                      <WorkDropdownLink to="/work/forms">Form Elements</WorkDropdownLink>
-                      <WorkDropdownLink to="/work/navigation">Navigation</WorkDropdownLink>
+                      <WorkDropdownLink to="/work/forms">Form Designs</WorkDropdownLink>
+                      <WorkDropdownLink to="/work/navigation">Navigation Designs</WorkDropdownLink>
                     </div>
                   </motion.div>
                 )}
@@ -207,12 +208,13 @@ const Header = () => {
                 <MobileNavLink to="/">Home</MobileNavLink>
                 <MobileNavLink to="/about">About</MobileNavLink>
                 <MobileNavLink to="/services">Services</MobileNavLink>
+                <MobileNavLink to="/ai">AI</MobileNavLink>
                 <MobileNavLink to="/work">All Projects</MobileNavLink>
                 <MobileNavLink to="/work/pages">Page Designs</MobileNavLink>
                 <MobileNavLink to="/work/buttons">Button Designs</MobileNavLink>
                 <MobileNavLink to="/work/cards">Card Designs</MobileNavLink>
-                <MobileNavLink to="/work/forms">Form Elements</MobileNavLink>
-                <MobileNavLink to="/work/navigation">Navigation</MobileNavLink>
+                <MobileNavLink to="/work/forms">Form Designs</MobileNavLink>
+                <MobileNavLink to="/work/navigation">Navigation Designs</MobileNavLink>
                 <MobileNavLink to="/contact">Contact</MobileNavLink>
               </motion.div>
             </motion.div>

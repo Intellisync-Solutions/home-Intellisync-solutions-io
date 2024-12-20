@@ -22,6 +22,10 @@ import EcommercePlatform from './pages/work/PageDesignShowcase/EcommerceShowcase
 import RealEstatePlatform from './pages/work/PageDesignShowcase/RealEstateShowcase/RealEstatePlatform';
 import RestaurantPlatform from './pages/work/PageDesignShowcase/RestaurantShowcase/RestaurantPlatform';
 import BlogPlatform from './pages/work/PageDesignShowcase/BlogShowcase/BlogPlatform';
+import AI from './pages/AI';
+import LanguageModel from './pages/ai-models/LanguageModel';
+import VisionModel from './pages/ai-models/VisionModel';
+import AudioModel from './pages/ai-models/AudioModel';
 import { useState } from 'react';
 import SplashPage from './components/PageSections/SplashPage/SplashPage';
 
@@ -58,6 +62,10 @@ const App = () => {
                 <Route path="/work/pages/real-estate-platform" element={<RealEstatePlatform />} />
                 <Route path="/work/pages/restaurant-platform" element={<RestaurantPlatform />} />
                 <Route path="/work/pages/blog-platform" element={<BlogPlatform />} />
+                <Route path="/ai" element={<AI />} />
+                <Route path="/ai/models/language" element={<LanguageModel />} />
+                <Route path="/ai/models/vision" element={<VisionModel />} />
+                <Route path="/ai/models/audio" element={<AudioModel />} />
                 <Route path="/contact" element={<Contact />} />
               </Routes>
             </main>
