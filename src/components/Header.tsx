@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from './ui/Button/button';
 import { useTheme } from '../context/ThemeContext';
-import { Sun, Moon, ChevronDown, Menu, X } from 'lucide-react';
+import { Sun, Moon, ChevronDown, Menu, X, Command } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { cn } from '../lib/utils';
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
@@ -15,11 +15,8 @@ const Header = () => {
   const location = useLocation();
 
   const { scrollY } = useScroll();
-  const headerBackground = useTransform(
-    scrollY,
-    [0, 100],
-    ["rgba(var(--background-rgb), 0)", "rgba(var(--background-rgb), 0.9)"]
-  );
+  const headerOpacity = useTransform(scrollY, [0, 100], [0.8, 0.95]);
+  const headerBlur = useTransform(scrollY, [0, 100], [8, 12]);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const direction = latest > lastScrollY ? "down" : "up";
@@ -31,44 +28,40 @@ const Header = () => {
     setLastScrollY(latest);
   });
 
-  // Close mobile menu on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
 
   return (
     <motion.header 
-      style={{ backgroundColor: headerBackground }}
+      style={{ 
+        opacity: headerOpacity,
+        backdropFilter: `blur(${headerBlur}px)`
+      }}
       animate={{ y: isHeaderVisible ? 0 : -100 }}
       transition={{ duration: 0.3 }}
-      className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b border-border/40"
+      className="fixed top-0 left-0 right-0 z-50 border-b border-border/10 bg-background/60"
     >
       <div className="container mx-auto px-4">
         <nav className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link 
-            to="/" 
-            className="relative z-10"
-          >
+          <Link to="/" className="relative z-10 group">
             <motion.div
-              className="flex items-center space-x-2 text-xl font-bold"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="flex items-center space-x-3"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <motion.span 
-                className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/50"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-              >
-                Intellisync
-              </motion.span>
-              <motion.span 
-                className="text-muted-foreground"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-              >
-                Solutions
-              </motion.span>
+              <div className="p-2 rounded-lg bg-primary/10 text-primary">
+                <Command size={20} />
+              </div>
+              <div className="flex flex-col">
+                <motion.span 
+                  className="text-lg font-semibold bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/80"
+                >
+                  Intellisync
+                </motion.span>
+                <span className="text-xs text-muted-foreground">Solutions</span>
+              </div>
             </motion.div>
           </Link>
 
@@ -82,45 +75,37 @@ const Header = () => {
             {/* Work Dropdown */}
             <div className="relative group">
               <motion.button 
-                className="flex items-center space-x-1 px-4 py-2 rounded-md transition-colors hover:bg-accent relative overflow-hidden group"
+                className="flex items-center space-x-1 px-3 py-1.5 rounded-md transition-colors hover:bg-accent/50 relative"
                 onClick={() => setIsWorkDropdownOpen(!isWorkDropdownOpen)}
                 onMouseEnter={() => setIsWorkDropdownOpen(true)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
-                <span className="relative z-10">Our Work</span>
+                <span className="text-sm font-medium">Our Work</span>
                 <motion.div
                   animate={{ rotate: isWorkDropdownOpen ? 180 : 0 }}
                   transition={{ duration: 0.2 }}
-                  className="relative z-10"
                 >
-                  <ChevronDown size={16} />
+                  <ChevronDown size={14} className="text-muted-foreground" />
                 </motion.div>
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"
-                  layoutId="navHover"
-                />
               </motion.button>
               
               <AnimatePresence>
                 {isWorkDropdownOpen && (
                   <motion.div 
-                    initial={{ opacity: 0, scale: 0.95, y: 10 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute top-full left-0 mt-1 w-48 bg-popover/95 backdrop-blur-sm rounded-md shadow-lg overflow-hidden"
+                    className="absolute top-full left-0 mt-1 py-2 w-48 bg-background/95 backdrop-blur-sm rounded-lg border border-border/20 shadow-lg"
                     onMouseLeave={() => setIsWorkDropdownOpen(false)}
                   >
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
-                      <WorkDropdownLink to="/work">All Projects</WorkDropdownLink>
-                      <WorkDropdownLink to="/work/pages">Page Designs</WorkDropdownLink>
-                      <WorkDropdownLink to="/work/buttons">Button Designs</WorkDropdownLink>
-                      <WorkDropdownLink to="/work/cards">Card Designs</WorkDropdownLink>
-                      <WorkDropdownLink to="/work/forms">Form Designs</WorkDropdownLink>
-                      <WorkDropdownLink to="/work/navigation">Navigation Designs</WorkDropdownLink>
-                    </div>
+                    <WorkDropdownLink to="/work">All Projects</WorkDropdownLink>
+                    <WorkDropdownLink to="/work/pages">Page Designs</WorkDropdownLink>
+                    <WorkDropdownLink to="/work/buttons">Button Designs</WorkDropdownLink>
+                    <WorkDropdownLink to="/work/cards">Card Designs</WorkDropdownLink>
+                    <WorkDropdownLink to="/work/forms">Form Designs</WorkDropdownLink>
+                    <WorkDropdownLink to="/work/navigation">Navigation Designs</WorkDropdownLink>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -131,35 +116,33 @@ const Header = () => {
 
           {/* Right Side Actions */}
           <div className="flex items-center space-x-2">
-            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={toggleTheme}
-                className="rounded-full relative overflow-hidden group"
+                className="w-9 h-9 rounded-lg relative"
               >
                 <motion.div
                   initial={false}
-                  animate={{ rotate: theme === 'dark' ? 360 : 0 }}
+                  animate={{ 
+                    rotate: theme === 'dark' ? 360 : 0,
+                    scale: theme === 'dark' ? 1 : 0.8
+                  }}
                   transition={{ duration: 0.5, type: "spring" }}
-                  className="relative z-10"
                 >
-                  {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+                  {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
                 </motion.div>
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"
-                  layoutId="buttonHover"
-                />
               </Button>
             </motion.div>
 
             {/* Mobile Menu Button */}
-            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="md:hidden rounded-full relative overflow-hidden group"
+                className="md:hidden w-9 h-9 rounded-lg relative"
               >
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -168,15 +151,10 @@ const Header = () => {
                     animate={{ opacity: 1, rotate: 0 }}
                     exit={{ opacity: 0, rotate: 90 }}
                     transition={{ duration: 0.2 }}
-                    className="relative z-10"
                   >
-                    {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+                    {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
                   </motion.div>
                 </AnimatePresence>
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"
-                  layoutId="buttonHover"
-                />
               </Button>
             </motion.div>
           </div>
@@ -190,33 +168,16 @@ const Header = () => {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden overflow-hidden"
+              className="md:hidden overflow-hidden border-t border-border/10"
             >
-              <motion.div 
-                className="py-4 space-y-2 relative"
-                initial="hidden"
-                animate="visible"
-                variants={{
-                  visible: {
-                    transition: {
-                      staggerChildren: 0.05
-                    }
-                  }
-                }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-b from-background/80 to-background/40 backdrop-blur-sm pointer-events-none" />
+              <div className="py-4 space-y-1">
                 <MobileNavLink to="/">Home</MobileNavLink>
                 <MobileNavLink to="/about">About</MobileNavLink>
                 <MobileNavLink to="/services">Services</MobileNavLink>
                 <MobileNavLink to="/ai">AI</MobileNavLink>
-                <MobileNavLink to="/work">All Projects</MobileNavLink>
-                <MobileNavLink to="/work/pages">Page Designs</MobileNavLink>
-                <MobileNavLink to="/work/buttons">Button Designs</MobileNavLink>
-                <MobileNavLink to="/work/cards">Card Designs</MobileNavLink>
-                <MobileNavLink to="/work/forms">Form Designs</MobileNavLink>
-                <MobileNavLink to="/work/navigation">Navigation Designs</MobileNavLink>
+                <MobileNavLink to="/work">Our Work</MobileNavLink>
                 <MobileNavLink to="/contact">Contact</MobileNavLink>
-              </motion.div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -234,21 +195,18 @@ const NavLink = ({ to, children }: { to: string; children: React.ReactNode }) =>
     <Link
       to={to}
       className={cn(
-        "px-4 py-2 rounded-md transition-colors relative overflow-hidden group",
-        isActive ? "text-primary" : "text-foreground"
+        "px-3 py-1.5 text-sm font-medium rounded-md transition-colors relative group",
+        isActive 
+          ? "text-foreground" 
+          : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
       )}
     >
-      <span className="relative z-10">{children}</span>
-      {isActive ? (
+      {children}
+      {isActive && (
         <motion.div
-          layoutId="activeIndicator"
-          className="absolute inset-0 bg-primary/10 rounded-md"
-          transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-        />
-      ) : (
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"
-          layoutId="navHover"
+          layoutId="activeNav"
+          className="absolute inset-0 bg-accent/50 rounded-md -z-10"
+          transition={{ type: "spring", duration: 0.5 }}
         />
       )}
     </Link>
@@ -263,17 +221,13 @@ const WorkDropdownLink = ({ to, children }: { to: string; children: React.ReactN
     <Link
       to={to}
       className={cn(
-        "block px-4 py-2 text-sm transition-colors relative overflow-hidden group",
-        isActive
-          ? "text-primary bg-primary/10"
-          : "text-foreground hover:text-primary"
+        "block px-4 py-1.5 text-sm transition-colors",
+        isActive 
+          ? "text-foreground bg-accent/50" 
+          : "text-muted-foreground hover:text-foreground hover:bg-accent/30"
       )}
     >
-      <span className="relative z-10">{children}</span>
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"
-        layoutId="dropdownHover"
-      />
+      {children}
     </Link>
   );
 };
@@ -283,28 +237,17 @@ const MobileNavLink = ({ to, children }: { to: string; children: React.ReactNode
   const isActive = location.pathname === to;
 
   return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, x: -20 },
-        visible: { opacity: 1, x: 0 }
-      }}
+    <Link
+      to={to}
+      className={cn(
+        "block px-4 py-2 text-sm font-medium transition-colors",
+        isActive 
+          ? "text-foreground bg-accent/50 rounded-md" 
+          : "text-muted-foreground hover:text-foreground hover:bg-accent/30 rounded-md"
+      )}
     >
-      <Link
-        to={to}
-        className={cn(
-          "block px-4 py-2 text-base transition-colors relative overflow-hidden group",
-          isActive
-            ? "text-primary bg-primary/10"
-            : "text-foreground hover:text-primary"
-        )}
-      >
-        <span className="relative z-10">{children}</span>
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"
-          layoutId="mobileHover"
-        />
-      </Link>
-    </motion.div>
+      {children}
+    </Link>
   );
 };
 

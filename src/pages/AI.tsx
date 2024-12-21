@@ -1,15 +1,13 @@
 import { motion, useScroll } from 'framer-motion';
-import { Brain, Cpu, Bot, Sparkles, Code2, Network, MessageSquare, Zap, ArrowRight, Play, ChevronRight, Lightbulb, Shield, Rocket, Star, Quote, Image, Volume2 } from 'lucide-react';
+import { Brain, Cpu, Bot, Sparkles, Code2, Network, MessageSquare, Zap, ArrowRight, Play, ChevronRight, Lightbulb, Shield, Rocket, Star, Quote} from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 import { useEffect, useState, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import AIModelNav from '../components/AIModelNav';
 
 const AI = () => {
-  const navigate = useNavigate();
   const [isTyping, setIsTyping] = useState(true);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
-  const [activeSection, setActiveSection] = useState('main');
   
   const { scrollYProgress } = useScroll();
 
@@ -175,15 +173,9 @@ const AI = () => {
     threshold: 0.1,
   });
 
-  const aiModels = [
-    { id: 'main', label: 'Overview', icon: Sparkles, path: '/ai' },
-    { id: 'language', label: 'Language Model', icon: MessageSquare, path: '/ai/models/language' },
-    { id: 'vision', label: 'Vision Model', icon: Image, path: '/ai/models/vision' },
-    { id: 'audio', label: 'Audio Model', icon: Volume2, path: '/ai/models/audio' }
-  ];
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-background/95">
+      <AIModelNav />
       {/* Hero Section */}
       <motion.section
         ref={heroRef}
@@ -550,42 +542,6 @@ const AI = () => {
           </div>
         </div>
       </motion.section>
-
-      {/* Floating Navigation Dots */}
-      <motion.div 
-        className="fixed right-8 top-1/2 transform -translate-y-1/2 hidden lg:flex flex-col gap-4 z-50"
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 1 }}
-      >
-        {aiModels.map((model) => (
-          <motion.div
-            key={model.id}
-            className="group relative"
-            whileHover={{ scale: 1.2 }}
-          >
-            <motion.button
-              className={`w-3 h-3 rounded-full border border-primary/20 transition-colors ${
-                activeSection === model.id ? 'bg-primary' : 'bg-primary/10'
-              }`}
-              onClick={() => {
-                setActiveSection(model.id);
-                if (model.id === 'main') {
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                } else {
-                  navigate(model.path);
-                }
-              }}
-            />
-            <div className="absolute right-full mr-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
-              <div className="flex items-center gap-2 bg-background/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-primary/20">
-                <model.icon className="w-4 h-4 text-primary" />
-                <span className="text-sm whitespace-nowrap">{model.label}</span>
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </motion.div>
 
       {/* Scroll Progress Indicator */}
       <motion.div
