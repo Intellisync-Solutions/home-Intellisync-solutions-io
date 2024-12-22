@@ -37,7 +37,6 @@ const philosophers = [
 
 const PhilosopherModel = () => {
   const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState('');
   const [selectedPhilosopher, setSelectedPhilosopher] = useState(philosophers[0]);
 
   const containerVariants = {
@@ -63,7 +62,7 @@ const PhilosopherModel = () => {
     setMessages([...messages, userMessage, philosopherResponse]);
   };
 
-  const generatePhilosopherResponse = (input: string, philosopher: typeof philosophers[0]) => {
+  const generatePhilosopherResponse = (_input: string, philosopher: typeof philosophers[0]) => {
     // In a real application, this would connect to an AI service
     const responses = {
       'socrates': 'And what leads you to believe this? Have you considered...',
@@ -154,14 +153,12 @@ const PhilosopherModel = () => {
           <div className="flex gap-4">
             <input
               type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleSendMessage(input)}
               placeholder={`Ask ${selectedPhilosopher.name} a question...`}
+              onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && handleSendMessage((e.target as HTMLInputElement).value)}
               className="flex-1 px-4 py-2 rounded-full bg-background border border-primary/20 focus:outline-none focus:border-primary"
             />
             <button
-              onClick={() => handleSendMessage(input)}
+              onClick={() => handleSendMessage('')}
               className="p-2 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
             >
               <Send className="w-5 h-5" />

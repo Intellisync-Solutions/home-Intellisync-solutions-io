@@ -43,33 +43,37 @@ const teachers = [
 
 const TeacherModel = () => {
   const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState('');
   const [selectedTeacher, setSelectedTeacher] = useState(teachers[0]);
+  const [inputMessage, setInputMessage] = useState('');
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { duration: 0.5 } }
   };
 
-  const handleSendMessage = (content: string) => {
+  const handleSendMessage = (input: string) => {
     const userMessage: Message = {
       id: uuidv4(),
       type: 'user',
-      content,
+      content: input,
       timestamp: new Date()
     };
+
+    const selectedTeacherData = teachers.find(t => t.id === selectedTeacher.id);
+    
+    if (!selectedTeacherData) return;
 
     const teacherResponse: Message = {
       id: uuidv4(),
       type: 'ai',
-      content: generateTeacherResponse(content, selectedTeacher),
+      content: generateTeacherResponse(input, selectedTeacherData),
       timestamp: new Date()
     };
 
-    setMessages([...messages, userMessage, teacherResponse]);
+    setMessages(prevMessages => [...prevMessages, userMessage, teacherResponse]);
   };
 
-  const generateTeacherResponse = (input: string, teacher: typeof teachers[0]) => {
+  const generateTeacherResponse = (_input: string, teacher: typeof teachers[0]) => {
     // In a real application, this would connect to an AI service
     const responses = {
       'einstein': 'Let me explain this with a thought experiment...',
@@ -77,8 +81,7 @@ const TeacherModel = () => {
       'feynman': 'Here\'s a simple way to understand this concept...'
     };
 
-    return responses[teacher.id as keyof typeof responses] + 
-           ' (This is a simulated response. In production, it would use a real AI service)';
+    return responses[teacher.id as keyof typeof responses] || 'I find your query intriguing.';
   };
 
   return (
@@ -159,17 +162,21 @@ const TeacherModel = () => {
           </div>
 
           <div className="flex gap-4">
-            <input
+            <input 
               type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleSendMessage(input)}
+              value={inputMessage}
+              onChange={(e) => setInputMessage(e.target.value)}
               placeholder={`Ask ${selectedTeacher.name} about ${selectedTeacher.subject.toLowerCase()}...`}
               className="flex-1 px-4 py-2 rounded-full bg-background border border-primary/20 focus:outline-none focus:border-primary"
             />
-            <button
-              onClick={() => handleSendMessage(input)}
-              className="p-2 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+            <button 
+              onClick={() => {
+                if (inputMessage.trim()) {
+                  handleSendMessage(inputMessage);
+                  setInputMessage('');
+                }
+              }}
+              className="bg-blue-500 text-white p-2 rounded-r-lg"
             >
               <Send className="w-5 h-5" />
             </button>
