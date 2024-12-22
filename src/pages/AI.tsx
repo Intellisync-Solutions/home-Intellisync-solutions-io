@@ -1,8 +1,11 @@
 import { motion, useScroll } from 'framer-motion';
-import { Brain, Cpu, Bot, Sparkles, Code2, Network, MessageSquare, Zap, ArrowRight, Play, ChevronRight, Lightbulb, Shield, Rocket, Star, Quote} from 'lucide-react';
+import { Brain, Cpu, Bot, Sparkles, Code2, Network, MessageSquare, Zap, ArrowRight, Play, ChevronRight, Lightbulb, Shield,  Star, Quote, Users} from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 import { useEffect, useState, useMemo } from 'react';
 import AIModelNav from '../components/AIModelNav';
+import { AdvancedInteractiveButton } from './Contact';
+import { Link } from 'react-router-dom';
+import { StreamingText } from "../components/features/StreamingText"; // Corrected import path
 
 const AI = () => {
   const [isTyping, setIsTyping] = useState(true);
@@ -51,11 +54,6 @@ const AI = () => {
   ];
 
   const showcaseItems = [
-    {
-      title: "20x Faster Processing",
-      description: "Our AI algorithms process data at unprecedented speeds, delivering insights in real-time.",
-      icon: <Rocket className="w-6 h-6" />
-    },
     {
       title: "99.9% Accuracy",
       description: "Advanced machine learning models ensure exceptional precision in data analysis and predictions.",
@@ -119,7 +117,7 @@ const AI = () => {
       setCurrentTextIndex((prev) => (prev + 1) % heroTexts.length);
       setIsTyping(true);
       setDisplayText('');
-    }, 5000);
+    }, 10000);
 
     return () => clearInterval(interval);
   }, [heroTexts.length]);
@@ -179,7 +177,7 @@ const AI = () => {
       {/* Hero Section */}
       <motion.section
         ref={heroRef}
-        className="min-h-[90vh] flex flex-col items-center justify-center relative overflow-hidden"
+        className="min-h-[90vh] flex flex-col items-center justify-center relative overflow-hidden py-32"
         initial="hidden"
         animate={heroInView ? "visible" : "hidden"}
         variants={containerVariants}
@@ -193,18 +191,41 @@ const AI = () => {
           className="relative z-10 text-center space-y-8 px-4"
           variants={itemVariants}
         >
-          <motion.div
-            className="inline-block p-3 rounded-2xl bg-primary/10 backdrop-blur-sm border border-primary/20"
-            whileHover={{ scale: 1.05 }}
+          <motion.div 
+            className="flex justify-center items-center"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ 
+              opacity: 1, 
+              scale: 1,
+              y: [0, -10, 0], // Bounce effect
+            }}
+            transition={{ 
+              duration: 1, 
+              ease: "easeInOut",
+              repeat: Infinity,
+              repeatType: "loop"
+            }}
           >
             <Sparkles className="w-8 h-8 text-primary" />
           </motion.div>
           
-          <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/50">
-            {displayText}
-          </h1>
+          <motion.div 
+            className="relative h-32 mb-4"
+            variants={itemVariants}
+          >
+            <motion.h1 
+              key={currentTextIndex}
+              className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/50 py-2"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 1, ease: "easeInOut" }}
+            >
+              {heroTexts[currentTextIndex]}
+            </motion.h1>
+          </motion.div>
           
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mt-2">
             Empowering businesses with cutting-edge AI solutions that drive innovation and transform user experiences.
           </p>
 
@@ -212,12 +233,22 @@ const AI = () => {
             className="flex gap-4 justify-center"
             whileHover={{ scale: 1.05 }}
           >
-            <button className="px-8 py-3 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors">
-              Explore Solutions
-            </button>
-            <button className="px-8 py-3 rounded-full border border-primary/20 hover:bg-primary/10 transition-colors">
+            <Link to="/contact">
+              <AdvancedInteractiveButton 
+                variant="primary" 
+                size="large" 
+                className="flex items-center"
+              >
+                Explore Solutions
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              </AdvancedInteractiveButton>
+            </Link>
+            <AdvancedInteractiveButton 
+              variant="secondary" 
+              size="large"
+            >
               Learn More
-            </button>
+            </AdvancedInteractiveButton>
           </motion.div>
         </motion.div>
 
@@ -233,13 +264,13 @@ const AI = () => {
       {/* Statistics Section */}
       <motion.section
         ref={statisticsRef}
-        className="py-16 relative overflow-hidden"
+        className="py-16 relative overflow-hidden bg-background/50"
         initial="hidden"
         animate={statisticsInView ? "visible" : "hidden"}
         variants={containerVariants}
       >
         <div className="absolute inset-0 bg-primary/5" />
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto">
           <motion.div
             className="grid grid-cols-2 md:grid-cols-4 gap-8"
             variants={containerVariants}
@@ -264,7 +295,7 @@ const AI = () => {
       {/* Features Grid */}
       <motion.section
         ref={featuresRef}
-        className="py-20 px-4 relative"
+        className="py-20 px-4 relative bg-background/50"
         initial="hidden"
         animate={featuresInView ? "visible" : "hidden"}
         variants={containerVariants}
@@ -274,7 +305,7 @@ const AI = () => {
           className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 auto-rows-min"
           variants={containerVariants}
         >
-          {features.slice(0, 3).map((feature, index) => (
+          {features.map((feature, index) => (
             <motion.div
               key={index}
               className={`p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border hover:border-primary/20 transition-colors group ${
@@ -284,27 +315,7 @@ const AI = () => {
               whileHover={{ scale: 1.02 }}
             >
               <div className="flex items-start space-x-4">
-                <div className="p-3 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                  {feature.icon}
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-muted-foreground">{feature.description}</p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-          {features.slice(3).map((feature, index) => (
-            <motion.div
-              key={index + 3}
-              className={`p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border hover:border-primary/20 transition-colors group ${
-                index === 1 ? 'md:-translate-y-12' : ''
-              }`}
-              variants={itemVariants}
-              whileHover={{ scale: 1.02 }}
-            >
-              <div className="flex items-start space-x-4">
-                <div className="p-3 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                <div className="p-3 rounded-xl bg-primary/10 text-primary w-fit mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                   {feature.icon}
                 </div>
                 <div>
@@ -320,7 +331,7 @@ const AI = () => {
       {/* Showcase Section */}
       <motion.section
         ref={showcaseRef}
-        className="py-20 px-4 bg-primary/5 relative overflow-hidden"
+        className="py-20 px-4 bg-background/50 relative overflow-hidden"
         initial="hidden"
         animate={showcaseInView ? "visible" : "hidden"}
         variants={containerVariants}
@@ -331,11 +342,74 @@ const AI = () => {
         <div className="max-w-7xl mx-auto">
           <motion.div className="text-left max-w-2xl mb-16" variants={itemVariants}>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Revolutionize Your Business with AI
+              <StreamingText 
+                text="Revolutionize" 
+                className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/50 block"
+                speed={100}
+              /> Your Business with AI
             </h2>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-xl text-muted-foreground mb-8">
               Discover how our AI solutions are transforming industries and creating new possibilities.
             </p>
+            <motion.div
+              className="p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border hover:border-primary/20 transition-colors group"
+              variants={itemVariants}
+              whileHover={{ scale: 1.02 }}
+            >
+              <div className="flex items-start space-x-4">
+                <div className="p-3 rounded-xl bg-primary/10 text-primary w-fit mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                  <Cpu className="w-6 h-6" />
+                </div>
+
+                <div className="flex-1">
+                  <h3 className="text-xl font-semibold mb-2">20x Faster Processing</h3>
+                  <p className="text-muted-foreground mb-6">Our AI algorithms process data at unprecedented speeds, delivering insights in real-time.</p>
+                </div>
+              </div>
+              <div className="relative w-full h-32 mt-4 z-10">
+                <motion.svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  viewBox="0 0 300 100" 
+                  className="w-full h-full"
+                >
+                  <motion.path
+                    d="M0 80 
+                       L60 60 
+                       L120 40 
+                       L180 45 
+                       L240 25 
+                       L300 20"
+                    fill="none"
+                    stroke="hsl(var(--primary))"
+                    strokeWidth="2"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ 
+                      duration: 2, 
+                      ease: "easeInOut" 
+                    }}
+                  />
+                  {[60, 120, 180, 240, 300].map((x, index) => (
+                    <motion.circle 
+                      key={x} 
+                      cx={x} 
+                      cy={[60, 40, 45, 25, 20][index]} 
+                      r="3" 
+                      fill="hsl(var(--primary))"
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ 
+                        opacity: 1, 
+                        scale: 1,
+                        transition: { 
+                          delay: index * 0.3,
+                          duration: 0.5 
+                        }
+                      }}
+                    />
+                  ))}
+                </motion.svg>
+              </div>
+            </motion.div>
           </motion.div>
 
           <motion.div 
@@ -369,27 +443,88 @@ const AI = () => {
                 <h3 className="text-2xl font-semibold mb-2">{showcaseItems[1].title}</h3>
                 <p className="text-muted-foreground">{showcaseItems[1].description}</p>
               </motion.div>
-              
-              <motion.div
-                className="p-6 rounded-2xl bg-background/50 backdrop-blur-sm border border-primary/10 hover:border-primary/30 transition-all group"
-                variants={itemVariants}
-                whileHover={{ scale: 1.02 }}
-              >
-                <div className="p-3 rounded-xl bg-primary/10 text-primary w-fit mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                  {showcaseItems[2].icon}
-                </div>
-                <h3 className="text-2xl font-semibold mb-2">{showcaseItems[2].title}</h3>
-                <p className="text-muted-foreground">{showcaseItems[2].description}</p>
-              </motion.div>
             </motion.div>
           </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <motion.div
+              className="p-6 rounded-2xl bg-card backdrop-blur-sm border border-border hover:border-primary/20 transition-colors group row-span-2 flex flex-col"
+              variants={itemVariants}
+              whileHover={{ scale: 1.02 }}
+            >
+              <div className="flex items-start space-x-4">
+                <div className="p-3 rounded-xl bg-primary/10 text-primary w-fit group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                  <Shield className="w-6 h-6" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-semibold mb-2">99.9% Accuracy</h3>
+                  <p className="text-muted-foreground mb-6">Advanced machine learning models ensure exceptional precision in data analysis.</p>
+                </div>
+              </div>
+              <div className="flex-1 flex items-center justify-center">
+                <motion.div 
+                  className="text-8xl font-black text-primary tracking-tighter text-center w-full bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ 
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 20 
+                  }}
+                >
+                  99.9%
+                </motion.div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border hover:border-primary/20 transition-colors group"
+              variants={itemVariants}
+              whileHover={{ scale: 1.02 }}
+            >
+              <div className="flex items-start space-x-4">
+                <div className="p-3 rounded-xl bg-primary/10 text-primary w-fit group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                  <Users className="w-6 h-6" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-semibold mb-2">1M+ Users</h3>
+                  <p className="text-muted-foreground mb-6">Join our growing community of satisfied users experiencing the power of AI.</p>
+                </div>
+              </div>
+              <div className="relative w-full h-32 mt-4 z-10">
+                <motion.div 
+                  className="flex items-center justify-center gap-4"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  {[...Array(5)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center"
+                      initial={{ scale: 0, x: -20 }}
+                      animate={{ scale: 1, x: 0 }}
+                      transition={{ 
+                        delay: i * 0.1,
+                        type: "spring",
+                        stiffness: 260,
+                        damping: 20
+                      }}
+                    >
+                      <Users className="w-4 h-4 text-primary" />
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </motion.section>
 
       {/* Testimonials Section */}
       <motion.section
         ref={testimonialsRef}
-        className="py-20 px-4 relative overflow-hidden"
+        className="py-20 px-4 relative overflow-hidden bg-background/50"
         initial="hidden"
         animate={testimonialsInView ? "visible" : "hidden"}
         variants={containerVariants}
@@ -436,7 +571,7 @@ const AI = () => {
       {/* Interactive Demo Section */}
       <motion.section
         ref={demoRef}
-        className="py-20 px-4 relative"
+        className="py-20 px-4 relative bg-background/50"
         initial="hidden"
         animate={demoInView ? "visible" : "hidden"}
         variants={containerVariants}
@@ -455,14 +590,16 @@ const AI = () => {
                 <p className="text-xl text-muted-foreground mb-6">
                   Try our interactive demo and witness the power of AI firsthand. See how our technology can transform your data into actionable insights.
                 </p>
-                <motion.button
-                  className="flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors group"
-                  whileHover={{ scale: 1.05 }}
+                <AdvancedInteractiveButton 
+                  variant="primary"
+                  size="large"
+                  className="flex items-center gap-2"
+                  onClick={() => {/* Add demo launch logic here */}}
                 >
                   <Play className="w-5 h-5" />
                   Launch Demo
                   <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </motion.button>
+                </AdvancedInteractiveButton>
               </div>
               <div className="md:col-span-7 aspect-[4/3] md:aspect-auto md:h-full bg-card/50 backdrop-blur-sm flex items-center justify-center p-8 md:p-12">
                 <div className="w-full h-full rounded-xl border border-border bg-background/50 flex items-center justify-center">
@@ -477,7 +614,7 @@ const AI = () => {
       {/* Call to Action Section */}
       <motion.section
         ref={ctaRef}
-        className="py-20 px-4 bg-primary/5 relative overflow-hidden"
+        className="py-20 px-4 bg-background/50 relative overflow-hidden"
         initial="hidden"
         animate={ctaInView ? "visible" : "hidden"}
         variants={containerVariants}
@@ -496,7 +633,7 @@ const AI = () => {
                 <div className="w-full h-full rounded-xl bg-background/50 backdrop-blur-sm border border-primary/10 overflow-hidden relative group">
                   <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:32px_32px]" />
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-3/4 h-3/4 bg-primary/5 rounded-full blur-2xl animate-pulse" />
+                    <div className="w-3/4 h-3/4 bg-primary/5 rounded-full blur-2xl" />
                   </div>
                   <div className="relative h-full flex items-center justify-center">
                     <Bot className="w-24 h-24 text-primary/40 group-hover:text-primary/60 transition-colors" />
@@ -524,19 +661,22 @@ const AI = () => {
                 className="flex flex-col sm:flex-row gap-4 justify-end"
                 variants={itemVariants}
               >
-                <motion.button
-                  className="px-8 py-4 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 group"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  Get Started Now
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </motion.button>
-                <motion.button
-                  className="px-8 py-4 rounded-full border border-primary/20 hover:bg-primary/10 transition-colors"
-                  whileHover={{ scale: 1.05 }}
+                <Link to="/contact">
+                  <AdvancedInteractiveButton 
+                    variant="primary" 
+                    size="large" 
+                    className="flex items-center"
+                  >
+                    Get Started Now
+                    <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </AdvancedInteractiveButton>
+                </Link>
+                <AdvancedInteractiveButton 
+                  variant="secondary" 
+                  size="large"
                 >
                   Schedule a Demo
-                </motion.button>
+                </AdvancedInteractiveButton>
               </motion.div>
             </motion.div>
           </div>

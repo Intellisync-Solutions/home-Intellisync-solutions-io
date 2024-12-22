@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { StreamingText } from '../../features/StreamingText';
-import { Button } from '../../ui/Button/button';
-import { ArrowRight } from 'lucide-react';
+import { Send, Rocket } from 'lucide-react';
+import { AdvancedInteractiveButton } from '../../../pages/Contact';
 import ContactFormModal from '../../Modals/ContactFormModal';
 
 export const CTASection = () => {
@@ -37,25 +37,19 @@ export const CTASection = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
-              <Button
-                variant="default"
-                size="lg"
-                className="group min-w-[200px]"
+              <AdvancedInteractiveButton 
                 onClick={() => setIsContactModalOpen(true)}
+                icon={Send}
               >
                 Start Your Project
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              
+              </AdvancedInteractiveButton>
               <Link to="/work">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="min-w-[200px]"
+                <AdvancedInteractiveButton 
+                  variant="secondary"
+                  icon={Rocket}
                 >
                   View Portfolio
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
+                </AdvancedInteractiveButton>
               </Link>
             </div>
 

@@ -3,6 +3,7 @@ import Animation from '../../features/Animation';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import ContactFormModal from '../../Modals/ContactFormModal';
+import { AdvancedInteractiveButton } from '../../../pages/Contact';
 
 export const ServicesCTA = () => {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
@@ -68,24 +69,27 @@ export const ServicesCTA = () => {
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
                 <Animation type="slide-fade" direction="right" delay={0.4}>
-                  <button 
+                  <AdvancedInteractiveButton 
+                    variant="primary" 
+                    size="large" 
                     onClick={() => setIsContactModalOpen(true)}
-                    className="group relative inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300"
+                    className="flex items-center"
                   >
                     Start a Project
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
-                  </button>
+                    <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </AdvancedInteractiveButton>
                 </Animation>
 
                 <Animation type="slide-fade" direction="left" delay={0.5}>
-                  <Link 
-                    to="/contact"
-                    className="group relative inline-flex items-center gap-2 px-8 py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-semibold rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300"
-                  >
-                    <MessageCircle className="w-5 h-5" />
-                    Schedule a Call
-                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-600/0 to-purple-600/0 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
+                  <Link to="/contact">
+                    <AdvancedInteractiveButton 
+                      variant="secondary" 
+                      size="large" 
+                      className="flex items-center"
+                    >
+                      <MessageCircle className="w-5 h-5 mr-2" />
+                      Schedule a Call
+                    </AdvancedInteractiveButton>
                   </Link>
                 </Animation>
               </div>

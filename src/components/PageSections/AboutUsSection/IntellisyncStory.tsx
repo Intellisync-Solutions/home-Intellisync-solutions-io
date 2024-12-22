@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles, Rocket, Users } from 'lucide-react';
-import { Button } from '../../ui/Button/button';
+import { AdvancedInteractiveButton } from '../../../pages/Contact';
+import { Link } from 'react-router-dom';
 
 export const IntellisyncStory = () => {
   const storyPoints = [
@@ -56,10 +57,16 @@ export const IntellisyncStory = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <Button variant="default" size="lg">
-                Join Our Journey
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
+              <Link to="/contact">
+                <AdvancedInteractiveButton 
+                  variant="primary" 
+                  size="large" 
+                  className="flex items-center"
+                >
+                  Join Our Journey
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </AdvancedInteractiveButton>
+              </Link>
             </motion.div>
           </div>
 
