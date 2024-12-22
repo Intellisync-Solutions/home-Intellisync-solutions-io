@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { BookOpen, Feather, Pen, Scroll } from 'lucide-react';
+import { Feather, Pen, Scroll } from 'lucide-react';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import AIModelNav from '../../../components/AIModelNav';
@@ -72,7 +72,7 @@ const LiteraryModel = () => {
     setMessages([...messages, userMessage, authorResponse]);
   };
 
-  const generateAuthorResponse = (input: string, author: typeof authors[0]) => {
+  const generateAuthorResponse = (_input: string, author: typeof authors[0]) => {
     // In a real application, this would connect to an AI service
     const responses = {
       'shakespeare': 'Prithee, let me speak on this matter...',

@@ -90,7 +90,7 @@ const HistoricalModel = () => {
     setMessages([...messages, userMessage, figureResponse]);
   };
 
-  const generateHistoricalResponse = (input: string, figure: typeof historicalFigures[0]) => {
+  const generateHistoricalResponse = (_input: string, figure: typeof historicalFigures[0]) => {
     // In a real application, this would connect to an AI service
     const responses = {
       'cleopatra': 'As ruler of Egypt, I must say...',
