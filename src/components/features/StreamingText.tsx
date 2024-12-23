@@ -8,6 +8,9 @@ interface StreamingTextProps {
   onComplete?: () => void;
   cursor?: boolean;
   delay?: number; // initial delay before starting
+  color?: string; // final color of the text
+  gradientStart?: string; // starting dark color for gradient
+  dynamicColors?: string[]; // array of colors to cycle through during streaming
 }
 
 const StreamingText = ({
@@ -16,7 +19,10 @@ const StreamingText = ({
   className = '',
   onComplete,
   cursor = true,
-  delay = 0
+  delay = 0,
+  color,
+  gradientStart,
+  dynamicColors
 }: StreamingTextProps) => {
   const [currentIndex, setCurrentIndex] = useState<number>(-1);
   const [isComplete, setIsComplete] = useState(false);
@@ -81,6 +87,12 @@ const StreamingText = ({
             opacity: { duration: 0.3 },
             y: { duration: 0.4 }
           }}
+          style={{
+            color: isComplete ? color : dynamicColors && dynamicColors[index % dynamicColors.length] || gradientStart,
+            backgroundImage: isComplete ? undefined : dynamicColors && dynamicColors[index % dynamicColors.length] ? undefined : `linear-gradient(to right, ${gradientStart}, ${color})`,
+            backgroundClip: isComplete || dynamicColors && dynamicColors[index % dynamicColors.length] ? undefined : 'text',
+            WebkitBackgroundClip: isComplete || dynamicColors && dynamicColors[index % dynamicColors.length] ? undefined : 'text',
+          }}
         >
           {char}
         </motion.span>
@@ -98,6 +110,12 @@ const StreamingText = ({
               repeatType: "reverse"
             }}
             className="inline-block ml-[1px] -translate-y-[2px]"
+            style={{
+              color: isComplete ? color : dynamicColors && dynamicColors[currentIndex % dynamicColors.length] || gradientStart,
+              backgroundImage: isComplete ? undefined : dynamicColors && dynamicColors[currentIndex % dynamicColors.length] ? undefined : `linear-gradient(to right, ${gradientStart}, ${color})`,
+              backgroundClip: isComplete || dynamicColors && dynamicColors[currentIndex % dynamicColors.length] ? undefined : 'text',
+              WebkitBackgroundClip: isComplete || dynamicColors && dynamicColors[currentIndex % dynamicColors.length] ? undefined : 'text',
+            }}
           >
             |
           </motion.span>

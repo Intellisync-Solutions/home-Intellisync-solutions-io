@@ -29,7 +29,7 @@ export const ProjectFeaturesModal = ({ project, onClose, isOpen }: ProjectFeatur
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 50 }}
-            className="fixed inset-x-4 top-[2vh] mx-auto max-w-4xl bg-background rounded-xl shadow-2xl z-50 overflow-hidden border border-gray-200 dark:border-gray-800 m-4 max-h-[96vh]"
+            className="fixed inset-x-4 top-[2vh] mx-auto max-w-4xl bg-background rounded-xl shadow-2xl z-50 overflow-hidden border border-gray-200 dark:border-gray-800 m-4 max-h-[96vh] overflow-y-auto"
           >
             {/* Modal Header */}
             <div className="relative h-[30vh] overflow-hidden">
@@ -53,7 +53,7 @@ export const ProjectFeaturesModal = ({ project, onClose, isOpen }: ProjectFeatur
             </div>
 
             {/* Modal Content */}
-            <div className="p-6 overflow-y-auto" style={{ maxHeight: 'calc(66vh - 2rem)' }}>
+            <div className="p-6 overflow-y-auto">
               {/* Features */}
               <div className="mb-8">
                 <h3 className="text-xl font-semibold mb-4">Key Features</h3>

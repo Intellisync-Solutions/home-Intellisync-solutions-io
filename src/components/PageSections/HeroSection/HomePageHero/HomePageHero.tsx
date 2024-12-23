@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import Animation from '../../../features/Animation';
+import { StreamingText } from '../../../features/StreamingText';
 
 const HomePageHero = () => {
   return (
@@ -25,8 +26,23 @@ const HomePageHero = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              We build digital dreams.<br/><br/>
-              From Concept to Completion, each step is a Journey toward Innovation.
+              <StreamingText 
+                text="We build digital dreams." 
+                speed={90} 
+                delay={500}
+                className="block mb-4"
+                color="#8B5CF6"
+                gradientStart="#3B82F6"
+                dynamicColors={['#3B82F6', '#6366F1', '#4299E1', '#8B5CF6', '#6B46C6']}
+              />
+              <StreamingText 
+                text="From Concept to Completion, each step is a Journey toward Innovation." 
+                speed={90} 
+                delay={1500}
+                className="block"
+                color="#8B5CF6"
+                gradientStart="#3B82F6"
+                dynamicColors={['#3B82F6', '#6366F1', '#4299E1', '#8B5CF6', '#6B46C6']}              />
             </p>
           </motion.div>
 

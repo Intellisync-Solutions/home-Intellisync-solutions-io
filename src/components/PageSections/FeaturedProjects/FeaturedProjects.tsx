@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import {  Code, Brain, Heart, Users, Clock, Calculator } from 'lucide-react';
 import { useState } from 'react';
 import { ProjectFeaturesModal } from '../../Modals/ProjectFeaturesModal';
-
+import { StreamingText } from '../../features/StreamingText';
 import { InfiniteCarousel } from '../../ui/InfiniteCarousel/InfiniteCarousel';
 import { ProjectCard } from '../../ui/ProjectCard/ProjectCard';
 import type { Project } from './types';
@@ -284,7 +284,24 @@ export const FeaturedProjects = () => {
             Featured Projects
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            At Intellisync Solutions we build Communities. We believe that great work comes from sharing a Passion, not just the technical requirements, but the human stories that live behind every project.
+            <StreamingText 
+              text="At Intellisync Solutions we build Communities." 
+              speed={100} 
+              delay={500}
+              className="block mb-4"
+              color="#8B5CF6"
+              gradientStart="#3B82F6"
+              dynamicColors={['#3B82F6', '#6366F1', '#4299E1', '#8B5CF6', '#6B46C6']}
+            />
+            <StreamingText 
+              text="We believe that great work comes from sharing a Passion, not just the technical requirements, but the human stories that live behind every project." 
+              speed={100} 
+              delay={1500}
+              className="block"
+              color="#8B5CF6"
+              gradientStart="#3B82F6"
+              dynamicColors={['#3B82F6', '#6366F1', '#4299E1', '#8B5CF6', '#6B46C6']}
+            />
           </p>
         </motion.div>
 
