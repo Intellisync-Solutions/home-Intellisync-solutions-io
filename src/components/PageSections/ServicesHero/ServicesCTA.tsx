@@ -62,7 +62,7 @@ export const ServicesCTA = () => {
               {/* Description */}
               <Animation type="fade" delay={0.3}>
                 <p className="text-xl text-gray-600 dark:text-gray-300 text-center mb-8 max-w-2xl mx-auto">
-                  Let's discuss how our services can help you achieve your business goals. Schedule a free consultation today.
+                  Let's discuss how our services can help you maximize your digital potential. Schedule a free consultation today.
                 </p>
               </Animation>
 
@@ -103,11 +103,11 @@ export const ServicesCTA = () => {
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-blue-500" />
-                    24/7 Support
+                    Infinite Support
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-purple-500" />
-                    100% Satisfaction Guaranteed
+                    Satisfaction Guaranteed
                   </div>
                 </div>
               </Animation>

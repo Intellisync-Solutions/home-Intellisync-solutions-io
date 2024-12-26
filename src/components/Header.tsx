@@ -58,7 +58,7 @@ const Header = () => {
                 <motion.span 
                   className="text-lg font-semibold bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/80"
                 >
-                  Intellisync
+                  IntelliSync
                 </motion.span>
                 <span className="text-xs text-muted-foreground">Solutions</span>
               </div>

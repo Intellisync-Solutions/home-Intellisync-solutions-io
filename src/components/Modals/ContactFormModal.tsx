@@ -93,7 +93,7 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({ isOpen, onClose }) 
                     Start Your Project
                   </DialogTitle>
                   <DialogDescription className="text-center text-gray-600 dark:text-gray-300">
-                    Tell us about your project and we'll get back to you within 24 hours.
+                    Tell me more about your DREAM project.
                   </DialogDescription>
                   <div className="mb-6">
                     <StreamingText 
@@ -102,7 +102,7 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({ isOpen, onClose }) 
                       speed={70}
                     />
                     <p className="text-gray-600 mt-2">
-                      Share your vision with us, and let's transform it into reality. Whether it's a sleek portfolio or a complex platform, we're here to help.
+                      Share your vision and let's transform it into reality. Whether it's a sleek portfolio or a complex platform, I'm here to help.
                     </p>
                   </div>
                 </DialogHeader>
@@ -113,7 +113,7 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({ isOpen, onClose }) 
                     <Input
                       id="name"
                       {...register("name", { required: "Name is required" })}
-                      placeholder="John Smith"
+                      placeholder="Chris June"
                       className="w-full"
                     />
                     {errors.name && (
@@ -133,7 +133,7 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({ isOpen, onClose }) 
                           message: "Invalid email address"
                         }
                       })}
-                      placeholder="john@example.com"
+                      placeholder="chris.june@intellisync.ca" 
                       className="w-full"
                     />
                     {errors.email && (
@@ -162,7 +162,7 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({ isOpen, onClose }) 
                     <Textarea
                       id="message"
                       {...register("message", { required: "Message is required" })}
-                      placeholder="Tell us about your project idea, goals, and any specific features you'd like. The more details, the better!"
+                      placeholder="Tell me about your project idea, goals, and any specific features you'd like. The more details, the better!"
                       className="w-full min-h-[120px]"
                     />
                     {errors.message && (

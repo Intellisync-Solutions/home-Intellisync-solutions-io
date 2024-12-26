@@ -8,20 +8,27 @@ export const IntellisyncStory = () => {
     {
       icon: <Sparkles className="w-6 h-6" />,
       title: "Our Vision",
-      content: "Revolutionizing digital experiences through innovative AI solutions",
+      content: "Transforming digital adoption with personalized user experiences powered by innovative AI solutions.",
       year: "2020",
     },
     {
       icon: <Rocket className="w-6 h-6" />,
       title: "The Journey",
-      content: "From startup to industry leader in AI-powered development tools",
+      content: "A relentless pursuit of excellence, evolving from visionaries to pioneers in AI-powered transformation",
       year: "2021",
     },
     {
       icon: <Users className="w-6 h-6" />,
       title: "Growing Community",
-      content: "Building a thriving ecosystem of developers and enterprises",
+      content: "Building a thriving ecosystem of personal and enterprise solutions.",
       year: "2022",
+    },
+
+    {
+      icon: <Users className="w-6 h-6" />,
+      title: "The Path Forward",
+      content: "Unleashing the full potential of A.I. to reshape the future of digital experiences.",
+      year: "2025",
     },
   ];
 
@@ -40,7 +47,7 @@ export const IntellisyncStory = () => {
               transition={{ duration: 0.6 }}
               className="text-4xl font-bold mb-6 text-gray-900 dark:text-gray-100"
             >
-              The Intellisync Story
+              The IntelliSync Story
             </motion.h2>
             
             <motion.p 
@@ -49,7 +56,8 @@ export const IntellisyncStory = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-gray-600 dark:text-gray-300 text-lg mb-8"
             >
-              From a bold ideas to a global movement, our journey has always been about re-defining what’s possible. We don’t just create tools; we build digital experiences. At Intellisync Solutions, we believe in empowering users to unleash the full potential of A.I. and shape the future through integrated intelligent solutions.
+              From forward-thinking ideas to a progressive movement, our journey has always been fueled by the passion to redefine what’s possible. At IntelliSync Solutions, we don’t just develop tools; we create transformative digital experiences. Our purpose is to empower users to fully embrace the potential of AI, unlocking endless opportunities to shape a smarter, more connected future through innovative solutions.
+              
             </motion.p>
 
             <motion.div

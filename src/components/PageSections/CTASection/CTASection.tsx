@@ -56,20 +56,20 @@ export const CTASection = () => {
             {/* Trust indicators */}
             <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
               <div className="text-center">
-                <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">Infinite</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Support Available</div>
+                <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">Infinite Possibilities</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Transforming Ideas Into Reality</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">100%</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Client Satisfaction</div>
+                <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">Empowering Potential</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Turning Visions Into Victories</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">10+</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Years Experience</div>
+                <div className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">Global Connections</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Building Bridges Across Communities</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">Global</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Project Delivery</div>
+                <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">Trusted Excellence</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Your Vision, Our Commitment</div>
               </div>
             </div>
           </motion.div>

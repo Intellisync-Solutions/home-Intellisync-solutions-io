@@ -11,8 +11,8 @@ export const ServicesHero = () => {
     },
     {
       icon: <Code className="w-6 h-6" />,
-      title: "Custom Software",
-      description: "Building tailored solutions that solve your unique business challenges.",
+      title: "Custom Web Application Software",
+      description: "Building tailored A.I. solutions that solve your unique business needs.",
       delay: 0.3
     },
     {
@@ -29,8 +29,8 @@ export const ServicesHero = () => {
     },
     {
       icon: <Cloud className="w-6 h-6" />,
-      title: "Cloud Infrastructure",
-      description: "Building scalable, secure cloud solutions that power your digital transformation.",
+      title: "Integrated Intelligence",
+      description: "Building Personalized Intelligent solutions that enhance your digital experience.",
       delay: 0.45
     },
     {

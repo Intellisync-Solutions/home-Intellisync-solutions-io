@@ -36,7 +36,7 @@ const HomePageHero = () => {
                 dynamicColors={['#3B82F6', '#6366F1', '#4299E1', '#8B5CF6', '#6B46C6']}
               />
               <StreamingText 
-                text="From Concept to Completion, each step is a Journey toward Innovation." 
+                text="From Concept to Completion, every step is a Journey toward Innovation." 
                 speed={90} 
                 delay={1500}
                 className="block"
@@ -49,22 +49,22 @@ const HomePageHero = () => {
           <div className="flex justify-center gap-16 mt-16">
             <Animation type="3d-rotate" delay={0.4} duration={0.8}>
               <div className="w-32 h-32 bg-transparent rounded-lg flex flex-col items-center justify-center">
-                <span className="text-3xl font-bold text-blue-600 dark:text-blue-400">100+</span>
-                <span className="text-sm text-gray-600 dark:text-gray-400 mt-2">Projects</span>
+                <span className="text-3xl font-bold text-blue-600 dark:text-blue-400">Innovation</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400 mt-2">No Exceptions</span>
               </div>
             </Animation>
 
             <Animation type="3d-rotate" delay={0.6} duration={0.8}>
               <div className="w-32 h-32 bg-transparent rounded-lg flex flex-col items-center justify-center">
-                <span className="text-3xl font-bold text-purple-600 dark:text-purple-400">100%</span>
-                <span className="text-sm text-gray-600 dark:text-gray-400 mt-2">Success</span>
+                <span className="text-3xl font-bold text-purple-600 dark:text-purple-400">Success</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400 mt-2">Limitless</span>
               </div>
             </Animation>
 
             <Animation type="3d-rotate" delay={0.8} duration={0.8}>
               <div className="w-32 h-32 bg-transparent rounded-lg flex flex-col items-center justify-center">
-                <span className="text-3xl font-bold text-indigo-600 dark:text-indigo-400">100%</span>
-                <span className="text-sm text-gray-600 dark:text-gray-400 mt-2">Satisfaction</span>
+                <span className="text-3xl font-bold text-indigo-600 dark:text-indigo-400">Satisfaction</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400 mt-2">Inevitable</span>
               </div>
             </Animation>
           </div>

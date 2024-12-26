@@ -3,7 +3,7 @@ import Animation from '../../features/Animation';
 import { IntellisyncStory } from './IntellisyncStory';
 
 export const AboutUs = () => {
-  const stats = [
+  const _stats = [
     { number: "10+", label: "Years Experience", delay: 0.4 },
     { number: "100+", label: "Projects Completed", delay: 0.6 },
     { number: "95%", label: "Client Satisfaction", delay: 0.8 }
@@ -17,13 +17,13 @@ export const AboutUs = () => {
     },
     {
       icon: <Code className="w-6 h-6" />,
-      title: "Technical Excellence",
-      description: "Delivering robust, scalable solutions with clean, efficient code."
+      title: "Innovation Excellence",
+      description: "Delivering personalized AI Solutions that break barriers."
     },
     {
       icon: <Heart className="w-6 h-6" />,
-      title: "Client-Centric",
-      description: "Your success is our priority. We're committed to exceeding expectations."
+      title: "Innovation Driven",
+      description: "Progressive ideas built to challenge the future."
     }
   ];
 
@@ -61,7 +61,7 @@ export const AboutUs = () => {
         {/* Stats Section - Floating Cards */}
         <div className="relative mb-32">
           <div className="flex flex-wrap justify-center gap-8">
-            {stats.map((stat, index) => (
+            {_stats.map((stat, index) => (
               <Animation
                 key={stat.label}
                 type="pop"

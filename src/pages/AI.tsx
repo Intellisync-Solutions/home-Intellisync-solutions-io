@@ -28,18 +28,18 @@ const AI = () => {
     },
     {
       icon: <Bot className="w-8 h-8" />,
-      title: "Chatbots & Virtual Assistants",
-      description: "Intelligent conversational interfaces for seamless interaction"
+      title: "Chat Interfaces & Virtual Assistants",
+      description: "Intelligent interfaces for seamless interactions"
     },
     {
       icon: <Network className="w-8 h-8" />,
-      title: "Neural Networks",
-      description: "Deep learning systems inspired by human brain architecture"
+      title: "Integrated Services",
+      description: "Platform designs for end-to-end AI solutions that grow with you & your business"
     },
     {
       icon: <MessageSquare className="w-8 h-8" />,
       title: "Natural Language Processing",
-      description: "Understanding and processing human language naturally"
+      description: "Natural Language Processing for deep understanding of human language"
     },
     {
       icon: <Code2 className="w-8 h-8" />,
@@ -48,49 +48,49 @@ const AI = () => {
     },
     {
       icon: <Cpu className="w-8 h-8" />,
-      title: "Automated Systems",
-      description: "Smart automation for enhanced efficiency"
+      title: "GPT Builder Platform",
+      description: "IntelliSync Solutions' GPT Builder Platform for advanced No-Code AI development & deployment"
     }
   ];
 
   const showcaseItems = [
     {
-      title: "99.9% Accuracy",
-      description: "Advanced machine learning models ensure exceptional precision in data analysis and predictions.",
+      title: "Automatic Web-Scraping",
+      description: "Extract knowledge data from your website effortlessly by drag and drop functionality with AI-powered web-scraping.",
       icon: <Lightbulb className="w-6 h-6" />
     },
     {
-      title: "Enterprise Security",
-      description: "Bank-grade encryption and security protocols protect your sensitive data.",
+      title: "Vector Data Base Storage",
+      description: "Encryption and security protocols built-in to protect your sensitive data.",
       icon: <Shield className="w-6 h-6" />
     }
   ];
 
   const statistics = [
-    { value: '98%', label: 'Accuracy Rate' },
-    { value: '2.5x', label: 'Faster Processing' },
-    { value: '24/7', label: 'Support Available' },
-    { value: '500+', label: 'Active Users' },
+    { value: '98%', label: 'Model Response Accuracy Rate' },
+    { value: '20x', label: 'Faster Decision Processing' },
+    { value: '24/7', label: 'Performance Efficiency' },
+    { value: '2x', label: 'Return on Investment' },
   ];
 
   const testimonials = [
     {
       quote: "The AI solutions have transformed how we handle data analysis. It's been a game-changer for our business.",
-      author: "Sarah Chen",
-      role: "CTO, TechVision Inc.",
-      rating: 5
+      author: "",
+      role: "",
+      rating: 4
     },
     {
       quote: "Implementation was smooth, and the results were immediate. Our efficiency improved dramatically.",
-      author: "Michael Rodriguez",
-      role: "Head of Operations, DataFlow",
-      rating: 5
+      author: "",
+      role: "",
+      rating: 4
     },
     {
       quote: "The level of accuracy and speed is unprecedented. Highly recommend their solutions.",
-      author: "Emma Thompson",
-      role: "Data Scientist, AI Labs",
-      rating: 5
+      author: "",
+      role: "",
+      rating: 4
     }
   ];
 
@@ -226,7 +226,7 @@ const AI = () => {
           </motion.div>
           
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto mt-2">
-            Empowering businesses with cutting-edge AI solutions that drive innovation and transform user experiences.
+            Empowering you with cutting-edge AI solutions that drive innovation and transform user experiences.
           </p>
 
           <motion.div
@@ -243,12 +243,13 @@ const AI = () => {
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </AdvancedInteractiveButton>
             </Link>
-            <AdvancedInteractiveButton 
+
+            {/* <AdvancedInteractiveButton 
               variant="secondary" 
               size="large"
             >
               Learn More
-            </AdvancedInteractiveButton>
+            </AdvancedInteractiveButton> */}
           </motion.div>
         </motion.div>
 
@@ -363,7 +364,7 @@ const AI = () => {
 
                 <div className="flex-1">
                   <h3 className="text-xl font-semibold mb-2">20x Faster Processing</h3>
-                  <p className="text-muted-foreground mb-6">Our AI algorithms process data at unprecedented speeds, delivering insights in real-time.</p>
+                  <p className="text-muted-foreground mb-6">AI algorithms process data at unprecedented speeds, delivering insights in real-time.</p>
                 </div>
               </div>
               <div className="relative w-full h-32 mt-4 z-10">
@@ -456,9 +457,10 @@ const AI = () => {
                 <div className="p-3 rounded-xl bg-primary/10 text-primary w-fit group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                   <Shield className="w-6 h-6" />
                 </div>
+
                 <div className="flex-1">
-                  <h3 className="text-xl font-semibold mb-2">99.9% Accuracy</h3>
-                  <p className="text-muted-foreground mb-6">Advanced machine learning models ensure exceptional precision in data analysis.</p>
+                  <h3 className="text-xl font-semibold mb-2">No-Code Solutions  </h3>
+                  <p className="text-muted-foreground mb-6">Unlocking the power of AI without coding. Copy/Paste IntelliSync generated embed snippets to any website or intranet for both Personal or Business use cases. </p>
                 </div>
               </div>
               <div className="flex-1 flex items-center justify-center">
@@ -472,7 +474,7 @@ const AI = () => {
                     damping: 20 
                   }}
                 >
-                  99.9%
+                  
                 </motion.div>
               </div>
             </motion.div>
@@ -487,8 +489,8 @@ const AI = () => {
                   <Users className="w-6 h-6" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-semibold mb-2">1M+ Users</h3>
-                  <p className="text-muted-foreground mb-6">Join our growing community of satisfied users experiencing the power of AI.</p>
+                  <h3 className="text-xl font-semibold mb-2">Enhanced Knowledge Base</h3>
+                  <p className="text-muted-foreground mb-6">URL, Domain and Sitemap indexing for enhanced knowledge base. PDF file upload for data ingestion. Text Editor for deeper knowledge base customization </p>
                 </div>
               </div>
               <div className="relative w-full h-32 mt-4 z-10">
@@ -671,12 +673,13 @@ const AI = () => {
                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                   </AdvancedInteractiveButton>
                 </Link>
-                <AdvancedInteractiveButton 
+                
+                {/* <AdvancedInteractiveButton 
                   variant="secondary" 
                   size="large"
                 >
                   Schedule a Demo
-                </AdvancedInteractiveButton>
+                </AdvancedInteractiveButton> */}
               </motion.div>
             </motion.div>
           </div>

@@ -285,7 +285,7 @@ export const FeaturedProjects = () => {
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             <StreamingText 
-              text="At Intellisync Solutions we build Communities." 
+              text="At IntelliSync Solutions we build Communities." 
               speed={100} 
               delay={500}
               className="block mb-4"
@@ -294,8 +294,8 @@ export const FeaturedProjects = () => {
               dynamicColors={['#3B82F6', '#6366F1', '#4299E1', '#8B5CF6', '#6B46C6']}
             />
             <StreamingText 
-              text="We believe that great work comes from sharing a Passion, not just the technical requirements, but the human stories that live behind every project." 
-              speed={100} 
+              text="We believe that great work comes from sharing a Passion, not just the technical requirements, but the human story that lives behind every project." 
+              speed={90} 
               delay={1500}
               className="block"
               color="#8B5CF6"

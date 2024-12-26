@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-2">
         <div className="flex flex-wrap justify-between items-start gap-4 text-sm">
           <div className="flex-shrink-0">
-            <span className="font-semibold text-gray-800 dark:text-gray-200">Intellisync Solutions</span>
+            <span className="font-semibold text-gray-800 dark:text-gray-200">IntelliSync Solutions</span>
             <span className="mx-2 text-gray-400">|</span>
             <span className="text-gray-600 dark:text-gray-400">Creating personalized digital experiences</span>
           </div>
@@ -34,14 +34,14 @@ const Footer = () => {
         </div>
         
         <div className="mt-2 pt-2 border-t border-gray-200 dark:border-gray-800 flex justify-between items-center text-xs text-gray-600 dark:text-gray-400">
-          <p>{new Date().getFullYear()} Intellisync Solutions. All rights reserved.</p>
+          <p>{new Date().getFullYear()} IntelliSync Solutions. All rights reserved.</p>
           <a 
             href="https://intellisyncsolutions.io" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300"
           >
-            Powered by Intellisync Solutions
+            Powered by IntelliSync Solutions
           </a>
         
       </div>

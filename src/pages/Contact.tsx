@@ -5,8 +5,8 @@ import {
   Award, 
   Rocket, 
   Clock, 
-  Briefcase, 
-  Star, 
+  // Briefcase, 
+  // Star, 
   Users,
   MessageCircleMore
 } from 'lucide-react';
@@ -292,8 +292,8 @@ const StaggeredAsymmetricalLayout: React.FC = () => {
       description: "Recognized for innovative design and cutting-edge technology.",
       testimonial: {
         quote: "Their innovative approach completely transformed our digital strategy, setting new industry standards.",
-        name: "Sarah Johnson",
-        role: "CEO, TechInnovate",
+        name: "",
+        role: "",
         avatar: "https://randomuser.me/api/portraits/women/65.jpg"
       }
     },
@@ -303,19 +303,19 @@ const StaggeredAsymmetricalLayout: React.FC = () => {
       description: "Efficient project management with quick turnaround times.",
       testimonial: {
         quote: "They delivered our complex SaaS platform ahead of schedule, which was crucial for our product launch.",
-        name: "Michael Chen",
-        role: "Founder, StartupSync",
+        name: "",
+        role: "",
         avatar: "https://randomuser.me/api/portraits/men/32.jpg"
       }
     },
     {
       icon: <Clock size={48} className="text-green-500" />,
-      title: "24/7 Support",
-      description: "Dedicated support team always ready to assist you.",
+      title: "Infinite Support",
+      description: "Dedicated support always ready to assist you.",
       testimonial: {
-        quote: "Their round-the-clock support has been a game-changer. We always feel supported, no matter the time zone.",
-        name: "Emily Rodriguez",
-        role: "Marketing Director, GlobalBrand",
+        quote: "Their personalized support has been a game-changer. We always feel supported, no matter the time zone.",
+        name: "",
+        role: "",
         avatar: "https://randomuser.me/api/portraits/women/44.jpg"
       }
     },
@@ -325,8 +325,8 @@ const StaggeredAsymmetricalLayout: React.FC = () => {
       description: "Tailored solutions that align with your unique business goals.",
       testimonial: {
         quote: "They didn't just build a website, they understood our vision and crafted a solution that truly represents our brand.",
-        name: "David Kim",
-        role: "CTO, InnovationLabs",
+        name: "",
+        role: "",
         avatar: "https://randomuser.me/api/portraits/men/46.jpg"
       }
     }
@@ -443,7 +443,7 @@ const StaggeredAsymmetricalLayout: React.FC = () => {
             viewport={{ once: true }}
             className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-3xl shadow-2xl hover:shadow-[0_45px_70px_-20px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_45px_70px_-20px_rgba(255,255,255,0.1)] transition-all duration-300 p-12 mt-8 relative z-30 w-full transform hover:-translate-y-3 hover:scale-[1.02]"
           >
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
               {[
                 { 
                   icon: <Briefcase size={48} className="text-blue-500 mx-auto mb-4" />, 
@@ -472,7 +472,7 @@ const StaggeredAsymmetricalLayout: React.FC = () => {
                   <p className="text-gray-600 dark:text-gray-400">{stat.label}</p>
                 </div>
               ))}
-            </div>
+            </div> */}
           </motion.div>
         </div>
 
