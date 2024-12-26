@@ -616,42 +616,19 @@ const AI = () => {
         
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-12 gap-8 items-center">
-            {/* Image Placeholder */}
-            <motion.div 
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="bg-white dark:bg-gray-800 rounded-xl p-8 relative overflow-hidden group"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <h2 className="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-gray-200 relative z-10">
-                Interact with Our AI Assistant
-              </h2>
-              <div 
-                id="intellisync-chat" 
-                className="w-full min-h-[500px] relative z-10 rounded-lg 
-                  shadow-[0_0_20px_theme(colors.primary.DEFAULT)] 
-                  hover:shadow-[0_0_40px_theme(colors.primary.DEFAULT)] 
-                  dark:shadow-[0_0_20px_theme(colors.primary.DEFAULT/0.3)]
-                  dark:hover:shadow-[0_0_40px_theme(colors.primary.DEFAULT/0.5)]
-                  transition-all duration-500
-                  bg-white dark:bg-gray-800"
-              />
-            </motion.div>
-
             {/* Content */}
             <motion.div 
-              className="md:col-span-7 text-right"
+              className="md:col-span-12 text-center"
               variants={itemVariants}
             >
               <h2 className="text-3xl md:text-5xl font-bold mb-6">
                 Ready to Transform<br />Your Future?
               </h2>
-              <p className="text-xl text-muted-foreground mb-8 max-w-xl ml-auto">
+              <p className="text-xl text-muted-foreground mb-8 max-w-xl mx-auto">
                 Join the AI revolution today. Our team of experts is ready to help you implement cutting-edge AI solutions tailored to your needs.
               </p>
               <motion.div 
-                className="flex flex-col sm:flex-row gap-4 justify-end"
+                className="flex flex-col sm:flex-row gap-4 justify-center"
                 variants={itemVariants}
               >
                 <Link to="/contact">
@@ -664,13 +641,6 @@ const AI = () => {
                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                   </AdvancedInteractiveButton>
                 </Link>
-                
-                {/* <AdvancedInteractiveButton 
-                  variant="secondary" 
-                  size="large"
-                >
-                  Schedule a Demo
-                </AdvancedInteractiveButton> */}
               </motion.div>
             </motion.div>
           </div>
