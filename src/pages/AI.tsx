@@ -1,11 +1,11 @@
 import { motion, useScroll } from 'framer-motion';
-import { Brain, Cpu, Bot, Sparkles, Code2, Network, MessageSquare, Zap, ArrowRight, Play, ChevronRight, Lightbulb, Shield,  Star, Quote, Users} from 'lucide-react';
+import { Brain, Cpu,  Sparkles, Code2, Network, Zap, ArrowRight, Play, ChevronRight, Lightbulb, Shield, Star, Quote, Users } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 import { useEffect, useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
+import { StreamingText } from "../components/features/StreamingText";
 import AIModelNav from '../components/AIModelNav';
 import { AdvancedInteractiveButton } from './Contact';
-import { Link } from 'react-router-dom';
-import { StreamingText } from "../components/features/StreamingText"; // Corrected import path
 
 const AI = () => {
   const [isTyping, setIsTyping] = useState(true);
@@ -27,19 +27,9 @@ const AI = () => {
       description: "Advanced algorithms that learn and adapt from data patterns"
     },
     {
-      icon: <Bot className="w-8 h-8" />,
-      title: "Chat Interfaces & Virtual Assistants",
-      description: "Intelligent interfaces for seamless interactions"
-    },
-    {
       icon: <Network className="w-8 h-8" />,
       title: "Integrated Services",
       description: "Platform designs for end-to-end AI solutions that grow with you & your business"
-    },
-    {
-      icon: <MessageSquare className="w-8 h-8" />,
-      title: "Natural Language Processing",
-      description: "Natural Language Processing for deep understanding of human language"
     },
     {
       icon: <Code2 className="w-8 h-8" />,
@@ -136,6 +126,45 @@ const AI = () => {
     }
   }, [isTyping, displayText, currentTextIndex, heroTexts]);
 
+  useEffect(() => {
+    // Add custom styles for the chatbot widget
+    const style = document.createElement('style');
+    style.textContent = `
+      layouts-app {
+        box-shadow: 0 0 20px #6366f1 !important;
+        transition: box-shadow 0.3s ease-in-out !important;
+      }
+      layouts-app:hover {
+        box-shadow: 0 0 40px #6366f1 !important;
+      }
+      compositions-chat {
+        box-shadow: 0 0 20px rgba(99, 102, 241, 0.5) !important;
+        transition: box-shadow 0.3s ease-in-out !important;
+      }
+      modules-chat-launcher {
+        position: relative !important;
+      }
+      modules-chat-launcher::after {
+        content: '';
+        position: absolute;
+        inset: -5px;
+        border-radius: inherit;
+        background: radial-gradient(circle at center, #6366f1 0%, transparent 70%);
+        opacity: 0.5;
+        transition: opacity 0.3s ease-in-out;
+        pointer-events: none;
+      }
+      modules-chat-launcher:hover::after {
+        opacity: 0.8;
+      }
+    `;
+    document.head.appendChild(style);
+
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
   const [heroRef, heroInView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -173,7 +202,7 @@ const AI = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-background/95">
-      <AIModelNav />
+      <AIModelNav initialCollapsed={true} />
       {/* Hero Section */}
       <motion.section
         ref={heroRef}
@@ -449,7 +478,7 @@ const AI = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
             <motion.div
-              className="p-6 rounded-2xl bg-card backdrop-blur-sm border border-border hover:border-primary/20 transition-colors group row-span-2 flex flex-col"
+              className="p-6 rounded-2xl bg-card backdrop-blur-sm border border-border hover:border-primary/20 transition-colors group md:col-span-2"
               variants={itemVariants}
               whileHover={{ scale: 1.02 }}
             >
@@ -459,23 +488,9 @@ const AI = () => {
                 </div>
 
                 <div className="flex-1">
-                  <h3 className="text-xl font-semibold mb-2">No-Code Solutions  </h3>
-                  <p className="text-muted-foreground mb-6">Unlocking the power of AI without coding. Copy/Paste IntelliSync generated embed snippets to any website or intranet for both Personal or Business use cases. </p>
+                  <h3 className="text-xl font-semibold mb-2">No-Code Solutions</h3>
+                  <p className="text-muted-foreground mb-6">Unlocking the power of AI without coding. Copy/Paste IntelliSync generated embed snippets to any website or intranet for both Personal or Business use cases.</p>
                 </div>
-              </div>
-              <div className="flex-1 flex items-center justify-center">
-                <motion.div 
-                  className="text-8xl font-black text-primary tracking-tighter text-center w-full bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent"
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ 
-                    type: "spring",
-                    stiffness: 260,
-                    damping: 20 
-                  }}
-                >
-                  
-                </motion.div>
               </div>
             </motion.div>
 
@@ -490,33 +505,8 @@ const AI = () => {
                 </div>
                 <div className="flex-1">
                   <h3 className="text-xl font-semibold mb-2">Enhanced Knowledge Base</h3>
-                  <p className="text-muted-foreground mb-6">URL, Domain and Sitemap indexing for enhanced knowledge base. PDF file upload for data ingestion. Text Editor for deeper knowledge base customization </p>
+                  <p className="text-muted-foreground">URL, Domain and Sitemap indexing for enhanced knowledge base. PDF file upload for data ingestion.</p>
                 </div>
-              </div>
-              <div className="relative w-full h-32 mt-4 z-10">
-                <motion.div 
-                  className="flex items-center justify-center gap-4"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  {[...Array(5)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center"
-                      initial={{ scale: 0, x: -20 }}
-                      animate={{ scale: 1, x: 0 }}
-                      transition={{ 
-                        delay: i * 0.1,
-                        type: "spring",
-                        stiffness: 260,
-                        damping: 20
-                      }}
-                    >
-                      <Users className="w-4 h-4 text-primary" />
-                    </motion.div>
-                  ))}
-                </motion.div>
               </div>
             </motion.div>
           </div>
@@ -628,24 +618,25 @@ const AI = () => {
           <div className="grid md:grid-cols-12 gap-8 items-center">
             {/* Image Placeholder */}
             <motion.div 
-              className="md:col-span-5 relative"
-              variants={itemVariants}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="bg-white dark:bg-gray-800 rounded-xl p-8 relative overflow-hidden group"
             >
-              <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20 p-1">
-                <div className="w-full h-full rounded-xl bg-background/50 backdrop-blur-sm border border-primary/10 overflow-hidden relative group">
-                  <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:32px_32px]" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-3/4 h-3/4 bg-primary/5 rounded-full blur-2xl" />
-                  </div>
-                  <div className="relative h-full flex items-center justify-center">
-                    <Bot className="w-24 h-24 text-primary/40 group-hover:text-primary/60 transition-colors" />
-                  </div>
-                </div>
-              </div>
-              
-              {/* Decorative Elements */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/5 rounded-full blur-2xl" />
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-primary/10 rounded-full blur-2xl" />
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <h2 className="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-gray-200 relative z-10">
+                Interact with Our AI Assistant
+              </h2>
+              <div 
+                id="intellisync-chat" 
+                className="w-full min-h-[500px] relative z-10 rounded-lg 
+                  shadow-[0_0_20px_theme(colors.primary.DEFAULT)] 
+                  hover:shadow-[0_0_40px_theme(colors.primary.DEFAULT)] 
+                  dark:shadow-[0_0_20px_theme(colors.primary.DEFAULT/0.3)]
+                  dark:hover:shadow-[0_0_40px_theme(colors.primary.DEFAULT/0.5)]
+                  transition-all duration-500
+                  bg-white dark:bg-gray-800"
+              />
             </motion.div>
 
             {/* Content */}

@@ -3,11 +3,14 @@ import Animation from '../../features/Animation';
 import { IntellisyncStory } from './IntellisyncStory';
 
 export const AboutUs = () => {
+  // Commented out stats for future development
+  /*
   const _stats = [
     { number: "10+", label: "Years Experience", delay: 0.4 },
     { number: "100+", label: "Projects Completed", delay: 0.6 },
     { number: "95%", label: "Client Satisfaction", delay: 0.8 }
   ];
+  */
 
   const values = [
     {
@@ -58,7 +61,8 @@ export const AboutUs = () => {
           </Animation>
         </div>
 
-        {/* Stats Section - Floating Cards */}
+        {/* Commented out stats section for future development */}
+        {/* 
         <div className="relative mb-32">
           <div className="flex flex-wrap justify-center gap-8">
             {_stats.map((stat, index) => (
@@ -83,6 +87,7 @@ export const AboutUs = () => {
             ))}
           </div>
         </div>
+        */}
 
         {/* Values Section - Modern Grid */}
         <div className="max-w-6xl mx-auto">

@@ -147,11 +147,11 @@ const NavButton = ({
   );
 };
 
-const AIModelNav = ({ inOverlay = false }: { inOverlay?: boolean }) => {
+const AIModelNav = ({ inOverlay = false, initialCollapsed = false }: { inOverlay?: boolean; initialCollapsed?: boolean }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [activeCategory, setActiveCategory] = React.useState<'core' | 'persona'>('core');
-  const [isCollapsed, setIsCollapsed] = React.useState(false);
+  const [isCollapsed, setIsCollapsed] = React.useState(initialCollapsed);
   const [isMobileExpanded, setIsMobileExpanded] = React.useState(false);
   const [isMobile, setIsMobile] = React.useState(false);
 

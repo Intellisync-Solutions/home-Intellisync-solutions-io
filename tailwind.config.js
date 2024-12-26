@@ -28,7 +28,8 @@ export default {
         'fade-in': 'fadeIn 0.5s ease-in-out',
         'slide-up': 'slideUp 0.5s ease-in-out',
         blob: "blob 7s infinite",
-        'glow': 'glow 1.5s ease-in-out infinite',
+        'glow': 'glow 1.5s ease-in-out infinite alternate',
+        'pulse-glow': 'pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       keyframes: {
         fadeIn: {
@@ -41,14 +42,23 @@ export default {
         },
         glow: {
           '0%': {
-            boxShadow: '0 0 0 rgba(var(--primary), 0.6)',
-          },
-          '50%': {
-            boxShadow: '0 0 30px rgba(var(--primary), 0.8)',
+            boxShadow: '0 0 5px rgba(var(--primary), 0.1)',
+            opacity: '0.5'
           },
           '100%': {
-            boxShadow: '0 0 0 rgba(var(--primary), 0.6)',
+            boxShadow: '0 0 20px rgba(var(--primary), 0.4)',
+            opacity: '1'
+          }
+        },
+        pulseGlow: {
+          '0%, 100%': {
+            opacity: '1',
+            boxShadow: '0 0 30px rgba(var(--primary), 0.3)'
           },
+          '50%': {
+            opacity: '0.5',
+            boxShadow: '0 0 50px rgba(var(--primary), 0.6)'
+          }
         },
         blob: {
           "0%": {

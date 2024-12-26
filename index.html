@@ -59,12 +59,35 @@
     <link rel="preconnect" href="https://home.intellisyncsolutions.io">
     <link rel="dns-prefetch" href="https://home.intellisyncsolutions.io">
     <link rel="preload" as="font" href="/fonts/main-font.woff2" type="font/woff2" crossorigin>
+    <link rel="preconnect" href="https://intellisync-server-fbc47e09b67b.herokuapp.com" crossorigin>
     
     <!-- Security -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
-    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:;">
+    
+    <!-- Chatbot Resources -->
+    <link rel="preload" href="https://intellisync-server-fbc47e09b67b.herokuapp.com/chatbot-embed.js" as="script" type="text/javascript" crossorigin="anonymous">
+    <link rel="preload" href="https://intellisync-server-fbc47e09b67b.herokuapp.com/static/chatbot.css" as="style" crossorigin="anonymous">
+    
+    <!-- Try multiple potential font paths -->
+    <link rel="preload" href="https://intellisync-server-fbc47e09b67b.herokuapp.com/static/chatbot-icons.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://intellisync-server-fbc47e09b67b.herokuapp.com/static/fonts/chatbot-icons.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <link rel="stylesheet" href="https://intellisync-server-fbc47e09b67b.herokuapp.com/static/chatbot.css" crossorigin="anonymous">
+    
+    <!-- Fallback for Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self' https://intellisync-server-fbc47e09b67b.herokuapp.com https://fonts.googleapis.com https://fonts.gstatic.com https://res.cloudinary.com;
+      script-src 'self' https://intellisync-server-fbc47e09b67b.herokuapp.com https://fonts.googleapis.com https://fonts.gstatic.com 'unsafe-inline' 'unsafe-eval';
+      style-src 'self' 'unsafe-inline' https://intellisync-server-fbc47e09b67b.herokuapp.com https://fonts.googleapis.com https://fonts.gstatic.com;
+      img-src 'self' data: https: https://intellisync-server-fbc47e09b67b.herokuapp.com https://res.cloudinary.com;
+      font-src 'self' data: https://intellisync-server-fbc47e09b67b.herokuapp.com https://fonts.gstatic.com https://fonts.googleapis.com https://res.cloudinary.com;
+      connect-src 'self' https: wss: https://intellisync-server-fbc47e09b67b.herokuapp.com;
+      worker-src blob:;
+    ">
     
     <!-- Schema.org markup -->
     <script type="application/ld+json">
@@ -115,7 +138,14 @@
   </head>
   <body>
     <div id="root"></div>
+    <div id="intellisync-chat"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script 
+      src="https://intellisync-server-fbc47e09b67b.herokuapp.com/chatbot-embed.js" 
+      data-intellisync-id="pNXqEuc4jTU3Y07ylF5I" 
+      defer 
+      type="module"
+    ></script>
     <!-- Accessibility -->
     <noscript>
       <p>For full functionality of this site it is necessary to enable JavaScript. Here are the <a href="https://www.enable-javascript.com/" target="_blank" rel="noopener noreferrer">instructions how to enable JavaScript in your web browser</a>.</p>
