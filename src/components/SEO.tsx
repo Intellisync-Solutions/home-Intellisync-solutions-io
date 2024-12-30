@@ -22,10 +22,10 @@
  *    - schema-dts: For TypeScript Schema.org types
  * 
  * 4. Environment Variables Required:
- *    - NEXT_PUBLIC_SITE_URL: Base URL of the website
- *    - NEXT_PUBLIC_SITE_NAME: Name of the website
- *    - NEXT_PUBLIC_TWITTER_HANDLE: Twitter username
- *    - NEXT_PUBLIC_LINKEDIN_PROFILE: LinkedIn profile URL
+ *    - VITE_SITE_URL: Base URL of the website
+ *    - VITE_SITE_NAME: Name of the website
+ *    - VITE_TWITTER_HANDLE: Twitter username
+ *    - VITE_LINKEDIN_PROFILE: LinkedIn profile URL
  * 
  * Implementation Notes:
  * - All images should be optimized and served in WebP format with fallbacks
@@ -60,12 +60,18 @@ interface SEOProps {
   additionalMetaTags?: Array<{ name: string; content: string }>;
 }
 
+// Define default values for environment variables
+const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://home.intellisyncsolutions.io';
+const SITE_NAME = import.meta.env.VITE_SITE_NAME || 'IntelliSync Solutions';
+const TWITTER_HANDLE = import.meta.env.VITE_TWITTER_HANDLE || '@intellisync';
+const LINKEDIN_PROFILE = import.meta.env.VITE_LINKEDIN_PROFILE || 'https://www.linkedin.com/company/intellisync';
+
 export const SEO = ({
   title = 'IntelliSync Solutions - Innovative Technology Solutions',
   description = 'Transform your business with IntelliSync Solutions cutting-edge technology services. We specialize in AI, cloud computing, and custom software development.',
   keywords = 'IntelliSync Solutions, technology solutions, digital transformation, AI, cloud computing, software development',
   image = '/og-image.jpg',
-  url = process.env.NEXT_PUBLIC_SITE_URL,
+  url = SITE_URL,
   type = 'website',
   lang = 'en-US',
   publishDate,
@@ -73,19 +79,16 @@ export const SEO = ({
   structuredData,
   additionalMetaTags = [],
 }: SEOProps) => {
-  const siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'IntelliSync Solutions';
-  const twitterHandle = process.env.NEXT_PUBLIC_TWITTER_HANDLE || '@intellisync';
-  
   // Base structured data for the organization
   const baseStructuredData = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: siteName,
+    name: SITE_NAME,
     url: url,
     logo: `${url}/logo.png`,
     sameAs: [
-      `https://twitter.com/${twitterHandle.replace('@', '')}`,
-      process.env.NEXT_PUBLIC_LINKEDIN_PROFILE,
+      `https://twitter.com/${TWITTER_HANDLE.replace('@', '')}`,
+      LINKEDIN_PROFILE,
     ],
   };
 
@@ -113,19 +116,19 @@ export const SEO = ({
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
-      <meta property="og:site_name" content={siteName} />
+      <meta property="og:site_name" content={SITE_NAME} />
       <meta property="og:locale" content={lang} />
       
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content={twitterHandle} />
-      <meta name="twitter:creator" content={twitterHandle} />
+      <meta name="twitter:site" content={TWITTER_HANDLE} />
+      <meta name="twitter:creator" content={TWITTER_HANDLE} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
       
       {/* LinkedIn */}
-      <meta property="linkedin:owner" content={siteName} />
+      <meta property="linkedin:owner" content={SITE_NAME} />
       <meta property="linkedin:title" content={title} />
       <meta property="linkedin:description" content={description} />
       <meta property="linkedin:image" content={image} />

@@ -3,8 +3,10 @@ import { ThemeProvider } from './context/ThemeContext';
 import { Toaster } from "./components/ui/Toast/toaster";
 import { ToastProvider } from "./components/ui/Toast/toast";
 import { ScrollToTop } from './components/ScrollToTop';
+import { HelmetProvider } from 'react-helmet-async';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { SEO } from './components/SEO';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
@@ -59,59 +61,62 @@ const App = () => {
   }, []);
 
   return (
-    <ThemeProvider>
-      <ToastProvider>
-        <Router>
-          <ScrollToTop />
-          {showSplash && <SplashPage show={showSplash} onEnter={handleEnter} />}
-          <PageLayout>
-            <div className={`flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 overflow-x-hidden transition-opacity duration-1000 ${showSplash ? 'opacity-0' : 'opacity-100'}`}>
-              <Header />
-              <main className="flex-grow overflow-auto pt-16 pb-8">
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/services" element={<Services />} />
-                  <Route path="/work" element={<Work />} />
-                  <Route path="/work/buttons" element={<ButtonShowcase />} />
-                  <Route path="/work/cards" element={<CardShowcase />} />
-                  <Route path="/work/forms" element={<FormShowcase />} />
-                  <Route path="/work/navigation" element={<NavigationShowcase />} />
-                  <Route path="/work/pages" element={<PageShowcase />} />
-                  <Route path="/work/pages/:id" element={<PageDesignDetail />} />
-                  <Route path="/work/business-one" element={<NotFound />} />
-                  <Route path="/work/pages/saas-dashboard" element={<SaasDashboard />} />
-                  <Route path="/work/pages/modern-portfolio" element={<ModernPortfolio />} />
-                  <Route path="/work/pages/ecommerce-platform" element={<EcommercePlatform />} />
-                  <Route path="/work/pages/real-estate-platform" element={<RealEstatePlatform />} />
-                  <Route path="/work/pages/restaurant-platform" element={<RestaurantPlatform />} />
-                  <Route path="/work/pages/blog-platform" element={<BlogPlatform />} />
-                  <Route path="/ai" element={<AI />} />
-                  <Route path="/ai/models/language" element={<LanguageModel />} />
-                  <Route path="/ai/models/vision" element={<VisionModel />} />
-                  <Route path="/ai/models/audio" element={<AudioModel />} />
-                  <Route path="/ai/models/personas/philosopher" element={<PhilosopherModel />} />
-                  <Route path="/ai/models/personas/teacher" element={<TeacherModel />} />
-                  <Route path="/ai/models/personas/literary" element={<LiteraryModel />} />
-                  <Route path="/ai/models/personas/historical" element={<HistoricalModel />} />
-                  <Route path="/historical-model" element={<HistoricalModel />} />
-                  <Route path="/contact" element={<Contact />} />
-                  
-                  {/* Legal Pages */}
-                  <Route path="/privacy" element={<PrivacyPolicy />} />
-                  <Route path="/terms" element={<TermsOfService />} />
-                  
-                  {/* 404 Route */}
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </main>
-              <Footer />
-            </div>
-          </PageLayout>
-          <Toaster />
-        </Router>
-      </ToastProvider>
-    </ThemeProvider>
+    <HelmetProvider>
+      <ThemeProvider>
+        <ToastProvider>
+          <Router>
+            <ScrollToTop />
+            {showSplash && <SplashPage show={showSplash} onEnter={handleEnter} />}
+            <SEO />
+            <PageLayout>
+              <div className={`flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 overflow-x-hidden transition-opacity duration-1000 ${showSplash ? 'opacity-0' : 'opacity-100'}`}>
+                <Header />
+                <main className="flex-grow overflow-auto pt-16 pb-8">
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/services" element={<Services />} />
+                    <Route path="/work" element={<Work />} />
+                    <Route path="/work/buttons" element={<ButtonShowcase />} />
+                    <Route path="/work/cards" element={<CardShowcase />} />
+                    <Route path="/work/forms" element={<FormShowcase />} />
+                    <Route path="/work/navigation" element={<NavigationShowcase />} />
+                    <Route path="/work/pages" element={<PageShowcase />} />
+                    <Route path="/work/pages/:id" element={<PageDesignDetail />} />
+                    <Route path="/work/business-one" element={<NotFound />} />
+                    <Route path="/work/pages/saas-dashboard" element={<SaasDashboard />} />
+                    <Route path="/work/pages/modern-portfolio" element={<ModernPortfolio />} />
+                    <Route path="/work/pages/ecommerce-platform" element={<EcommercePlatform />} />
+                    <Route path="/work/pages/real-estate-platform" element={<RealEstatePlatform />} />
+                    <Route path="/work/pages/restaurant-platform" element={<RestaurantPlatform />} />
+                    <Route path="/work/pages/blog-platform" element={<BlogPlatform />} />
+                    <Route path="/ai" element={<AI />} />
+                    <Route path="/ai/models/language" element={<LanguageModel />} />
+                    <Route path="/ai/models/vision" element={<VisionModel />} />
+                    <Route path="/ai/models/audio" element={<AudioModel />} />
+                    <Route path="/ai/models/personas/philosopher" element={<PhilosopherModel />} />
+                    <Route path="/ai/models/personas/teacher" element={<TeacherModel />} />
+                    <Route path="/ai/models/personas/literary" element={<LiteraryModel />} />
+                    <Route path="/ai/models/personas/historical" element={<HistoricalModel />} />
+                    <Route path="/historical-model" element={<HistoricalModel />} />
+                    <Route path="/contact" element={<Contact />} />
+                    
+                    {/* Legal Pages */}
+                    <Route path="/privacy" element={<PrivacyPolicy />} />
+                    <Route path="/terms" element={<TermsOfService />} />
+                    
+                    {/* 404 Route */}
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </main>
+                <Footer />
+              </div>
+            </PageLayout>
+            <Toaster />
+          </Router>
+        </ToastProvider>
+      </ThemeProvider>
+    </HelmetProvider>
   );
 };
 
