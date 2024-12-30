@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { TextShimmer } from '@/components/core/text-shimmer';
 import { TextEffect } from '@/components/core/text-effect';
 import { cn } from '@/lib/utils';
 import { 
@@ -28,7 +27,9 @@ import {
 
 const companionWords = [
   ' Experiences',
-  ' Presence', 
+' Connections',
+'Solutions',
+'Innovation',
   ' Dreams',
   ' Ideas',
   ' Visions'
@@ -141,7 +142,7 @@ const HomePageHero: React.FC = () => {
             className="space-y-4"
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-              Crafting Digital
+              Designing Digital
               <AnimatePresence mode="wait">
                 <motion.span
                   key={currentWordIndex}
@@ -156,9 +157,12 @@ const HomePageHero: React.FC = () => {
               </AnimatePresence>
             </h1>
             
-            <TextShimmer className="text-xl md:text-2xl text-muted-foreground max-w-xl">
-              Full-stack developer and UI/UX enthusiast, crafting seamless digital experiences with modern web technologies.
-            </TextShimmer>
+            <TextEffect 
+              className="text-xl md:text-2xl text-muted-foreground max-w-xl"
+              preset="fade"
+            >
+              At IntelliSync Solutions, we don’t just create digital experiences – we bring your vision to life with seamless, user-centered solutions designed to inspire and engage. Together, let’s craft something truly extraordinary.
+            </TextEffect>
           </motion.div>
 
           <motion.div 

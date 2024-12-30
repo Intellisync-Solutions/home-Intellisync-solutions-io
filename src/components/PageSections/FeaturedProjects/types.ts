@@ -15,4 +15,5 @@ export interface Project {
   features?: ProjectFeature[];
   demoUrl?: string;
   githubUrl?: string;
+  displayTitle?: React.ReactNode;  // Optional field for fancy rendering
 }

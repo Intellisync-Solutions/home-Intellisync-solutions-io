@@ -10,13 +10,13 @@ import {
   Target,
   Zap,
   Lightbulb,
-  Puzzle,
-  Gem,
+ 
   LucideIcon
 } from 'lucide-react';
 import { ProjectFeaturesModal } from '../../Modals/ProjectFeaturesModal';
 import { TextShimmer } from '@/components/core/text-shimmer';
 import { InfiniteSlider } from '@/components/core/infinite-slider';
+import { TextEffect } from '@/components/core/text-effect';
 import type { Project } from './types';
 
 const iconVariations = [
@@ -50,6 +50,7 @@ const ProjectFeatureHighlight = ({ icon, title }: {
 const projects: Project[] = [
   {
     title: "Intellisync Solutions - BusinessOne",
+    displayTitle: <TextEffect preset="fade">Intellisync Solutions - BusinessOne</TextEffect>,
     description: "A comprehensive suite of tools and calculators designed to assist entrepreneurs and seasoned business professionals in making data-driven decisions.",
     imageUrl: "/images/business-one.png",
     link: "/work/business-one",
@@ -87,47 +88,10 @@ const projects: Project[] = [
       }
     ]
   },
-  {
-    title: "Cognitive Sync - AI Assistant",
-    description: "An intelligent AI-powered assistant that leverages advanced natural language processing to provide personalized support across various domains.",
-    imageUrl: "/images/cognitive-sync.png",
-    link: "/work/cognitive-sync",
-    tags: ["Next.js", "OpenAI", "TypeScript"],
-    features: [
-      {
-        title: "Contextual Understanding",
-        description: "Advanced NLP for nuanced conversation comprehension",
-        icon: Brain
-      },
-      {
-        title: "Multi-domain Expertise",
-        description: "Specialized knowledge across various professional fields",
-        icon: Gem
-      },
-      {
-        title: "Problem Solving",
-        description: "Intelligent problem-solving and strategic thinking",
-        icon: Puzzle
-      },
-      {
-        title: "Collaborative Workflow",
-        description: "Seamless integration with team communication tools",
-        icon: Users
-      },
-      {
-        title: "Time Management",
-        description: "Intelligent scheduling and priority management",
-        icon: Clock
-      },
-      {
-        title: "Emotional Intelligence",
-        description: "Empathetic and context-aware communication",
-        icon: Heart
-      }
-    ]
-  },
+  
   {
     title: "Serenity",
+    displayTitle: <TextEffect preset="fade">Serenity</TextEffect>,
     description: "An interactive mental health and wellness platform featuring mood tracking, daily affirmations, journaling, guided meditation, and sleep tracking.",
     imageUrl: "/images/serenity.png",
     link: "/work/serenity",
@@ -167,6 +131,7 @@ const projects: Project[] = [
   },
   {
     title: "Teen Minds Matter",
+    displayTitle: <TextEffect preset="fade">Teen Minds Matter</TextEffect>,
     description: "A social networking platform for youth mental health, featuring community groups, peer-led tutoring, and gamified interactions for ages 10-18.",
     imageUrl: "/images/teen-minds.png",
     link: "/work/teen-minds-matter",
@@ -206,6 +171,7 @@ const projects: Project[] = [
   },
   {
     title: "Intellisync Solutions - EducationOne",
+    displayTitle: <TextEffect preset="fade">Intellisync Solutions - EducationOne</TextEffect>,
     description: "A comprehensive AI-powered educational platform featuring expert AI tutors across multiple subjects, with specialized dashboards for students, parents, teachers, and administrators.",
     imageUrl: "/images/education-one.png",
     link: "/work/education-one",
@@ -245,6 +211,7 @@ const projects: Project[] = [
   },
   {
     title: "Intellisync Solutions - TimeCapsule",
+    displayTitle: <TextEffect preset="fade">Intellisync Solutions - TimeCapsule</TextEffect>,
     description: "AI-enhanced photo sharing platform with smart albums, family sharing, and interactive AI storytelling for preserving and sharing memories.",
     imageUrl: "/images/time-capsule.png",
     link: "/work/time-capsule",
@@ -274,6 +241,7 @@ const projects: Project[] = [
   },
   {
     title: "Intellisync Solutions - PersonalOne",
+    displayTitle: <TextEffect preset="fade">Intellisync Solutions - PersonalOne</TextEffect>,
     description: "A comprehensive personal finance platform offering advanced tools for wealth management, investment planning, tax projections, and retirement planning.",
     imageUrl: "/images/personal-one.png",
     link: "/work/personal-one",
@@ -331,7 +299,7 @@ export function FeaturedProjects() {
                   <div className="flex flex-col space-y-6">
                     <div>
                       <TextShimmer className="text-2xl md:text-3xl font-bold mb-3 break-words">
-                        {project.title}
+                        {project.displayTitle}
                       </TextShimmer>
                       <p className="text-gray-300 text-sm md:text-base mb-4 break-words">
                         {project.description}
