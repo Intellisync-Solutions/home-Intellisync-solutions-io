@@ -7,23 +7,20 @@ import {
   Code, 
   Palette, 
   Users, 
-  Share2, 
-  Plus, 
-  Download, 
+ 
   Check, 
   X, 
   Send, 
-  Bell, 
+ 
   Trash, 
   Star, 
   Zap, 
-  Loader2, 
-  ShoppingCart,
+  Bell,
   
 } from 'lucide-react';
 import { Button } from '../../../components/ui/Button/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "../../../components/ui/dialog";
-import { toast } from 'sonner';
+import { Toaster, toast } from 'sonner';
 import { StreamingText } from '../../../components/features/StreamingText';
 
 const ButtonShowcase = () => {
@@ -35,6 +32,15 @@ const ButtonShowcase = () => {
   const [notificationCount, setNotificationCount] = useState(0);
   const [cartCount, setCartCount] = useState(0);
 
+  const handleButtonToast = (buttonName: string) => {
+    toast(`Congrats, You used the "${buttonName}" Button!`);
+  };
+
+  const handleVariantButtons = (variant: string) => {
+    console.log(`Attempting to toast for variant: ${variant}`);
+    handleButtonToast(variant);
+  };
+
   const handleShare = async () => {
     const shareData = {
       title: 'Button Showcase',
@@ -44,25 +50,21 @@ const ButtonShowcase = () => {
 
     try {
       if (navigator.share) {
+        handleButtonToast("Share");
         await navigator.share(shareData);
-        toast.success("Content has been shared successfully");
+        toast.success('Page shared successfully!');
       } else {
-        await navigator.clipboard.writeText(shareData.url);
-        toast.success("Content copied to clipboard");
+        toast.error('Web Share API not supported');
       }
-    } catch {
-      toast.error("Failed to share");
+    } catch (error: unknown) {
+      console.error('Error sharing page:', error);
+      toast.error('Error sharing page');
     }
-  };
-
-  const handleLike = () => {
-    const newLikedState = !isLiked;
-    setIsLiked(newLikedState);
-    toast.success(newLikedState ? "Added to your likes" : "Removed from your likes");
   };
 
   const openModal = () => {
     setIsOpen(true);
+    handleButtonToast("Discover My Journey");
     toast("Let me share my passion for design with you", {
       duration: 3000,
     });
@@ -70,6 +72,7 @@ const ButtonShowcase = () => {
 
   const simulateLoading = () => {
     setIsLoading(true);
+    handleButtonToast("Simulate Loading");
     toast.loading("Your request is being processed");
     setTimeout(() => {
       setIsLoading(false);
@@ -79,33 +82,45 @@ const ButtonShowcase = () => {
 
   const handleNotification = () => {
     setNotificationCount(prev => prev + 1);
+    handleButtonToast("Notifications");
     toast(`You have ${notificationCount + 1} unread messages`);
   };
 
   const handleDelete = () => {
     console.log('Delete button clicked');
+    handleButtonToast("Delete");
     setShowConfirmModal(true);
     toast.error("Please confirm if you want to delete this item");
   };
 
   const confirmDelete = () => {
+    handleButtonToast("Confirm Delete");
     toast.success("The item has been deleted successfully");
     setShowConfirmModal(false);
   };
 
   const handleApprove = () => {
     console.log('Approve button clicked');
+    handleButtonToast("Approve");
     toast.success("The requested action has been approved successfully");
   };
 
   const handleDecline = () => {
     console.log('Decline button clicked');
+    handleButtonToast("Reject");
     toast.error("The requested action has been rejected");
   };
 
   const handleSend = () => {
     console.log('Send button clicked');
+    handleButtonToast("Send");
     toast.success("Your message has been sent successfully. We'll get back to you soon!");
+  };
+
+  const handleCart = () => {
+    setCartCount(prev => prev + 1);
+    handleButtonToast("Add to Cart");
+    toast.success(`Added to cart. Total items: ${cartCount + 1}`);
   };
 
   return (
@@ -240,6 +255,13 @@ const ButtonShowcase = () => {
             >
               Let's Work Together
             </Button>
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={handleShare}
+            >
+              Share Page
+            </Button>
           </div>
         </DialogContent>
       </Dialog>
@@ -274,116 +296,57 @@ const ButtonShowcase = () => {
             <section className="space-y-6">
               <h2 className="text-2xl font-semibold text-white/90">Basic Variants</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <Button variant="default" className="w-full">Default Button</Button>
-                <Button variant="secondary" className="w-full">Secondary</Button>
-                <Button variant="outline" className="w-full">Outline</Button>
-                <Button variant="ghost" className="w-full">Ghost</Button>
-              </div>
-            </section>
-
-            {/* Interactive States */}
-            <section className="space-y-6">
-              <h2 className="text-2xl font-semibold text-white/90">Interactive States</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {/* Like Button */}
-                <Button
-                  variant={isLiked ? "default" : "outline"}
-                  onClick={handleLike}
-                  className={`w-full group relative ${
-                    isLiked 
-                      ? 'bg-gradient-to-r from-pink-500/20 to-purple-500/20 hover:from-pink-500/30 hover:to-purple-500/30' 
-                      : 'hover:bg-white/10'
-                  }`}
-                >
-                  <motion.span 
-                    className="flex items-center justify-center w-full"
-                    animate={isLiked ? { scale: [1, 1.2, 1] } : {}}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Heart
-                      size={16}
-                      className={`mr-2 transition-all duration-300 ${
-                        isLiked 
-                          ? "fill-pink-500 text-pink-500" 
-                          : "text-slate-300 group-hover:text-pink-400"
-                      }`}
-                    />
-                    {isLiked ? 'Liked' : 'Like'}
-                  </motion.span>
-                </Button>
-                
-                {/* Loading Button */}
-                <Button
-                  onClick={() => {
-                    simulateLoading();
-                    // toast({
-                    //   title: "Loading Started",
-                    //   description: "This will take 2 seconds...",
-                    // });
+                <Button 
+                  variant="default" 
+                  className="w-full" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleVariantButtons("Default Button");
+                    handleButtonToast("Default Button");
+                    toast.success("Default Button clicked");
                   }}
-                  disabled={isLoading}
-                  className={`w-full relative ${
-                    isLoading 
-                      ? 'bg-slate-700 cursor-not-allowed' 
-                      : 'bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600'
-                  }`}
                 >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Loading...
-                    </>
-                  ) : (
-                    <>
-                      <Download className="mr-2 h-4 w-4" />
-                      Download
-                    </>
-                  )}
+                  Default Button
                 </Button>
-
-                {/* Share Button */}
+                <Button 
+                  variant="secondary" 
+                  className="w-full" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleVariantButtons("Secondary Button");
+                    handleButtonToast("Secondary Button");
+                    toast.success("Secondary Button clicked");
+                  }}
+                >
+                  Secondary
+                </Button>
                 <Button 
                   variant="outline" 
-                  className="w-full group hover:bg-white/10"
-                  onClick={handleShare}
-                >
-                  <motion.span 
-                    className="flex items-center justify-center w-full"
-                    whileHover={{ x: 5 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    Share
-                    <Share2 className="ml-2 h-4 w-4 transition-transform duration-300" />
-                  </motion.span>
-                </Button>
-
-                {/* Cart Button */}
-                <Button 
-                  className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 group relative"
-                  onClick={() => {
-                    setCartCount(prev => prev + 1);
-                    toast.success("Item has been added to your cart");
+                  className="w-full" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleVariantButtons("Outline Button");
+                    handleButtonToast("Outline Button");
+                    toast.success("Outline Button clicked");
                   }}
                 >
-                  <motion.span 
-                    className="flex items-center justify-center w-full"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <ShoppingCart className="mr-2 h-4 w-4 transition-transform duration-300" />
-                    Add to Cart
-                  </motion.span>
-                  <AnimatePresence>
-                    {cartCount > 0 && (
-                      <motion.span
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        exit={{ scale: 0 }}
-                        className="absolute -top-2 -right-2 bg-emerald-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
-                      >
-                        {cartCount}
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
+                  Outline
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  className="w-full" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleVariantButtons("Ghost Button");
+                    handleButtonToast("Ghost Button");
+                    toast.success("Ghost Button clicked");
+                  }}
+                >
+                  Ghost
                 </Button>
               </div>
             </section>
@@ -395,112 +358,125 @@ const ButtonShowcase = () => {
                 <Button 
                   type="button"
                   className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    console.log('Approve button clicked from JSX');
-                    handleApprove();
+                  onClick={() => {
+                    simulateLoading();
+                    toast.success("Simulate Loading button clicked");
                   }}
                 >
-                  <Check className="mr-2 h-4 w-4" />
-                  Approve
-                </Button>
-                
-                <Button 
-                  type="button"
-                  className="w-full bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    console.log('Decline button clicked from JSX');
-                    handleDecline();
-                  }}
-                >
-                  <X className="mr-2 h-4 w-4" />
-                  Reject
-                </Button>
-                
-                <Button 
-                  type="button"
-                  variant="outline" 
-                  className="w-full text-red-400 hover:text-red-300 hover:bg-red-950/30"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    console.log('Delete button clicked from JSX');
-                    handleDelete();
-                  }}
-                >
-                  <Trash className="mr-2 h-4 w-4" />
-                  Delete
+                  <Zap className="mr-2 h-4 w-4" /> {isLoading ? 'Loading...' : 'Simulate Loading'}
                 </Button>
                 
                 <Button 
                   type="button"
                   className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600"
+                  onClick={() => {
+                    handleNotification();
+                    toast.success("Notifications button clicked");
+                  }}
+                >
+                  <Bell className="mr-2 h-4 w-4" /> Notifications
+                </Button>
+                
+                <Button 
+                  type="button"
+                  variant="destructive"
+                  className="w-full"
+                  onClick={() => {
+                    handleDelete();
+                    toast.error("Delete button clicked");
+                  }}
+                >
+                  <Trash className="mr-2 h-4 w-4" /> Delete
+                </Button>
+                
+                <Button 
+                  type="button"
+                  className="w-full bg-gradient-to-r from-purple-500 to-fuchsia-500 hover:from-purple-600 hover:to-fuchsia-600"
+                  onClick={() => {
+                    handleApprove();
+                    toast.success("Approve button clicked");
+                  }}
+                >
+                  <Check className="mr-2 h-4 w-4" /> Approve
+                </Button>
+                
+                <Button 
+                  type="button"
+                  variant="outline"
+                  className="w-full"
+                  onClick={() => {
+                    handleDecline();
+                    toast.error("Decline button clicked");
+                  }}
+                >
+                  <X className="mr-2 h-4 w-4" /> Decline
+                </Button>
+                
+                <Button 
+                  type="button"
+                  className="w-full bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-600 hover:to-sky-600"
+                  onClick={() => {
+                    handleSend();
+                    toast.success("Send button clicked");
+                  }}
+                >
+                  <Send className="mr-2 h-4 w-4" /> Send
+                </Button>
+                
+                <Button 
+                  type="button"
+                  className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600"
+                  onClick={() => {
+                    handleCart();
+                    toast.success("Add to Cart button clicked");
+                  }}
+                >
+                  <Star className="mr-2 h-4 w-4" /> Add to Cart
+                </Button>
+                
+                <Button 
+                  type="button"
+                  variant="outline" 
+                  size="sm" 
+                  onClick={handleShare}
+                >
+                  Share Page
+                </Button>
+                
+                <Button 
+                  type="button"
+                  className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600"
+                  onClick={simulateLoading}
+                  disabled={isLoading}
+                >
+                  {isLoading ? 'Processing...' : 'Simulate Loading'}
+                </Button>
+                
+                <Button 
+                  variant="secondary" 
+                  size="lg" 
+                  onClick={handleCart}
+                  className="w-full flex items-center justify-center gap-2"
+                >
+                  <Star className="w-5 h-5" /> Add to Cart ({cartCount})
+                </Button>
+                
+                <Button 
+                  type="button"
+                  variant={isLiked ? "default" : "outline"}
+                  className={`w-full ${isLiked 
+                    ? 'bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600' 
+                    : 'border-pink-400 text-pink-400 hover:bg-pink-950/30'}`}
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    console.log('Send button clicked from JSX');
-                    handleSend();
+                    setIsLiked(!isLiked);
+                    handleButtonToast("Like");
+                    toast.success(isLiked ? "Removed from likes" : "Added to likes");
                   }}
                 >
-                  <Send className="mr-2 h-4 w-4" />
-                  Send
-                </Button>
-              </div>
-            </section>
-
-            {/* Notification Actions */}
-            <section className="space-y-6">
-              <h2 className="text-2xl font-semibold text-white/90">Interactive Actions</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <Button 
-                  onClick={() => setShowModal(true)}
-                  className="w-full backdrop-blur-sm bg-white/10 border border-white/20 hover:bg-white/20"
-                >
-                  <motion.span 
-                    className="flex items-center"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <Plus className="mr-2 h-4 w-4" />
-                    Open Modal
-                  </motion.span>
-                </Button>
-
-                <Button
-                  onClick={handleNotification}
-                  className="w-full relative backdrop-blur-sm bg-white/10 border border-white/20 hover:bg-white/20"
-                >
-                  <motion.span className="flex items-center">
-                    <Bell className="mr-2 h-4 w-4" />
-                    Notifications
-                  </motion.span>
-                  <AnimatePresence>
-                    {notificationCount > 0 && (
-                      <motion.span
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        exit={{ scale: 0 }}
-                        className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
-                      >
-                        {notificationCount}
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
-                </Button>
-
-                <Button
-                  onClick={handleDelete}
-                  className="w-full bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600"
-                >
-                  <motion.span 
-                    className="flex items-center"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <Trash className="mr-2 h-4 w-4" />
-                    Delete Item
-                  </motion.span>
+                  <Heart className={`mr-2 h-4 w-4 ${isLiked ? 'fill-white' : 'text-pink-400'}`} />
+                  {isLiked ? 'Liked' : 'Like'}
                 </Button>
               </div>
             </section>
@@ -583,56 +559,31 @@ const ButtonShowcase = () => {
               </div>
             </section>
 
-            {/* Interactive Actions */}
+            {/* Loading Button */}
             <section className="space-y-6">
-              <h2 className="text-2xl font-semibold text-white/90">Interactive Actions</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <h2 className="text-2xl font-semibold text-white/90">Loading Button</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <Button 
-                  onClick={() => setShowModal(true)}
-                  className="w-full backdrop-blur-sm bg-white/10 border border-white/20 hover:bg-white/20"
+                  className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600"
+                  onClick={simulateLoading}
+                  disabled={isLoading}
                 >
-                  <motion.span 
-                    className="flex items-center"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <Plus className="mr-2 h-4 w-4" />
-                    Open Modal
-                  </motion.span>
+                  {isLoading ? 'Processing...' : 'Simulate Loading'}
                 </Button>
+              </div>
+            </section>
 
-                <Button
-                  onClick={handleNotification}
-                  className="w-full relative backdrop-blur-sm bg-white/10 border border-white/20 hover:bg-white/20"
+            {/* Cart Button */}
+            <section className="space-y-6">
+              <h2 className="text-2xl font-semibold text-white/90">Cart Button</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <Button 
+                  variant="secondary" 
+                  size="lg" 
+                  onClick={handleCart}
+                  className="w-full flex items-center justify-center gap-2"
                 >
-                  <motion.span className="flex items-center">
-                    <Bell className="mr-2 h-4 w-4" />
-                    Notifications
-                  </motion.span>
-                  <AnimatePresence>
-                    {notificationCount > 0 && (
-                      <motion.span
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        exit={{ scale: 0 }}
-                        className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
-                      >
-                        {notificationCount}
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
-                </Button>
-
-                <Button
-                  onClick={handleDelete}
-                  className="w-full bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600"
-                >
-                  <motion.span 
-                    className="flex items-center"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <Trash className="mr-2 h-4 w-4" />
-                    Delete Item
-                  </motion.span>
+                  <Star className="w-5 h-5" /> Add to Cart ({cartCount})
                 </Button>
               </div>
             </section>
@@ -701,6 +652,19 @@ const ButtonShowcase = () => {
           </Dialog>
         )}
       </AnimatePresence>
+      <Toaster 
+        position="top-right" 
+        richColors 
+        className="z-[9999]"
+        toastOptions={{
+          style: { 
+            zIndex: 9999,
+            position: 'fixed',
+            top: '20px',
+            right: '20px'
+          }
+        }}
+      />
     </div>
   );
 };

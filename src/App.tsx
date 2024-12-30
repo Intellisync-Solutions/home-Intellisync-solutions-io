@@ -30,6 +30,8 @@ import PhilosopherModel from './pages/ai-models/personas/PhilosopherModel';
 import TeacherModel from './pages/ai-models/personas/TeacherModel';
 import LiteraryModel from './pages/ai-models/personas/LiteraryModel';
 import HistoricalModel from './pages/ai-models/personas/HistoricalModel';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 import NotFound from './pages/NotFound';
 import { useState, useEffect } from 'react';
 import SplashPage from './components/PageSections/SplashPage/SplashPage';
@@ -92,7 +94,14 @@ const App = () => {
                   <Route path="/ai/models/personas/teacher" element={<TeacherModel />} />
                   <Route path="/ai/models/personas/literary" element={<LiteraryModel />} />
                   <Route path="/ai/models/personas/historical" element={<HistoricalModel />} />
+                  <Route path="/historical-model" element={<HistoricalModel />} />
                   <Route path="/contact" element={<Contact />} />
+                  
+                  {/* Legal Pages */}
+                  <Route path="/privacy" element={<PrivacyPolicy />} />
+                  <Route path="/terms" element={<TermsOfService />} />
+                  
+                  {/* 404 Route */}
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>
