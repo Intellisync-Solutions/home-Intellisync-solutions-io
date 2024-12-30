@@ -10,6 +10,7 @@ type BorderTrailProps = {
   delay?: number;
   onAnimationComplete?: () => void;
   style?: React.CSSProperties;
+  children?: React.ReactNode;
 };
 
 export function BorderTrail({
@@ -19,6 +20,7 @@ export function BorderTrail({
   delay,
   onAnimationComplete,
   style,
+  children,
 }: BorderTrailProps) {
   const BASE_TRANSITION = {
     repeat: Infinity,
@@ -28,6 +30,7 @@ export function BorderTrail({
 
   return (
     <div className='pointer-events-none absolute inset-0 rounded-[inherit] border border-transparent [mask-clip:padding-box,border-box] [mask-composite:intersect] [mask-image:linear-gradient(transparent,transparent),linear-gradient(#000,#000)]'>
+      {children}
       <motion.div
         className={cn('absolute aspect-square bg-zinc-500', className)}
         style={{
