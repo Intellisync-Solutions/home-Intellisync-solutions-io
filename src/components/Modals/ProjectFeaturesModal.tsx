@@ -1,5 +1,7 @@
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ExternalLink, Github } from 'lucide-react';
+import { X, ExternalLink, Github, CheckCircle, Target, Zap } from 'lucide-react';
+import { BorderTrail } from '../core/BorderTrail';
 import { Project } from '../PageSections/FeaturedProjects/types';
 
 interface ProjectFeaturesModalProps {
@@ -14,91 +16,112 @@ export const ProjectFeaturesModal = ({ project, onClose, isOpen }: ProjectFeatur
   return (
     <AnimatePresence>
       {isOpen && (
-        <>
-          {/* Backdrop */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm"
+          onClick={onClose}
+        >
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="fixed inset-0 bg-black/60 z-50 backdrop-blur-sm"
-          />
-
-          {/* Modal */}
-          <motion.div
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
-            className="fixed inset-x-4 top-[2vh] mx-auto max-w-4xl bg-background rounded-xl shadow-2xl z-50 overflow-hidden border border-gray-200 dark:border-gray-800 m-4 max-h-[96vh] overflow-y-auto"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className="bg-background w-full max-w-4xl mx-4 rounded-2xl shadow-2xl overflow-hidden relative"
+            onClick={(e) => e.stopPropagation()}
           >
-            {/* Modal Header */}
-            <div className="relative h-[30vh] overflow-hidden">
-              <img
-                src={project.imageUrl}
-                alt={project.title}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h2 className="text-3xl font-bold text-foreground mb-2">{project.title}</h2>
-                <p className="text-muted-foreground text-lg">{project.description}</p>
-              </div>
-              {/* Close button */}
-              <button
-                onClick={onClose}
-                className="absolute top-4 right-4 p-2 rounded-full bg-background/20 hover:bg-background/40 backdrop-blur-sm transition-colors"
+            <BorderTrail 
+              className="bg-gradient-to-r from-blue-200 via-blue-500 to-blue-200 dark:from-blue-400 dark:via-blue-500 dark:to-blue-700"
+              size={120}
+            />
+            <div className="p-8 relative z-10">
+              <button 
+                onClick={onClose} 
+                className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors z-20"
               >
-                <X className="w-5 h-5" />
+                <X className="w-6 h-6" />
               </button>
-            </div>
 
-            {/* Modal Content */}
-            <div className="p-6 overflow-y-auto">
-              {/* Features */}
-              <div className="mb-8">
-                <h3 className="text-xl font-semibold mb-4">Key Features</h3>
-                <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="flex items-center mb-6">
+                <div className="p-4 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 mr-4">
+                  <img 
+                    src={project.imageUrl} 
+                    alt={project.title} 
+                    className="w-6 h-6 object-contain" 
+                  />
+                </div>
+                <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  {project.title}
+                </h2>
+              </div>
+
+              <p className="text-xl text-muted-foreground mb-6">
+                {project.description}
+              </p>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="text-xl font-semibold mb-4 flex items-center">
+                    <Target className="w-5 h-5 mr-2 text-blue-500" /> 
+                    Project Vision
+                  </h3>
+                  <p className="text-muted-foreground">
+                    A comprehensive digital solution that transforms complex challenges into elegant, user-centric experiences through innovative design and cutting-edge technology.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-semibold mb-4 flex items-center">
+                    <Zap className="w-5 h-5 mr-2 text-purple-500" /> 
+                    Technology Highlights
+                  </h3>
+                  <ul className="space-y-2">
+                    {project.tags.map((tag, index) => (
+                      <li 
+                        key={index} 
+                        className="flex items-center text-muted-foreground"
+                      >
+                        <CheckCircle className="w-4 h-4 mr-2 text-green-500" />
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div className="mt-8 border-t border-border pt-6">
+                <h3 className="text-xl font-semibold mb-4">
+                  Key Features
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {project.features?.map((feature, index) => (
-                    <motion.li
+                    <motion.div
                       key={index}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 }}
                       className="flex items-start space-x-3 bg-muted/50 p-4 rounded-lg hover:bg-muted/70 transition-colors"
                     >
-                      <div className="w-5 h-5 mt-1 text-primary">{feature.icon}</div>
+                      <div className="w-5 h-5 mt-1 text-primary">
+                        {React.createElement(feature.icon, { size: 20 })}
+                      </div>
                       <div>
                         <h4 className="font-medium">{feature.title}</h4>
                         <p className="text-sm text-muted-foreground">{feature.description}</p>
                       </div>
-                    </motion.li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Technologies */}
-              <div className="mb-8">
-                <h3 className="text-xl font-semibold mb-4">Technologies Used</h3>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 text-sm bg-primary/10 text-primary rounded-full hover:bg-primary/20 transition-colors"
-                    >
-                      {tag}
-                    </span>
+                    </motion.div>
                   ))}
                 </div>
               </div>
 
-              {/* Links */}
-              <div className="flex items-center justify-end space-x-4 pt-4 border-t">
+              <div className="mt-8 border-t border-border pt-6 flex justify-end space-x-4">
                 {project.demoUrl && (
                   <a
                     href={project.demoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+                    className="inline-flex items-center space-x-2 px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:opacity-90 transition-opacity"
                   >
                     <ExternalLink className="w-4 h-4" />
                     <span>Live Demo</span>
@@ -118,7 +141,7 @@ export const ProjectFeaturesModal = ({ project, onClose, isOpen }: ProjectFeatur
               </div>
             </div>
           </motion.div>
-        </>
+        </motion.div>
       )}
     </AnimatePresence>
   );

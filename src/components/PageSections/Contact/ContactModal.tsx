@@ -9,7 +9,7 @@ import {
 import { Button } from '../../ui/Button/button';
 import { Input } from '../../ui/input';
 import { Textarea } from '../../ui/textarea';
-import { Send } from 'lucide-react';
+import { Send} from 'lucide-react';
 
 interface ContactModalProps {
   isOpen: boolean;

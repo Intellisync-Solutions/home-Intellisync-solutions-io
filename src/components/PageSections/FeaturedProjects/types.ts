@@ -1,9 +1,9 @@
-import { ReactNode } from 'react';
+import { LucideIcon } from 'lucide-react';
 
 export interface ProjectFeature {
   title: string;
   description: string;
-  icon: ReactNode;
+  icon: LucideIcon;
 }
 
 export interface Project {

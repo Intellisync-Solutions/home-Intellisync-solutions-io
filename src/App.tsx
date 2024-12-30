@@ -32,6 +32,7 @@ import LiteraryModel from './pages/ai-models/personas/LiteraryModel';
 import HistoricalModel from './pages/ai-models/personas/HistoricalModel';
 import { useState, useEffect } from 'react';
 import SplashPage from './components/PageSections/SplashPage/SplashPage';
+import { PageLayout } from './components/layout/PageLayout';
 
 const App = () => {
   const [showSplash, setShowSplash] = useState(() => {
@@ -60,40 +61,42 @@ const App = () => {
         <Router>
           <ScrollToTop />
           {showSplash && <SplashPage show={showSplash} onEnter={handleEnter} />}
-          <div className={`min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 overflow-x-hidden transition-opacity duration-1000 ${showSplash ? 'opacity-0' : 'opacity-100'}`}>
-            <Header />
-            <main className="flex-grow overflow-auto pt-16 pb-8">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/work" element={<Work />} />
-                <Route path="/work/buttons" element={<ButtonShowcase />} />
-                <Route path="/work/cards" element={<CardShowcase />} />
-                <Route path="/work/forms" element={<FormShowcase />} />
-                <Route path="/work/navigation" element={<NavigationShowcase />} />
-                <Route path="/work/pages" element={<PageShowcase />} />
-                <Route path="/work/pages/:id" element={<PageDesignDetail />} />
-                <Route path="/work/pages/saas-dashboard" element={<SaasDashboard />} />
-                <Route path="/work/pages/modern-portfolio" element={<ModernPortfolio />} />
-                <Route path="/work/pages/ecommerce-platform" element={<EcommercePlatform />} />
-                <Route path="/work/pages/real-estate-platform" element={<RealEstatePlatform />} />
-                <Route path="/work/pages/restaurant-platform" element={<RestaurantPlatform />} />
-                <Route path="/work/pages/blog-platform" element={<BlogPlatform />} />
-                <Route path="/ai" element={<AI />} />
-                <Route path="/ai/models/language" element={<LanguageModel />} />
-                <Route path="/ai/models/vision" element={<VisionModel />} />
-                <Route path="/ai/models/audio" element={<AudioModel />} />
-                <Route path="/ai/models/personas/philosopher" element={<PhilosopherModel />} />
-                <Route path="/ai/models/personas/teacher" element={<TeacherModel />} />
-                <Route path="/ai/models/personas/literary" element={<LiteraryModel />} />
-                <Route path="/ai/models/personas/historical" element={<HistoricalModel />} />
-                <Route path="/contact" element={<Contact />} />
-              </Routes>
-            </main>
-            <Footer />
-            <Toaster />
-          </div>
+          <PageLayout>
+            <div className={`flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 overflow-x-hidden transition-opacity duration-1000 ${showSplash ? 'opacity-0' : 'opacity-100'}`}>
+              <Header />
+              <main className="flex-grow overflow-auto pt-16 pb-8">
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/services" element={<Services />} />
+                  <Route path="/work" element={<Work />} />
+                  <Route path="/work/buttons" element={<ButtonShowcase />} />
+                  <Route path="/work/cards" element={<CardShowcase />} />
+                  <Route path="/work/forms" element={<FormShowcase />} />
+                  <Route path="/work/navigation" element={<NavigationShowcase />} />
+                  <Route path="/work/pages" element={<PageShowcase />} />
+                  <Route path="/work/pages/:id" element={<PageDesignDetail />} />
+                  <Route path="/work/pages/saas-dashboard" element={<SaasDashboard />} />
+                  <Route path="/work/pages/modern-portfolio" element={<ModernPortfolio />} />
+                  <Route path="/work/pages/ecommerce-platform" element={<EcommercePlatform />} />
+                  <Route path="/work/pages/real-estate-platform" element={<RealEstatePlatform />} />
+                  <Route path="/work/pages/restaurant-platform" element={<RestaurantPlatform />} />
+                  <Route path="/work/pages/blog-platform" element={<BlogPlatform />} />
+                  <Route path="/ai" element={<AI />} />
+                  <Route path="/ai/models/language" element={<LanguageModel />} />
+                  <Route path="/ai/models/vision" element={<VisionModel />} />
+                  <Route path="/ai/models/audio" element={<AudioModel />} />
+                  <Route path="/ai/models/personas/philosopher" element={<PhilosopherModel />} />
+                  <Route path="/ai/models/personas/teacher" element={<TeacherModel />} />
+                  <Route path="/ai/models/personas/literary" element={<LiteraryModel />} />
+                  <Route path="/ai/models/personas/historical" element={<HistoricalModel />} />
+                  <Route path="/contact" element={<Contact />} />
+                </Routes>
+              </main>
+              <Footer />
+            </div>
+          </PageLayout>
+          <Toaster />
         </Router>
       </ToastProvider>
     </ThemeProvider>

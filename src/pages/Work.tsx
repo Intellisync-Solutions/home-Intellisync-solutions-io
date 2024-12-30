@@ -1,37 +1,129 @@
-import { motion } from 'framer-motion';
-import { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
+import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
+import { WorkValuesModal } from '../components/Modals/WorkValuesModal';
 import { WorkFeatures } from '../components/Modals/WorkFeatures';
 import { 
   Users, 
-  Star, 
-  CheckCircle2,
-  ArrowRight,
-  MessageCircle,
-  HeartHandshake,
-  Rocket,
   Shield,
-  Trophy,
   Target,
-  Clock,
-  Sparkles
+  Info
 } from 'lucide-react';
 import { Heart, Lightbulb } from 'lucide-react';
 import { StreamingText } from '../components/features/StreamingText';
 import { ScrollAnimation } from '../components/features/ScrollAnimation';
+import { BorderTrail } from '../components/core/BorderTrail';
 
 const Work = () => {
   const [selectedFeature, setSelectedFeature] = useState<'process' | 'commitment' | 'expectations' | null>(null);
+  const [selectedValue, setSelectedValue] = useState<'innovation' | 'connection' | 'excellence' | null>(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const openModal = (feature: 'process' | 'commitment' | 'expectations') => {
+  const [features] = useState([
+    {
+      icon: Users,
+      title: 'Our Process',
+      description: 'We transform complex challenges into innovative solutions through a collaborative and strategic approach.',
+      feature: 'process' as const,
+      gradient: {
+        from: "from-blue-500/20",
+        to: "to-indigo-500/20",
+        text: "from-blue-600 to-indigo-600"
+      }
+    },
+    {
+      icon: Shield,
+      title: 'Our Commitment',
+      description: 'Our commitment goes beyond delivering solutions—we create transformative partnerships that drive your success.',
+      feature: 'commitment' as const,
+      gradient: {
+        from: "from-green-500/20",
+        to: "to-emerald-500/20",
+        text: "from-green-600 to-emerald-600"
+      }
+    },
+    {
+      icon: Target,
+      title: 'Our Expectations',
+      description: 'We set high standards and clear expectations, ensuring transparency, accountability, and exceptional outcomes.',
+      feature: 'expectations' as const,
+      gradient: {
+        from: "from-purple-500/20",
+        to: "to-violet-500/20",
+        text: "from-purple-600 to-violet-600"
+      }
+    }
+  ]);
+
+  const handleMouseMove = useCallback((event: React.MouseEvent) => {
+    if (containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      mouseX.set(event.clientX - rect.left);
+      mouseY.set(event.clientY - rect.top);
+    }
+  }, [mouseX, mouseY]);
+
+  const openModal = useCallback((feature: 'process' | 'commitment' | 'expectations') => {
     setSelectedFeature(feature);
-  };
+  }, []);
 
-  const closeModal = () => {
+  const openValueModal = useCallback((value: 'innovation' | 'connection' | 'excellence') => {
+    setSelectedValue(value);
+  }, []);
+
+  const closeModal = useCallback(() => {
     setSelectedFeature(null);
-  };
+    setSelectedValue(null);
+  }, []);
+
+  const values = [
+    {
+      icon: Lightbulb,
+      color: 'text-blue-500',
+      title: 'Innovation with Purpose',
+      description: 'We don\'t just chase the latest trends – we pursue meaningful innovation that creates real value for our clients.',
+      value: 'innovation',
+      gradient: {
+        from: "from-blue-500/20",
+        to: "to-purple-500/20",
+        text: "from-blue-600 to-purple-600"
+      }
+    },
+    {
+      icon: Users,
+      color: 'text-purple-500',
+      title: 'Personal Connection',
+      description: 'We believe in building lasting relationships with our clients, understanding their vision and becoming true partners in their success.',
+      value: 'connection',
+      gradient: {
+        from: "from-purple-500/20",
+        to: "to-pink-500/20",
+        text: "from-purple-600 to-pink-600"
+      }
+    },
+    {
+      icon: Target,
+      color: 'text-green-500',
+      title: 'Excellence in Delivery',
+      description: 'We\'re committed to delivering solutions that exceed expectations and create lasting impact.',
+      value: 'excellence',
+      gradient: {
+        from: "from-emerald-500/20",
+        to: "to-cyan-500/20",
+        text: "from-emerald-600 to-cyan-600"
+      }
+    }
+  ];
 
   return (
-    <div className="container mx-auto px-4 pt-24 pb-12">
+    <div 
+      ref={containerRef}
+      className="relative container mx-auto px-4 pt-24 pb-12 overflow-hidden"
+      onMouseMove={handleMouseMove}
+    >
+      <BorderTrail />
+      
       {/* Hero Section */}
       <ScrollAnimation>
         <motion.div
@@ -44,7 +136,7 @@ const Work = () => {
             Our Approach to Excellence
           </h1>
           <StreamingText
-            text="At Intellisync Solutions, we believe that every project is more than just technical requirements—it’s a story waiting to be told. By capturing the emotion and purpose behind your vision, we craft solutions that inspire action and create meaningful connections."
+            text="At Intellisync Solutions, we believe that every project is more than just technical requirements—it's a story waiting to be told. By capturing the emotion and purpose behind your vision, we craft solutions that inspire action and create meaningful connections."
             className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
             speed={50}
           />
@@ -59,29 +151,84 @@ const Work = () => {
           transition={{ delay: 0.2 }}
           className="mb-20"
         >
-          <h2 className="text-3xl font-bold mb-8 text-center">What Drives Us</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="p-6 rounded-lg bg-white dark:bg-gray-800 shadow-lg">
-              <Lightbulb className="w-12 h-12 text-blue-500 mb-4" />
-              <h3 className="text-xl font-semibold mb-3">Innovation with Purpose</h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                We don't just chase the latest trends – we pursue meaningful innovation that creates real value for our clients.
-              </p>
-            </div>
-            <div className="p-6 rounded-lg bg-white dark:bg-gray-800 shadow-lg">
-              <Users className="w-12 h-12 text-purple-500 mb-4" />
-              <h3 className="text-xl font-semibold mb-3">Personal Connection</h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                We believe in building lasting relationships with our clients, understanding their vision and becoming true partners in their success.
-              </p>
-            </div>
-            <div className="p-6 rounded-lg bg-white dark:bg-gray-800 shadow-lg">
-              <Target className="w-12 h-12 text-green-500 mb-4" />
-              <h3 className="text-xl font-semibold mb-3">Excellence in Delivery</h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                We're committed to delivering solutions that exceed expectations and create lasting impact.
-              </p>
-            </div>
+          <h2 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">What Drives Us</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {values.map((value, index) => (
+              <motion.div
+                key={value.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.5,
+                  delay: index * 0.1
+                }}
+                whileHover={{ 
+                  scale: 1.05,
+                  transition: { 
+                    type: "spring", 
+                    stiffness: 300, 
+                    damping: 10 
+                  }
+                }}
+                className="relative group"
+              >
+                <motion.div
+                  style={{
+                    background: useMotionTemplate`
+                      radial-gradient(
+                        350px circle at ${mouseX}px ${mouseY}px,
+                        rgba(59, 130, 246, 0.1),
+                        transparent 80%
+                      )
+                    `
+                  }}
+                  className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"
+                />
+                
+                <div className={`
+                  relative z-10 p-6 rounded-xl border border-border 
+                  bg-gradient-to-br ${value.gradient.from} ${value.gradient.to}
+                  hover:shadow-xl transition-all duration-300
+                  transform hover:-translate-y-2
+                `}>
+                  <div className="flex items-center mb-4">
+                    <div className={`
+                      p-4 rounded-xl 
+                      bg-gradient-to-br ${value.gradient.from} ${value.gradient.to}
+                      group-hover:scale-110 transition-transform duration-300
+                    `}>
+                      <value.icon className="w-6 h-6" />
+                    </div>
+                    <h3 className={`
+                      text-2xl font-bold ml-4 
+                      bg-gradient-to-r ${value.gradient.text} 
+                      bg-clip-text text-transparent
+                    `}>
+                      {value.title}
+                    </h3>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+                    {value.description}
+                  </p>
+                  <div className="flex justify-between items-center">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      whileHover={{ width: '100%' }}
+                      transition={{ duration: 0.3 }}
+                      className="h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 mt-4 origin-left"
+                    />
+                    <motion.button
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      onClick={() => openValueModal(value.value as 'innovation' | 'connection' | 'excellence')}
+                      className="ml-2 p-2 rounded-full bg-transparent hover:bg-white/10 transition-colors"
+                    >
+                      <Info className="w-5 h-5 text-gray-600 dark:text-gray-300 hover:text-foreground" />
+                    </motion.button>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </motion.section>
       </ScrollAnimation>
@@ -171,128 +318,101 @@ const Work = () => {
           transition={{ delay: 0.6 }}
           className="mb-20"
         >
-          <h2 className="text-3xl font-bold mb-12 text-center">How We Work</h2>
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Our Process Card */}
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-750 p-8 rounded-xl shadow-lg border border-blue-100 dark:border-gray-700 transform transition-all duration-300 hover:scale-105">
-              <div className="flex items-center mb-6">
-                <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg mr-4">
-                  <Users className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Our Process</h3>
-              </div>
-              <ul className="space-y-4 text-gray-600 dark:text-gray-300 mb-6">
-                <li className="flex items-start">
-                  <MessageCircle className="w-5 h-5 mr-3 text-blue-500 dark:text-blue-400 flex-shrink-0 mt-1" />
-                  <span>Personal discovery sessions to understand your vision</span>
-                </li>
-                <li className="flex items-start">
-                  <HeartHandshake className="w-5 h-5 mr-3 text-blue-500 dark:text-blue-400 flex-shrink-0 mt-1" />
-                  <span>Deep collaboration that builds lasting partnerships</span>
-                </li>
-                <li className="flex items-start">
-                  <Sparkles className="w-5 h-5 mr-3 text-blue-500 dark:text-blue-400 flex-shrink-0 mt-1" />
-                  <span>Continuous dialogue and shared innovation</span>
-                </li>
-                <li className="flex items-start">
-                  <Rocket className="w-5 h-5 mr-3 text-blue-500 dark:text-blue-400 flex-shrink-0 mt-1" />
-                  <span>Growth-focused development that evolves with you</span>
-                </li>
-              </ul>
-              <button
-                onClick={() => openModal('process')}
-                className="mt-4 flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200 group"
+          <h2 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">How We Work</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {features.map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.5,
+                  delay: index * 0.1
+                }}
+                whileHover={{ 
+                  scale: 1.05,
+                  transition: { 
+                    type: "spring", 
+                    stiffness: 300, 
+                    damping: 10 
+                  }
+                }}
+                className="relative group"
               >
-                Learn More
-                <ArrowRight className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-200" />
-              </button>
-            </div>
-
-            {/* Our Commitment Card */}
-            <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-750 p-8 rounded-xl shadow-lg border border-purple-100 dark:border-gray-700 transform transition-all duration-300 hover:scale-105">
-              <div className="flex items-center mb-6">
-                <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg mr-4">
-                  <Star className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                <motion.div
+                  style={{
+                    background: useMotionTemplate`
+                      radial-gradient(
+                        350px circle at ${mouseX}px ${mouseY}px,
+                        rgba(59, 130, 246, 0.1),
+                        transparent 80%
+                      )
+                    `
+                  }}
+                  className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"
+                />
+                
+                <div className={`
+                  relative z-10 p-6 rounded-xl border border-border 
+                  bg-gradient-to-br ${feature.gradient.from} ${feature.gradient.to}
+                  hover:shadow-xl transition-all duration-300
+                  transform hover:-translate-y-2
+                `}>
+                  <div className="flex items-center mb-4">
+                    <div className={`
+                      p-4 rounded-xl 
+                      bg-gradient-to-br ${feature.gradient.from} ${feature.gradient.to}
+                      group-hover:scale-110 transition-transform duration-300
+                    `}>
+                      <feature.icon className="w-6 h-6" />
+                    </div>
+                    <h3 className={`
+                      text-2xl font-bold ml-4 
+                      bg-gradient-to-r ${feature.gradient.text} 
+                      bg-clip-text text-transparent
+                    `}>
+                      {feature.title}
+                    </h3>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+                    {feature.description}
+                  </p>
+                  <div className="flex justify-between items-center">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      whileHover={{ width: '100%' }}
+                      transition={{ duration: 0.3 }}
+                      className="h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 mt-4 origin-left"
+                    />
+                    <motion.button
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      onClick={() => openModal(feature.feature)}
+                      className="ml-2 p-2 rounded-full bg-transparent hover:bg-white/10 transition-colors"
+                    >
+                      <Info className="w-5 h-5 text-gray-600 dark:text-gray-300 hover:text-foreground" />
+                    </motion.button>
+                  </div>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Our Commitment</h3>
-              </div>
-              <ul className="space-y-4 text-gray-600 dark:text-gray-300 mb-6">
-                <li className="flex items-start">
-                  <Trophy className="w-5 h-5 mr-3 text-purple-500 dark:text-purple-400 flex-shrink-0 mt-1" />
-                  <span>Unwavering dedication to excellence</span>
-                </li>
-                <li className="flex items-start">
-                  <Sparkles className="w-5 h-5 mr-3 text-purple-500 dark:text-purple-400 flex-shrink-0 mt-1" />
-                  <span>Solutions crafted with passion and purpose</span>
-                </li>
-                <li className="flex items-start">
-                  <Target className="w-5 h-5 mr-3 text-purple-500 dark:text-purple-400 flex-shrink-0 mt-1" />
-                  <span>Innovation driven by genuine understanding</span>
-                </li>
-                <li className="flex items-start">
-                  <Shield className="w-5 h-5 mr-3 text-purple-500 dark:text-purple-400 flex-shrink-0 mt-1" />
-                  <span>Relationships built on trust and respect</span>
-                </li>
-                <li className="flex items-start">
-                  <Rocket className="w-5 h-5 mr-3 text-purple-500 dark:text-purple-400 flex-shrink-0 mt-1" />
-                  <span>Impact that extends beyond technology</span>
-                </li>
-              </ul>
-              <button
-                onClick={() => openModal('commitment')}
-                className="mt-4 flex items-center text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 transition-colors duration-200 group"
-              >
-                Learn More
-                <ArrowRight className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-200" />
-              </button>
-            </div>
-
-            {/* Your Expectations Card */}
-            <div className="bg-gradient-to-br from-green-50 to-teal-50 dark:from-gray-800 dark:to-gray-750 p-8 rounded-xl shadow-lg border border-green-100 dark:border-gray-700 transform transition-all duration-300 hover:scale-105">
-              <div className="flex items-center mb-6">
-                <div className="p-3 bg-green-100 dark:bg-green-900/30 rounded-lg mr-4">
-                  <CheckCircle2 className="w-6 h-6 text-green-600 dark:text-green-400" />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Your Expectations</h3>
-              </div>
-              <ul className="space-y-4 text-gray-600 dark:text-gray-300 mb-6">
-                <li className="flex items-start">
-                  <Clock className="w-5 h-5 mr-3 text-green-500 dark:text-green-400 flex-shrink-0 mt-1" />
-                  <span>Transparent journey with clear milestones</span>
-                </li>
-                <li className="flex items-start">
-                  <MessageCircle className="w-5 h-5 mr-3 text-green-500 dark:text-green-400 flex-shrink-0 mt-1" />
-                  <span>Proactive communication that anticipates needs</span>
-                </li>
-                <li className="flex items-start">
-                  <HeartHandshake className="w-5 h-5 mr-3 text-green-500 dark:text-green-400 flex-shrink-0 mt-1" />
-                  <span>Dedicated support that goes the extra mile</span>
-                </li>
-                <li className="flex items-start">
-                  <Target className="w-5 h-5 mr-3 text-green-500 dark:text-green-400 flex-shrink-0 mt-1" />
-                  <span>Solutions that grow with your vision</span>
-                </li>
-                <li className="flex items-start">
-                  <Trophy className="w-5 h-5 mr-3 text-green-500 dark:text-green-400 flex-shrink-0 mt-1" />
-                  <span>Partnership that celebrates your success</span>
-                </li>
-              </ul>
-              <button
-                onClick={() => openModal('expectations')}
-                className="mt-4 flex items-center text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 transition-colors duration-200 group"
-              >
-                Learn More
-                <ArrowRight className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-200" />
-              </button>
-            </div>
+              </motion.div>
+            ))}
           </div>
         </motion.section>
       </ScrollAnimation>
+
+      {/* Modals */}
       {selectedFeature && (
         <WorkFeatures
           isOpen={!!selectedFeature}
           closeModal={closeModal}
           feature={selectedFeature}
+        />
+      )}
+      {selectedValue && (
+        <WorkValuesModal
+          isOpen={!!selectedValue}
+          closeModal={closeModal}
+          value={selectedValue}
         />
       )}
     </div>

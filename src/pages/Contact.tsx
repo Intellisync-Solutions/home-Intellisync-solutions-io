@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Send, 
-  Award, 
-  Rocket, 
-  Clock, 
-  // Briefcase, 
-  // Star, 
-  Users,
-  MessageCircleMore
+  Target, 
+  
+  Zap, 
+
+  Shield,
+  Info
 } from 'lucide-react';
 import { ScrollAnimation } from '../components/features/ScrollAnimation';
 import ContactFormModal from '../components/Modals/ContactFormModal';
+import TestimonialModal from '../components/Modals/TestimonialModal';
+import { TextEffect } from '../components/core/text-effect';
 
 // Advanced Interactive Button Component
 export const AdvancedInteractiveButton: React.FC<{
@@ -133,7 +134,7 @@ const ContactHero: React.FC = () => {
           }}
           className="flex justify-center mb-6"
         >
-          <MessageCircleMore 
+          <Shield 
             size={64} 
             className="text-blue-500 dark:text-blue-400 opacity-80" 
           />
@@ -218,269 +219,158 @@ const ContactHero: React.FC = () => {
   );
 };
 
-const ContactCTA: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const ctaWords = "Ready To Explore Possibilities".split(' ');
 
-  return (
-    <>
-      <div className="container mx-auto px-4 py-16">
-        <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-2xl p-12 text-center">
-          <motion.h2 
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-gray-100"
-          >
-            <AnimatePresence mode="wait">
-              {ctaWords.map((word, index) => (
-                <motion.span
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ 
-                    duration: 0.5, 
-                    delay: index * 0.2 
-                  }}
-                  className={`inline-block mr-2 ${
-                    word === "Possibilities" 
-                      ? "bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent" 
-                      : ""
-                  }`}
-                >
-                  {word}
-                </motion.span>
-              ))}
-            </AnimatePresence>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-8"
-          >
-            Your vision, our expertise – let's create something extraordinary together.
-          </motion.p>
-
-          <div className="flex justify-center">
-            <AdvancedInteractiveButton 
-              onClick={() => setIsModalOpen(true)}
-              icon={Send}
-              size="medium"
-            >
-              Start Your Project
-            </AdvancedInteractiveButton>
-          </div>
-        </div>
-      </div>
-
-      <ContactFormModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-      />
-    </>
-  );
-};
 
 const StaggeredAsymmetricalLayout: React.FC = () => {
+  const [selectedTestimonial, setSelectedTestimonial] = useState<{
+    quote: string;
+    author: string;
+    role: string;
+    avatar?: string;
+    fullStory?: JSX.Element;
+  } | null>(null);
+  
   const whyChooseUsCards = [
     {
-      icon: <Award size={48} className="text-blue-500" />,
-      title: "Award-Winning Solutions",
-      description: "Recognized for innovative design and cutting-edge technology.",
+      icon: <Target size={48} className="text-blue-500" />,
+      title: "Precision-Driven Solutions",
+      description: "Meticulously crafted strategies tailored to your unique challenges.",
       testimonial: {
-        quote: "Their innovative approach completely transformed our digital strategy, setting new industry standards.",
-        name: "",
-        role: "",
-        avatar: "https://randomuser.me/api/portraits/women/65.jpg"
+        quote: "Their attention to detail is unparalleled. Every solution feels custom-made.",
+        author: "Emily",
+        role: "Tech Innovator",
+        avatar: "https://randomuser.me/api/portraits/women/66.jpg",
+        fullStory: (
+          <TextEffect 
+            preset="fade" 
+            className="text-gray-700 dark:text-gray-300 italic"
+          >
+            When we approached Chris, we had a complex digital transformation idea. Chris didn't just provide a solution; he dissected our entire workflow, identified opportunities, and designed a custom strategy that increased our data use effectiveness. His precision and deep understanding of our unique ecosystem is what sets IntelliSync Solutions apart from any other tech partner we've worked with.
+          </TextEffect>
+        ),
+      },
+      gradient: {
+        from: "from-blue-500/20",
+        to: "to-indigo-500/20",
+        text: "from-blue-600 to-indigo-600"
       }
     },
     {
-      icon: <Rocket size={48} className="text-purple-500" />,
-      title: "Rapid Delivery",
-      description: "Efficient project management with quick turnaround times.",
+      icon: <Zap size={48} className="text-green-500" />,
+      title: "Rapid Innovation",
+      description: "Swift, agile development that transforms ideas into reality.",
       testimonial: {
-        quote: "They delivered our complex SaaS platform ahead of schedule, which was crucial for our product launch.",
-        name: "",
-        role: "",
-        avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+        quote: "They don't just meet deadlines, they redefine what's possible.",
+        author: "Michael",
+        role: "Startup Founder",
+        avatar: "https://randomuser.me/api/portraits/men/33.jpg",
+        fullStory: (
+          <TextEffect 
+            preset="fade" 
+            className="text-gray-700 dark:text-gray-300 italic"
+          >
+            As a startup founder, time and precision are everything. Chris took the time to understand our vision from day one. They not only developed our Website in record time but also provided strategic insights that helped us secure our first client. Their agile approach and innovative thinking turned our concept into a market-ready product faster than we ever imagined.
+          </TextEffect>
+        ),
+      },
+      gradient: {
+        from: "from-green-500/20",
+        to: "to-emerald-500/20",
+        text: "from-green-600 to-emerald-600"
       }
     },
     {
-      icon: <Clock size={48} className="text-green-500" />,
-      title: "Infinite Support",
-      description: "Dedicated support always ready to assist you.",
+      icon: <Shield size={48} className="text-purple-500" />,
+      title: "Trusted Partnership",
+      description: "Building lasting relationships through transparency and integrity.",
       testimonial: {
-        quote: "Their personalized support has been a game-changer. We always feel supported, no matter the time zone.",
-        name: "",
-        role: "",
-        avatar: "https://randomuser.me/api/portraits/women/44.jpg"
-      }
-    },
-    {
-      icon: <Users size={48} className="text-orange-500" />,
-      title: "Client-Centric Approach",
-      description: "Tailored solutions that align with your unique business goals.",
-      testimonial: {
-        quote: "They didn't just build a website, they understood our vision and crafted a solution that truly represents our brand.",
-        name: "",
-        role: "",
-        avatar: "https://randomuser.me/api/portraits/men/46.jpg"
+        quote: "More than a service provider, they're a true strategic partner.",
+        author: "Sarah",
+        role: "Enterprise Leader",
+        avatar: "https://randomuser.me/api/portraits/women/11.jpg",
+        fullStory: (
+          <TextEffect 
+            preset="fade" 
+            className="text-gray-700 dark:text-gray-300 italic"
+          >
+            In the enterprise world, trust is everything. Chris has been a trusted partner because he always takes the time to listen to our challenges and understand our needs. That's not just a service provider, and they consistently demonstrated an unwavering commitment to our success.
+          </TextEffect>
+        ),
+      },
+      gradient: {
+        from: "from-purple-500/20",
+        to: "to-violet-500/20",
+        text: "from-purple-600 to-violet-600"
       }
     }
   ];
 
   return (
-    <div className="relative py-16 overflow-hidden bg-blue-50/10 dark:bg-gray-950/5 backdrop-blur-sm">
-      <div className="container mx-auto px-4 relative">
-        <div className="space-y-16 relative">
-          {/* Why Choose Us with Paired Testimonials */}
-          {whyChooseUsCards.map((item, index) => (
-            <div 
-              key={index} 
-              className={`
-                grid grid-cols-1 md:grid-cols-2 gap-8 items-center
-                ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}
-              `}
-            >
-              {/* Why Choose Us Card */}
+    <>
+      <ScrollAnimation>
+        <motion.section 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="py-16 px-4 md:px-8 lg:px-16"
+        >
+          <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
+            {whyChooseUsCards.map((item, index) => (
               <motion.div
-                initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100, scale: 0.9 }}
-                whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ 
-                  type: "spring",
-                  stiffness: 100,
-                  damping: 20,
-                  duration: 0.8 
+                  duration: 0.6, 
+                  delay: index * 0.2 
                 }}
                 viewport={{ once: true }}
                 className={`
-                  bg-white dark:bg-gray-900 
+                  bg-gradient-to-r ${item.gradient.from} ${item.gradient.to} 
                   rounded-3xl 
                   shadow-2xl 
                   hover:shadow-[0_45px_70px_-20px_rgba(0,0,0,0.2)] 
-                  dark:hover:shadow-[0_45px_70px_-20px_rgba(255,255,255,0.1)]
-                  transition-all duration-300
-                  p-8 
-                  ${index % 2 === 0 ? 'mr-auto' : 'ml-auto'}
-                  w-full md:w-11/12 lg:w-10/12 xl:w-9/12
-                  z-10 relative
-                  transform hover:-translate-y-3 hover:scale-[1.02]
+                  transition-all 
+                  duration-300 
+                  p-6 
+                  relative 
+                  overflow-hidden
                 `}
               >
                 <div className="flex items-center mb-4">
                   {item.icon}
-                  <h3 className="ml-4 text-2xl font-bold text-gray-900 dark:text-gray-100">
+                  <h3 className={`ml-4 text-2xl font-bold ${item.gradient.text}`}>
                     {item.title}
                   </h3>
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => setSelectedTestimonial(item.testimonial)}
+                    className="ml-auto p-2 rounded-full hover:bg-white/10 transition-colors"
+                  >
+                    <Info className="w-5 h-5 text-gray-600 dark:text-gray-300 hover:text-foreground" />
+                  </motion.button>
                 </div>
-                <p className="text-lg text-gray-600 dark:text-gray-400">
+                <p className="text-gray-700 dark:text-gray-200 mb-4">
                   {item.description}
                 </p>
               </motion.div>
+            ))}
+          </div>
+        </motion.section>
+      </ScrollAnimation>
 
-              {/* Paired Testimonial */}
-              <motion.div
-                initial={{ opacity: 0, x: index % 2 === 0 ? 100 : -100, scale: 0.9 }}
-                whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                transition={{ 
-                  type: "spring",
-                  stiffness: 100,
-                  damping: 20,
-                  duration: 0.8,
-                  delay: 0.3
-                }}
-                viewport={{ once: true }}
-                className={`
-                  bg-white dark:bg-gray-900
-                  rounded-3xl 
-                  shadow-2xl 
-                  hover:shadow-[0_45px_70px_-20px_rgba(0,0,0,0.2)] 
-                  dark:hover:shadow-[0_45px_70px_-20px_rgba(255,255,255,0.1)]
-                  transition-all duration-300
-                  p-8 
-                  ${index % 2 === 0 ? 'ml-auto' : 'mr-auto'}
-                  w-full md:w-11/12 lg:w-10/12 xl:w-9/12
-                  relative z-20
-                  transform hover:-translate-y-3 hover:scale-[1.02]
-                `}
-              >
-                <div className="flex items-center mb-6">
-                  <img 
-                    src={item.testimonial.avatar} 
-                    alt={item.testimonial.name} 
-                    className="w-16 h-16 rounded-full mr-4 border-4 border-white dark:border-gray-800 object-cover"
-                  />
-                  <div>
-                    <h4 className="text-lg font-bold text-gray-900 dark:text-gray-100">
-                      {item.testimonial.name}
-                    </h4>
-                    <p className="text-gray-600 dark:text-gray-400">
-                      {item.testimonial.role}
-                    </p>
-                  </div>
-                </div>
-                <p className="italic text-gray-700 dark:text-gray-300 text-xl">
-                  "{item.testimonial.quote}"
-                </p>
-              </motion.div>
-            </div>
-          ))}
-
-          {/* Project Statistics */}
-          <motion.div
-            initial={{ opacity: 0, y: 100, scale: 0.9 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ 
-              type: "spring",
-              stiffness: 100,
-              damping: 20,
-              duration: 0.8,
-              delay: 0.6 
-            }}
-            viewport={{ once: true }}
-            className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-3xl shadow-2xl hover:shadow-[0_45px_70px_-20px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_45px_70px_-20px_rgba(255,255,255,0.1)] transition-all duration-300 p-12 mt-8 relative z-30 w-full transform hover:-translate-y-3 hover:scale-[1.02]"
-          >
-            {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-              {[
-                { 
-                  icon: <Briefcase size={48} className="text-blue-500 mx-auto mb-4" />, 
-                  number: "50+", 
-                  label: "Projects Completed" 
-                },
-                { 
-                  icon: <Users size={48} className="text-purple-500 mx-auto mb-4" />, 
-                  number: "100+", 
-                  label: "Happy Clients" 
-                },
-                { 
-                  icon: <Star size={48} className="text-yellow-500 mx-auto mb-4" />, 
-                  number: "4.9", 
-                  label: "Average Rating" 
-                }
-              ].map((stat, index) => (
-                <div 
-                  key={index} 
-                  className="transform transition-all hover:scale-105 hover:brightness-110"
-                >
-                  {stat.icon}
-                  <h3 className="text-5xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                    {stat.number}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400">{stat.label}</p>
-                </div>
-              ))}
-            </div> */}
-          </motion.div>
-        </div>
-
-        {/* Subtle Decorative Background Elements */}
-        <div className="absolute -top-20 -right-20 w-64 h-64 bg-blue-50/20 dark:bg-blue-900/5 rounded-full blur-3xl z-0" />
-        <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-purple-50/20 dark:bg-purple-900/5 rounded-full blur-3xl z-0" />
-      </div>
-    </div>
+      <TestimonialModal
+        isOpen={!!selectedTestimonial}
+        onClose={() => setSelectedTestimonial(null)}
+        testimonial={selectedTestimonial || {
+          quote: '',
+          author: '',
+          role: ''
+        }}
+      />
+    </>
   );
 };
 
@@ -495,7 +385,6 @@ const Contact = () => {
       <ScrollAnimation>
         <div className="relative z-10">
           <ContactHero />
-          <ContactCTA />
           <StaggeredAsymmetricalLayout />
         </div>
       </ScrollAnimation>
