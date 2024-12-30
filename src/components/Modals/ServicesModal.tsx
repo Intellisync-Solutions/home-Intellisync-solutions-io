@@ -30,11 +30,11 @@ export const ServicesModal: React.FC<ServiceModalProps> = ({
       whyImportant: "Your digital presence is your global megaphone. We don't just design websites; we architect digital stages where your story unfolds, your brand resonates, and your vision becomes an immersive, unforgettable experience."
     },
     "Custom Web Application Software": {
-      expandedDescription: "Your challenges are unique, and off-the-shelf solutions are relics of the past. We engineer bespoke software that doesn't just solve problems—it anticipates your needs, adapts to your workflow, and propels your vision forward.",
+      expandedDescription: "Your challenges are unique, and off-the-shelf solutions are relics of the past. We build a digital experience that doesn't just solve problems—it anticipates your needs, adapts to your workflow, and propels your vision forward.",
       keyBenefits: [
         "Precision-Engineered to Your Exact Specifications",
         "Intelligent Automation That Learns and Grows",
-        "Seamless Integration with Your Existing Ecosystem",
+        
         "Scalable Architecture That Evolves With You"
       ],
       whyImportant: "Software is not a product—it's a living, breathing extension of your creativity. We craft digital companions that don't just execute tasks, but understand your rhythm, predict your needs, and dance to the unique melody of your ambition."
@@ -47,7 +47,7 @@ export const ServicesModal: React.FC<ServiceModalProps> = ({
         "Machine Learning Models That Grow Smarter",
         "Automated Insights That Reveal Hidden Opportunities"
       ],
-      whyImportant: "AI is your digital crystal ball, your innovation accelerator. We don't just implement algorithms; we create intelligent ecosystems that transform your wildest dreams into tangible, data-driven realities that push the boundaries of what's possible."
+      whyImportant: "AI is your digital crystal ball, your innovation accelerator. We don't just write algorithms; we create intelligent ecosystems that transform your wildest dreams into tangible, data-driven realities that push the boundaries of what's possible."
     },
     "Digital Innovation": {
       expandedDescription: "Innovation is an art form, and we're your digital atelier. We don't just follow trends—we create them, crafting digital experiences that are as unique and dynamic as the visionaries we serve.",

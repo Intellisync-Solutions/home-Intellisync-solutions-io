@@ -57,7 +57,7 @@ export const IntellisyncStory = () => {
       icon: <Users className="w-6 h-6" />,
       title: "Growing Community",
       content: "Building a thriving ecosystem of personal and enterprise solutions.",
-      year: "2022",
+      year: "2023",
       delay: 0.4,
       gradient: {
         from: "from-indigo-500/20",
