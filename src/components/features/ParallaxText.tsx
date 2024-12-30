@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
 
 interface ParallaxTextProps {
   children: React.ReactNode;
@@ -12,8 +12,8 @@ export const ParallaxText: React.FC<ParallaxTextProps> = ({
   baseVelocity = 100, 
   className = '' 
 }) => {
-  const baseX = motion.useTransform(
-    motion.useMotionValue(0), 
+  const baseX = useTransform(
+    useMotionValue(0), 
     [0, 1], 
     [0, baseVelocity]
   );
