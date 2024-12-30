@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send, CheckCircle, Target, Zap, Rocket } from 'lucide-react';
+import { X, Send, CheckCircle, Target, Zap } from 'lucide-react';
 import { BorderTrail } from '../core/BorderTrail';
 import { Button } from '../ui/Button/button';
 import { Input } from '../ui/input';

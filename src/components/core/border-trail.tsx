@@ -1,8 +1,8 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
 
 interface BorderTrailProps {
   size?: number;
-  style?: CSSProperties;
+  style?: React.CSSProperties;
 }
 
 export function BorderTrail({ 
