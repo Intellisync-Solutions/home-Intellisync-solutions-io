@@ -1,4 +1,3 @@
-import { Button } from '../../../../components/ui/Button/button';
 import { 
   ShoppingBag, 
   Search, 
@@ -18,7 +17,8 @@ const EcommercePlatform = () => {
       price: "$299.99",
       rating: 4.8,
       image: "/images/products/headphones.jpg",
-      category: "Electronics"
+      category: "Electronics",
+      wishlist: true
     },
     {
       id: 2,
@@ -26,7 +26,8 @@ const EcommercePlatform = () => {
       price: "$199.99",
       rating: 4.9,
       image: "/images/products/watch.jpg",
-      category: "Accessories"
+      category: "Accessories",
+      wishlist: false
     },
     {
       id: 3,
@@ -34,7 +35,8 @@ const EcommercePlatform = () => {
       price: "$129.99",
       rating: 4.7,
       image: "/images/products/backpack.jpg",
-      category: "Fashion"
+      category: "Fashion",
+      wishlist: true
     }
   ];
 
@@ -51,144 +53,58 @@ const EcommercePlatform = () => {
     },
     {
       icon: <ShieldCheck className="w-6 h-6 text-primary" />,
-      title: "Buyer Protection",
-      description: "100% money-back guarantee for 30 days"
+      title: "Quality Guarantee",
+      description: "30-day return policy on all products"
     }
   ];
 
-  const categories = [
-    "Electronics",
-    "Fashion",
-    "Home & Living",
-    "Beauty",
-    "Sports",
-    "Books"
-  ];
-
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className="relative bg-muted/30 py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-2xl">
-            <h1 className="text-4xl font-bold mb-6">Discover Amazing Products</h1>
-            <p className="text-xl text-muted-foreground mb-8">
-              Shop the latest trends with confidence. Quality products, competitive prices.
-            </p>
-            <div className="flex gap-4">
-              <Button size="lg">
-                Shop Now
-                <ShoppingBag className="ml-2 w-4 h-4" />
-              </Button>
-              <Button variant="outline" size="lg">
-                Browse Categories
-              </Button>
-            </div>
-          </div>
+    <div className="container mx-auto px-4 py-8">
+      <div className="flex items-center justify-between mb-8">
+        <h1 className="text-3xl font-bold">E-commerce Platform</h1>
+        <div className="flex space-x-4">
+          <Search className="w-6 h-6 text-gray-600 cursor-pointer" />
+          <Tag className="w-6 h-6 text-gray-600 cursor-pointer" />
         </div>
-      </section>
+      </div>
 
-      {/* Search Section */}
-      <section className="py-8 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="flex gap-4 items-center">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
-              <input
-                type="text"
-                placeholder="Search products..."
-                className="w-full pl-10 pr-4 py-2 rounded-md border border-input bg-background"
-              />
-            </div>
-            <Button variant="outline">
-              <Tag className="mr-2 w-4 h-4" />
-              Filters
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Products */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8">Featured Products</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredProducts.map((product) => (
-              <div key={product.id} className="group bg-background rounded-lg border border-border p-4 hover:shadow-lg transition-shadow">
-                <div className="aspect-square bg-muted rounded-md mb-4 relative overflow-hidden">
-                  <button className="absolute top-4 right-4 p-2 rounded-full bg-background/80 hover:bg-background">
-                    <Heart className="w-5 h-5 text-muted-foreground" />
-                  </button>
+      <div className="grid grid-cols-3 gap-4 mb-8">
+        {featuredProducts.map((product) => (
+          <div key={product.id} className="border rounded-lg p-4 relative">
+            <img src={product.image} alt={product.name} className="w-full h-48 object-cover" />
+            <div className="mt-4">
+              <h2 className="text-xl font-semibold">{product.name}</h2>
+              <div className="flex justify-between items-center mt-2">
+                <span className="text-lg font-bold">{product.price}</span>
+                <div className="flex items-center">
+                  <Star className="w-5 h-5 text-yellow-500 mr-1" />
+                  <span>{product.rating}</span>
                 </div>
-                <div className="flex justify-between items-start mb-2">
-                  <div>
-                    <h3 className="font-semibold">{product.name}</h3>
-                    <p className="text-sm text-muted-foreground">{product.category}</p>
-                  </div>
-                  <p className="font-bold">{product.price}</p>
-                </div>
-                <div className="flex items-center gap-1 mb-4">
-                  <Star className="w-4 h-4 fill-primary text-primary" />
-                  <span className="text-sm">{product.rating}</span>
-                </div>
-                <Button className="w-full">Add to Cart</Button>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Categories */}
-      <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8">Shop by Category</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {categories.map((category) => (
-              <button
-                key={category}
-                className="p-4 bg-background rounded-lg border border-border hover:border-primary transition-colors text-center"
-              >
-                {category}
+              <div className="absolute top-4 right-4">
+                <Heart 
+                  className={`w-6 h-6 ${product.wishlist ? 'text-red-500' : 'text-gray-300'} cursor-pointer`} 
+                />
+              </div>
+              <button className="mt-4 w-full bg-primary text-white py-2 rounded flex items-center justify-center">
+                <ShoppingBag className="w-5 h-5 mr-2" /> Add to Cart
               </button>
-            ))}
+            </div>
           </div>
-        </div>
-      </section>
+        ))}
+      </div>
 
-      {/* Features */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <div key={index} className="text-center">
-                <div className="inline-block p-3 bg-primary/10 rounded-lg mb-4">
-                  {feature.icon}
-                </div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-muted-foreground">{feature.description}</p>
-              </div>
-            ))}
+      <div className="grid grid-cols-3 gap-4 bg-gray-50 p-8 rounded-lg">
+        {features.map((feature, index) => (
+          <div key={index} className="flex items-center space-x-4">
+            {feature.icon}
+            <div>
+              <h3 className="text-lg font-semibold">{feature.title}</h3>
+              <p className="text-gray-600">{feature.description}</p>
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* Newsletter */}
-      <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4 max-w-2xl text-center">
-          <h2 className="text-3xl font-bold mb-4">Stay Updated</h2>
-          <p className="text-muted-foreground mb-6">
-            Subscribe to our newsletter for exclusive deals and updates.
-          </p>
-          <div className="flex gap-4">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 px-4 py-2 rounded-md border border-input bg-background"
-            />
-            <Button>Subscribe</Button>
-          </div>
-        </div>
-      </section>
+        ))}
+      </div>
     </div>
   );
 };

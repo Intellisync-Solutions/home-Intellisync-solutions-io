@@ -1,4 +1,3 @@
-import { Button } from '../../../../components/ui/Button/button';
 import { 
   UtensilsCrossed,
   Clock,
@@ -11,6 +10,8 @@ import {
   ChevronRight,
   Instagram
 } from 'lucide-react';
+import UnderConstructionPage from '../../../../components/UnderConstructionPage';
+import { Button } from '../../../../components/ui/Button/button'; // Import Button component
 
 const RestaurantPlatform = () => {
   const menuCategories = [
@@ -87,194 +88,111 @@ const RestaurantPlatform = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className="relative bg-muted/30 py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Fine Dining Experience</h1>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Discover culinary excellence in an elegant atmosphere
-          </p>
-          <div className="flex justify-center gap-4">
-            <Button size="lg">
-              Reserve a Table
-              <Calendar className="ml-2 w-4 h-4" />
-            </Button>
-            <Button variant="outline" size="lg">
-              View Menu
-              <UtensilsCrossed className="ml-2 w-4 h-4" />
-            </Button>
+    <div className="container mx-auto p-4">
+      <UnderConstructionPage pageName="Restaurant Platform" />
+      <div className="restaurant-details grid md:grid-cols-2 gap-8 mb-8">
+        <div className="restaurant-info space-y-4">
+          <div className="flex items-center space-x-3">
+            <MapPin className="text-primary w-6 h-6" />
+            <span>123 Culinary Street, Gourmet City</span>
+          </div>
+          <div className="flex items-center space-x-3">
+            <Phone className="text-primary w-6 h-6" />
+            <span>(555) 123-4567</span>
+          </div>
+          <div className="flex items-center space-x-3">
+            <Clock className="text-primary w-6 h-6" />
+            <span>Open Daily: 11am - 10pm</span>
+          </div>
+          <div className="flex items-center space-x-3">
+            <Calendar className="text-primary w-6 h-6" />
+            <span>Reservations Recommended</span>
           </div>
         </div>
-      </section>
-
-      {/* Quick Info */}
-      <section className="py-8 bg-background border-y border-border">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="flex items-center justify-center">
-              <Clock className="w-5 h-5 text-primary mr-2" />
-              <span>Open Tue-Sun: 5pm - 11pm</span>
-            </div>
-            <div className="flex items-center justify-center">
-              <MapPin className="w-5 h-5 text-primary mr-2" />
-              <span>123 Culinary Street, NY</span>
-            </div>
-            <div className="flex items-center justify-center">
-              <Phone className="w-5 h-5 text-primary mr-2" />
-              <span>(555) 123-4567</span>
-            </div>
+        
+        <div className="restaurant-highlights space-y-4">
+          <div className="flex items-center space-x-3">
+            <UtensilsCrossed className="text-primary w-6 h-6" />
+            <span>Modern Fusion Cuisine</span>
+          </div>
+          <div className="flex items-center space-x-3">
+            <Users className="text-primary w-6 h-6" />
+            <span>Capacity: 120 Guests</span>
+          </div>
+          <div className="flex items-center space-x-3">
+            <Star className="text-primary w-6 h-6" />
+            <span>4.8/5 Customer Rating</span>
+          </div>
+          <div className="flex items-center space-x-3">
+            <Wine className="text-primary w-6 h-6" />
+            <span>Extensive Wine Selection</span>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Menu Preview */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Seasonal Menu</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <h2 className="text-2xl font-bold mb-4">Our Menu</h2>
           {menuCategories.map((category, index) => (
-            <div key={index} className="mb-12 last:mb-0">
-              <h3 className="text-2xl font-semibold mb-6">{category.name}</h3>
-              <div className="grid gap-6">
-                {category.items.map((item, itemIndex) => (
-                  <div
-                    key={itemIndex}
-                    className="flex justify-between items-start p-6 bg-background rounded-lg border border-border hover:border-primary transition-colors"
-                  >
+            <div key={index} className="mb-6">
+              <h3 className="text-xl font-semibold mb-2">{category.name}</h3>
+              {category.items.map((item, itemIndex) => (
+                <div key={itemIndex} className="mb-4 p-3 bg-gray-100 rounded-lg">
+                  <div className="flex justify-between items-center">
                     <div>
-                      <div className="flex items-center gap-2">
-                        <h4 className="text-xl font-medium">{item.name}</h4>
-                        {item.isSignature && (
-                          <span className="px-2 py-1 bg-primary/10 text-primary text-sm rounded-full">
-                            Chef's Signature
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-muted-foreground mt-2">{item.description}</p>
+                      <h4 className="font-medium">{item.name} {item.isSignature && <span className="text-sm text-red-500 ml-2">Signature</span>}</h4>
+                      <p className="text-gray-600 text-sm">{item.description}</p>
                     </div>
-                    <span className="text-xl font-semibold">{item.price}</span>
+                    <span className="font-bold">{item.price}</span>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           ))}
-          <div className="text-center mt-8">
-            <Button variant="outline" size="lg">
-              View Full Menu
-              <ChevronRight className="ml-2 w-4 h-4" />
-            </Button>
-          </div>
         </div>
-      </section>
+      </div>
+      <Button>Explore Menu</Button>
 
-      {/* Special Events */}
-      <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Special Events</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {specialEvents.map((event, index) => (
-              <div
-                key={index}
-                className="bg-background p-6 rounded-lg border border-border"
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <h3 className="text-xl font-semibold">{event.title}</h3>
-                  <Wine className="w-5 h-5 text-primary" />
-                </div>
-                <p className="text-primary font-medium mb-2">{event.date}</p>
-                <p className="text-muted-foreground mb-4">{event.description}</p>
-                <p className="font-semibold">{event.price}</p>
-              </div>
-            ))}
+      <div className="special-events-section">
+        <h2>Special Events</h2>
+        {specialEvents.map((event) => (
+          <div key={event.title} className="special-event-card">
+            <h3>{event.title}</h3>
+            <p><Calendar className="inline-icon" /> {event.date}</p>
+            <p>{event.description}</p>
+            <p>Price: {event.price}</p>
           </div>
-        </div>
-      </section>
+        ))}
+      </div>
 
-      {/* Reservation */}
-      <section className="py-16">
-        <div className="container mx-auto px-4 max-w-2xl">
-          <h2 className="text-3xl font-bold text-center mb-12">Make a Reservation</h2>
-          <div className="bg-background p-8 rounded-lg border border-border">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div>
-                <label className="block text-sm font-medium mb-2">Date</label>
-                <input
-                  type="date"
-                  className="w-full px-4 py-2 rounded-md border border-input bg-background"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-2">Time</label>
-                <select className="w-full px-4 py-2 rounded-md border border-input bg-background">
-                  <option>5:00 PM</option>
-                  <option>6:00 PM</option>
-                  <option>7:00 PM</option>
-                  <option>8:00 PM</option>
-                  <option>9:00 PM</option>
-                </select>
-              </div>
-            </div>
-            <div className="mb-6">
-              <label className="block text-sm font-medium mb-2">Party Size</label>
-              <div className="relative">
-                <Users className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
-                <select className="w-full pl-10 pr-4 py-2 rounded-md border border-input bg-background">
-                  <option>1 Person</option>
-                  <option>2 People</option>
-                  <option>3 People</option>
-                  <option>4 People</option>
-                  <option>5+ People</option>
-                </select>
-              </div>
-            </div>
-            <Button className="w-full" size="lg">
-              Reserve Now
-            </Button>
-          </div>
+      <div className="gallery mt-8">
+        <h2 className="text-2xl font-bold mb-4">Restaurant Gallery</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {galleryImages.map((image, index) => (
+            <img 
+              key={index} 
+              src={image} 
+              alt={`Restaurant gallery image ${index + 1}`} 
+              className="w-full h-48 object-cover rounded-lg"
+            />
+          ))}
         </div>
-      </section>
+      </div>
 
-      {/* Gallery Grid */}
-      <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Our Atmosphere</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {galleryImages.map((_, index) => (
-              <div key={index} className="aspect-square bg-muted rounded-lg overflow-hidden">
-                {/* Image placeholder */}
-              </div>
-            ))}
-          </div>
-          <div className="text-center mt-8">
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Instagram className="w-5 h-5 mr-2" />
-              Follow us on Instagram
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Reviews */}
-      <section className="py-16">
-        <div className="container mx-auto px-4 max-w-4xl text-center">
-          <h2 className="text-3xl font-bold mb-12">What Our Guests Say</h2>
-          <div className="flex items-center justify-center mb-4">
-            {[1, 2, 3, 4, 5].map((star) => (
-              <Star key={star} className="w-6 h-6 text-primary fill-primary" />
-            ))}
-          </div>
-          <blockquote className="text-xl italic text-muted-foreground mb-6">
-            "An extraordinary dining experience. The attention to detail in every dish
-            and the impeccable service make this restaurant truly special."
-          </blockquote>
-          <p className="font-medium">— The New York Times</p>
-        </div>
-      </section>
+      {/* Social Media Section */}
+      <div className="social-media flex items-center justify-between mt-8 bg-gray-100 p-4 rounded-lg">
+        <span className="text-lg font-semibold">Follow Our Culinary Journey</span>
+        <a 
+          href="https://instagram.com/restaurantname" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="flex items-center text-primary hover:text-primary-dark transition-colors"
+        >
+          <Instagram className="w-6 h-6 mr-2" />
+          <span>@restaurantname</span>
+          <ChevronRight className="w-5 h-5 ml-1" />
+        </a>
+      </div>
     </div>
   );
 };

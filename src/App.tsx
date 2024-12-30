@@ -30,6 +30,7 @@ import PhilosopherModel from './pages/ai-models/personas/PhilosopherModel';
 import TeacherModel from './pages/ai-models/personas/TeacherModel';
 import LiteraryModel from './pages/ai-models/personas/LiteraryModel';
 import HistoricalModel from './pages/ai-models/personas/HistoricalModel';
+import NotFound from './pages/NotFound';
 import { useState, useEffect } from 'react';
 import SplashPage from './components/PageSections/SplashPage/SplashPage';
 import { PageLayout } from './components/layout/PageLayout';
@@ -76,6 +77,7 @@ const App = () => {
                   <Route path="/work/navigation" element={<NavigationShowcase />} />
                   <Route path="/work/pages" element={<PageShowcase />} />
                   <Route path="/work/pages/:id" element={<PageDesignDetail />} />
+                  <Route path="/work/business-one" element={<NotFound />} />
                   <Route path="/work/pages/saas-dashboard" element={<SaasDashboard />} />
                   <Route path="/work/pages/modern-portfolio" element={<ModernPortfolio />} />
                   <Route path="/work/pages/ecommerce-platform" element={<EcommercePlatform />} />
@@ -91,6 +93,7 @@ const App = () => {
                   <Route path="/ai/models/personas/literary" element={<LiteraryModel />} />
                   <Route path="/ai/models/personas/historical" element={<HistoricalModel />} />
                   <Route path="/contact" element={<Contact />} />
+                  <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>
               <Footer />

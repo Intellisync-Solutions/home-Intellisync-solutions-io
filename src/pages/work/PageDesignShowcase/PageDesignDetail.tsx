@@ -3,6 +3,7 @@ import { Button } from '../../../components/ui/Button/button';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { StreamingText } from '../../../components/features/StreamingText';
+import UnderConstructionPage from '../../../components/UnderConstructionPage';
 
 interface PageDesign {
   id: string;
@@ -25,7 +26,7 @@ const pageDesigns: Record<string, PageDesign> = {
     title: 'Intellisync Solutions - BusinessOne',
     description: 'A comprehensive suite of tools and calculators designed to assist entrepreneurs and seasoned business professionals in making data-driven decisions.',
     image: '/projects/business-one.png',
-    demoUrl: '/work/business-one',
+    demoUrl: '/not-found',
     category: 'Business',
     tags: ['React', 'TypeScript', 'Firebase'],
     featured: true,
@@ -173,7 +174,7 @@ const pageDesigns: Record<string, PageDesign> = {
     title: 'Intellisync Solutions - TimeCapsule',
     description: 'AI-enhanced photo sharing platform with smart albums, family sharing, and interactive AI storytelling for preserving and sharing memories.',
     image: '/projects/time-capsule.png',
-    demoUrl: '/work/time-capsule',
+    demoUrl: '/not-found',
     category: 'Media',
     tags: ['React', 'TypeScript', 'Node.js', 'Firebase', 'OpenAI'],
     featured: true,
@@ -293,122 +294,127 @@ const PageDesignDetail = () => {
     );
   }
 
+  const selectedDesign = design;
+
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8 pl-[280px]">
-        <div
-        >
-          <Button
-            variant="ghost"
-            className="mb-6 flex items-center gap-2"
-            onClick={() => navigate('/work/pages')}
+      {!selectedDesign && <UnderConstructionPage pageName="Page Design Details" />}
+      {selectedDesign && (
+        <div className="container mx-auto px-4 py-8 pl-[280px]">
+          <div
           >
-            <ArrowLeft size={16} />
-            Back to Designs
-          </Button>
+            <Button
+              variant="ghost"
+              className="mb-6 flex items-center gap-2"
+              onClick={() => navigate('/work/pages')}
+            >
+              <ArrowLeft size={16} />
+              Back to Designs
+            </Button>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div>
-              <h1 className="text-4xl font-bold text-gray-800 dark:text-gray-200 mb-4">
-                {design.title}
-              </h1>
-              
-              <div className="flex flex-wrap gap-2 mb-6">
-                {design.tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="inline-block px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full"
-                  >
-                    {tag}
-                  </span>
-                ))}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              <div>
+                <h1 className="text-4xl font-bold text-gray-800 dark:text-gray-200 mb-4">
+                  {selectedDesign.title}
+                </h1>
+                
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {selectedDesign.tags.map((tag, index) => (
+                    <span
+                      key={index}
+                      className="inline-block px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-full"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <p className="text-gray-600 dark:text-gray-400 text-lg mb-8">
+                  {selectedDesign.fullDescription || selectedDesign.description}
+                </p>
+
+                {selectedDesign.features && (
+                  <div className="mb-8">
+                    <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
+                      Features
+                    </h2>
+                    <ul className="space-y-2">
+                      {selectedDesign.features.map((feature, index) => (
+                        <li key={index} className="flex items-start">
+                          <span className="inline-block w-2 h-2 rounded-full bg-blue-500 mt-2 mr-3" />
+                          <span className="text-gray-600 dark:text-gray-400">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {selectedDesign.technologies && (
+                  <div className="mb-8">
+                    <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
+                      Technologies Used
+                    </h2>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedDesign.technologies.map((tech, index) => (
+                        <span
+                          key={index}
+                          className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-full text-sm"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <Button
+                  className="flex items-center gap-2"
+                  onClick={() => window.open(selectedDesign.demoUrl, '_blank')}
+                >
+                  View Live Demo
+                  <ExternalLink size={16} />
+                </Button>
               </div>
 
-              <p className="text-gray-600 dark:text-gray-400 text-lg mb-8">
-                {design.fullDescription || design.description}
-              </p>
-
-              {design.features && (
-                <div className="mb-8">
-                  <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
-                    Features
-                  </h2>
-                  <ul className="space-y-2">
-                    {design.features.map((feature, index) => (
-                      <li key={index} className="flex items-start">
-                        <span className="inline-block w-2 h-2 rounded-full bg-blue-500 mt-2 mr-3" />
-                        <span className="text-gray-600 dark:text-gray-400">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {design.technologies && (
-                <div className="mb-8">
-                  <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
-                    Technologies Used
-                  </h2>
-                  <div className="flex flex-wrap gap-2">
-                    {design.technologies.map((tech, index) => (
-                      <span
-                        key={index}
-                        className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-full text-sm"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+              <div>
+                {selectedDesign.screenshots && (
+                  <div className="space-y-6">
+                    <div className="relative aspect-video overflow-hidden rounded-lg shadow-lg">
+                      <img
+                        src={selectedDesign.screenshots[activeImage].url}
+                        alt={selectedDesign.screenshots[activeImage].caption}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    
+                    <div className="grid grid-cols-3 gap-4">
+                      {selectedDesign.screenshots.map((screenshot, index) => (
+                        <button
+                          key={index}
+                          className={`relative aspect-video rounded-lg overflow-hidden ${
+                            index === activeImage ? 'ring-2 ring-blue-500' : ''
+                          }`}
+                          onClick={() => setActiveImage(index)}
+                        >
+                          <img
+                            src={screenshot.url}
+                            alt={screenshot.caption}
+                            className="w-full h-full object-cover"
+                          />
+                        </button>
+                      ))}
+                    </div>
+                    
+                    <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
+                      {selectedDesign.screenshots[activeImage].caption}
+                    </p>
                   </div>
-                </div>
-              )}
-
-              <Button
-                className="flex items-center gap-2"
-                onClick={() => window.open(design.demoUrl, '_blank')}
-              >
-                View Live Demo
-                <ExternalLink size={16} />
-              </Button>
-            </div>
-
-            <div>
-              {design.screenshots && (
-                <div className="space-y-6">
-                  <div className="relative aspect-video overflow-hidden rounded-lg shadow-lg">
-                    <img
-                      src={design.screenshots[activeImage].url}
-                      alt={design.screenshots[activeImage].caption}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  
-                  <div className="grid grid-cols-3 gap-4">
-                    {design.screenshots.map((screenshot, index) => (
-                      <button
-                        key={index}
-                        className={`relative aspect-video rounded-lg overflow-hidden ${
-                          index === activeImage ? 'ring-2 ring-blue-500' : ''
-                        }`}
-                        onClick={() => setActiveImage(index)}
-                      >
-                        <img
-                          src={screenshot.url}
-                          alt={screenshot.caption}
-                          className="w-full h-full object-cover"
-                        />
-                      </button>
-                    ))}
-                  </div>
-                  
-                  <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
-                    {design.screenshots[activeImage].caption}
-                  </p>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
