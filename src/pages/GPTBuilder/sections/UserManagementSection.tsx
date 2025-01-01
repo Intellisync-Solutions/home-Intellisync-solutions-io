@@ -6,7 +6,6 @@ import {
   Shield, 
   Settings, 
   Activity, 
-  Lock, 
   ChevronRight, 
   Check, 
   X 
