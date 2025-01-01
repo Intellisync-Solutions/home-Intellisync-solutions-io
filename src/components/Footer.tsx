@@ -34,7 +34,8 @@ const Footer: React.FC = () => {
       { name: "Home", path: "/" },
       { name: "About", path: "/about" },
       { name: "Projects", path: "/projects" },
-      { name: "Contact", path: "/contact" }
+      { name: "Contact", path: "/contact" },
+      { name: "GPT Builder", path: "/gpt-builder" }
     ]},
    
     { title: "Legal", links: [

@@ -66,7 +66,7 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden md:flex items-center space-x-4">
             <NavLink to="/">Home</NavLink>
             <NavLink to="/about">About</NavLink>
             <NavLink to="/services">Services</NavLink>
@@ -112,6 +112,7 @@ const Header = () => {
             </div>
 
             <NavLink to="/contact">Contact</NavLink>
+            <NavLink to="/gpt-builder">GPT Builder</NavLink>
           </div>
 
           {/* Right Side Actions */}
@@ -177,6 +178,7 @@ const Header = () => {
                 <MobileNavLink to="/ai">AI</MobileNavLink>
                 <MobileNavLink to="/work">Our Work</MobileNavLink>
                 <MobileNavLink to="/contact">Contact</MobileNavLink>
+                <MobileNavLink to="/gpt-builder">GPT Builder</MobileNavLink>
               </div>
             </motion.div>
           )}

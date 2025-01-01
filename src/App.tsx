@@ -35,6 +35,7 @@ import HistoricalModel from './pages/ai-models/personas/HistoricalModel';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import NotFound from './pages/NotFound';
+import GPTBuilder from './pages/GPTBuilder/GPTBuilder';
 import { useState, useEffect } from 'react';
 import SplashPage from './components/PageSections/SplashPage/SplashPage';
 import { PageLayout } from './components/layout/PageLayout';
@@ -100,6 +101,9 @@ const App = () => {
                     <Route path="/ai/models/personas/historical" element={<HistoricalModel />} />
                     <Route path="/historical-model" element={<HistoricalModel />} />
                     <Route path="/contact" element={<Contact />} />
+                    
+                    {/* GPT Builder Page */}
+                    <Route path="/gpt-builder" element={<GPTBuilder />} />
                     
                     {/* Legal Pages */}
                     <Route path="/privacy" element={<PrivacyPolicy />} />
