@@ -4,7 +4,6 @@ import {
   Settings as SettingsIcon, 
   Bell, 
   Globe, 
-  Clock, 
   Palette, 
   Lock, 
   Key, 
@@ -12,15 +11,63 @@ import {
   Link2, 
   Shield, 
   ChevronRight, 
-  Check, 
   Code 
 } from 'lucide-react';
+import type { LucideProps } from 'lucide-react';
+
+// Add this type adapter near the top of the file, after imports
+const adaptLucideIcon = (LucideIcon: React.ForwardRefExoticComponent<Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>>): React.ComponentType<{className?: string, size?: number}> => {
+  return (props: {className?: string, size?: number}) => (
+    <LucideIcon 
+      className={props.className} 
+      size={props.size} 
+    />
+  );
+};
+
+// Define a more precise type for settings
+type SettingItem = {
+    label: string;
+    description: string;
+    type: "toggle";
+    value: boolean;
+} | {
+    label: string;
+    description: string;
+    type: "value";
+    value: string;
+};
+
+type SettingsCategory = {
+  category: string;
+  icon: React.ComponentType<{className?: string, size?: number}>;
+  settings: SettingItem[];
+};
+
+type Integration = {
+  service: string;
+  key: string;
+  status: string;
+};
+
+type Security = {
+  method: string;
+  description: string;
+  icon: React.ComponentType<{className?: string, size?: number}>;
+  enabled: boolean;
+};
+
+type Theme = {
+  name: string;
+  description: string;
+  active: boolean;
+};
 
 const settingsSections = [
   {
     key: 'general',
     title: 'General Settings',
-    icon: SettingsIcon,
+    icon: adaptLucideIcon(SettingsIcon),
     description: 'Configure basic platform preferences',
     content: (
       <div className="space-y-4">
@@ -32,37 +79,41 @@ const settingsSections = [
             {[
               {
                 category: 'Notifications',
-                icon: Bell,
+                icon: adaptLucideIcon(Bell),
                 settings: [
                   { 
                     label: 'Email Notifications', 
                     description: 'Receive email updates for important events',
-                    toggle: true 
+                    type: 'toggle',
+                    value: true 
                   },
                   { 
                     label: 'Push Notifications', 
                     description: 'Get real-time alerts on your device',
-                    toggle: false 
+                    type: 'toggle',
+                    value: false 
                   }
-                ]
+                ] as SettingItem[]
               },
               {
                 category: 'Localization',
-                icon: Globe,
+                icon: adaptLucideIcon(Globe),
                 settings: [
                   { 
                     label: 'Language', 
                     description: 'Select your preferred interface language',
+                    type: 'value',
                     value: 'English (US)' 
                   },
                   { 
                     label: 'Time Zone', 
                     description: 'Set your local time zone',
+                    type: 'value',
                     value: 'Eastern Time (UTC-5)' 
                   }
-                ]
+                ] as SettingItem[]
               }
-            ].map((section) => (
+            ].map((section: SettingsCategory) => (
               <div 
                 key={section.category} 
                 className="bg-white dark:bg-gray-900 p-4 rounded-md"
@@ -73,7 +124,7 @@ const settingsSections = [
                     {section.category}
                   </h4>
                 </div>
-                {section.settings.map((setting) => (
+                {section.settings.map((setting: SettingItem) => (
                   <div 
                     key={setting.label} 
                     className="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700 last:border-b-0"
@@ -86,24 +137,24 @@ const settingsSections = [
                         {setting.description}
                       </p>
                     </div>
-                    {setting.toggle !== undefined ? (
+                    {setting.type === 'toggle' ? (
                       <label className="flex items-center cursor-pointer">
                         <div className="relative">
                           <input 
                             type="checkbox" 
                             className="sr-only" 
-                            defaultChecked={setting.toggle} 
+                            defaultChecked={setting.value} 
                           />
                           <div className={`
                             w-10 h-4 rounded-full shadow-inner
-                            ${setting.toggle 
+                            ${setting.value 
                               ? 'bg-blue-500' 
                               : 'bg-gray-300 dark:bg-gray-600'}
                           `}></div>
                           <div className={`
                             dot absolute -left-1 -top-1 bg-white w-6 h-6 rounded-full 
                             shadow transition-all
-                            ${setting.toggle 
+                            ${setting.value 
                               ? 'transform translate-x-full bg-blue-500' 
                               : 'bg-gray-200 dark:bg-gray-700'}
                           `}></div>
@@ -126,7 +177,7 @@ const settingsSections = [
   {
     key: 'integrations',
     title: 'Integration Settings',
-    icon: Link2,
+    icon: adaptLucideIcon(Link2),
     description: 'Manage API keys and third-party connections',
     content: (
       <div className="space-y-4">
@@ -151,7 +202,7 @@ const settingsSections = [
                     key: 'gh_webhook_secret_xyz', 
                     status: 'Active' 
                   }
-                ].map((integration) => (
+                ].map((integration: Integration) => (
                   <div 
                     key={integration.service} 
                     className="bg-white dark:bg-gray-900 p-4 rounded-md flex justify-between items-center"
@@ -215,7 +266,7 @@ const settingsSections = [
   {
     key: 'security',
     title: 'Security Settings',
-    icon: Lock,
+    icon: adaptLucideIcon(Lock),
     description: 'Configure authentication and access controls',
     content: (
       <div className="space-y-4">
@@ -233,16 +284,16 @@ const settingsSections = [
                   {
                     method: 'Multi-Factor Authentication',
                     description: 'Add an extra layer of security',
-                    icon: Shield,
+                    icon: adaptLucideIcon(Shield),
                     enabled: true
                   },
                   {
                     method: 'Password Policy',
                     description: 'Enforce strong password requirements',
-                    icon: Key,
+                    icon: adaptLucideIcon(Key),
                     enabled: false
                   }
-                ].map((security) => (
+                ].map((security: Security) => (
                   <div 
                     key={security.method} 
                     className="bg-white dark:bg-gray-900 p-4 rounded-md flex justify-between items-center"
@@ -319,7 +370,7 @@ const settingsSections = [
   {
     key: 'customization',
     title: 'Customization',
-    icon: Palette,
+    icon: adaptLucideIcon(Palette),
     description: 'Personalize your interface',
     content: (
       <div className="space-y-4">
@@ -344,7 +395,7 @@ const settingsSections = [
                     description: 'Optimize screen space usage',
                     active: false 
                   }
-                ].map((theme) => (
+                ].map((theme: Theme) => (
                   <div 
                     key={theme.name} 
                     className="bg-white dark:bg-gray-900 p-4 rounded-md flex justify-between items-center"
