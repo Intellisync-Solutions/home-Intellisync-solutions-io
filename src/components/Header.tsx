@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from './ui/Button/button';
 import { useTheme } from '../context/ThemeContext';
-import { Sun, Moon, ChevronDown, Menu, X, Command } from 'lucide-react';
+import { Sun, Moon, ChevronDown, Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { cn } from '../lib/utils';
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
@@ -52,7 +52,11 @@ const Header = () => {
               whileTap={{ scale: 0.98 }}
             >
               <div className="p-2 rounded-lg bg-primary/10 text-primary">
-                <Command size={20} />
+                <img 
+                  src="/images/logo.png" 
+                  alt="IntelliSync Logo" 
+                  className="w-8 h-8 object-contain"
+                />
               </div>
               <div className="flex flex-col">
                 <motion.span 
@@ -71,6 +75,7 @@ const Header = () => {
             <NavLink to="/about">About</NavLink>
             <NavLink to="/services">Services</NavLink>
             <NavLink to="/ai">AI</NavLink>
+            <NavLink to="/blog">Blog</NavLink>
             
             {/* Work Dropdown */}
             <div className="relative group">
@@ -176,6 +181,7 @@ const Header = () => {
                 <MobileNavLink to="/about">About</MobileNavLink>
                 <MobileNavLink to="/services">Services</MobileNavLink>
                 <MobileNavLink to="/ai">AI</MobileNavLink>
+                <MobileNavLink to="/blog">Blog</MobileNavLink>
                 <MobileNavLink to="/work">Our Work</MobileNavLink>
                 <MobileNavLink to="/contact">Contact</MobileNavLink>
                 <MobileNavLink to="/gpt-builder">GPT Builder</MobileNavLink>

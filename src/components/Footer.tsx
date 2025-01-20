@@ -6,7 +6,7 @@ import {
   Github, 
   Mail, 
   MapPin, 
-  Clock 
+
 } from 'lucide-react';
 
 const Footer: React.FC = () => {
@@ -47,6 +47,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 py-12">
       <div className="container mx-auto px-4 grid md:grid-cols-3 gap-8">
+
         {/* Company Info & Description */}
         <div className="space-y-4">
           <h3 className="text-xl font-bold text-gray-900 dark:text-white">
@@ -113,17 +114,7 @@ const Footer: React.FC = () => {
             ))}
           </div>
 
-          {/* Current Time */}
-          <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-400">
-            <Clock size={16} />
-            <span>
-              {new Date('2024-12-30T16:16:23-05:00').toLocaleString('en-US', {
-                timeZone: 'America/New_York',
-                dateStyle: 'full',
-                timeStyle: 'long'
-              })}
-            </span>
-          </div>
+          
         </div>
       </div>
 
