@@ -40,6 +40,7 @@ import Blog from './pages/Blog/Blog';
 import { useState, useEffect } from 'react';
 import SplashPage from './components/PageSections/SplashPage/SplashPage';
 import { PageLayout } from './components/layout/PageLayout';
+import { GoogleAnalytics } from './components/GoogleAnalytics';
 
 const App = () => {
   const [showSplash, setShowSplash] = useState(() => {
@@ -68,6 +69,7 @@ const App = () => {
         <ToastProvider>
           <Router>
             <ScrollToTop />
+            <GoogleAnalytics />
             {showSplash && <SplashPage show={showSplash} onEnter={handleEnter} />}
             <SEO />
             <PageLayout>
