@@ -1,49 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Primary Meta Tags -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IntelliSync Solutions - Innovative Technology Solutions</title>
+    <meta name="title" content="IntelliSync Solutions - Innovative Technology Solutions" />
+    <meta name="description" content="Transform your digital experiences with IntelliSync Solutions' cutting-edge technology services. We specialize in AI, cloud computing, and custom software development to drive your digital transformation forward." />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://intellisyncsolutions.io/" />
+    <meta property="og:title" content="IntelliSync Solutions - Innovative Technology Solutions" />
+    <meta property="og:description" content="Transform your digital experiences with IntelliSync Solutions' cutting-edge technology services. We specialize in AI, cloud computing, and custom software development to drive your digital transformation forward." />
+    <meta property="og:image" content="https://intellisyncsolutions.io/og-image.jpg" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://intellisyncsolutions.io/" />
+    <meta property="twitter:title" content="IntelliSync Solutions - Innovative Technology Solutions" />
+    <meta property="twitter:description" content="Transform your digital experiences with IntelliSync Solutions' cutting-edge technology services." />
+    <meta property="twitter:image" content="https://intellisyncsolutions.io/og-image.jpg" />
+
+    <!-- Favicon and Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-EFLHKMF1FT"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', ' G-5D79YWJBKP');
+      gtag('config', 'G-EFLHKMF1FT');
     </script>
 
-    <meta charset="UTF-8" />
-    <!-- Primary Meta Tags -->
-    <title>IntelliSync Solutions - Innovative Technology Solutions</title>
-    <meta name="title" content="IntelliSync Solutions - Innovative Technology Solutions">
-    <meta name="description" content="Transform your digital experiences with IntelliSync Solutions' cutting-edge technology services. We specialize in AI, cloud computing, and custom software development to drive your digital transformation forward.">
-   
-  </head>
-  <body>
-    <div id="root"></div>
-    <div id="intellisync-chat"></div>
-    <script type="module" src="/src/main.tsx"></script>
-    <script 
-      src="https://intellisync-server-fbc47e09b67b.herokuapp.com/chatbot-embed.js" 
-      data-intellisync-id="pNXqEuc4jTU3Y07ylF5I" 
-      defer 
-      type="module"
-      crossorigin="anonymous"
-    ></script>
-    <!-- Accessibility -->
-    <noscript>
-      <p>For full functionality of this site it is necessary to enable JavaScript. Here are the <a href="https://www.enable-javascript.com/" target="_blank" rel="noopener noreferrer">instructions how to enable JavaScript in your web browser</a>.</p>
-    </noscript>
     <!-- Structured Data Breadcrumbs -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
-        "itemListElement": [{
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://home.intellisyncsolutions.io"
-        }]
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://home.intellisyncsolutions.io"
+          }
+        ]
       }
     </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div id="intellisync-chat"></div>
+
+    <!-- Main Application Script -->
+    <script type="module" src="/src/main.tsx"></script>
+
+    <!-- IntelliSync Chatbot Embed -->
+    <script
+      src="https://intellisync-server-fbc47e09b67b.herokuapp.com/chatbot-embed.js"
+      data-intellisync-id="pNXqEuc4jTU3Y07ylF5I"
+      defer
+      type="module"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Accessibility -->
+    <noscript>
+      <p>
+        For full functionality of this site it is necessary to enable JavaScript.
+        Here are the
+        <a
+          href="https://www.enable-javascript.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          instructions how to enable JavaScript in your web browser
+        </a>.
+      </p>
+    </noscript>
   </body>
 </html>
