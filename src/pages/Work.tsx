@@ -203,6 +203,7 @@ const Work = () => {
                       text-2xl font-bold ml-4 
                       bg-gradient-to-r ${value.gradient.text} 
                       bg-clip-text text-transparent
+                      break-words overflow-wrap-break-word max-w-full truncate
                     `}>
                       {value.title}
                     </h3>
@@ -252,9 +253,7 @@ const Work = () => {
                 <div className="md:w-2/3">
                   <h3 className="text-2xl font-semibold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Chris - Founder & CEO</h3>
                   <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-                    As the founder of Intellisync Solutions, I believe in creating technology that makes a difference. 
-                    My journey in tech has taught me that the best solutions come from truly understanding our clients' needs 
-                    and building lasting relationships.
+                  As the founder of Intellisync Solutions, my mission has always been personal: to create technology that genuinely impacts lives. Over the years, I’ve learned that the most meaningful solutions don’t come from fancy algorithms alone—they come from listening, understanding, and building real connections with the people we serve. This belief drives everything we do.”
                   </p>
                 </div>
                 <div className="md:w-1/3">
@@ -358,7 +357,7 @@ const Work = () => {
                   hover:shadow-xl transition-all duration-300
                   transform hover:-translate-y-2
                 `}>
-                  <div className="flex items-center mb-4">
+                  <div className="flex items-center mb-4 w-full overflow-hidden">
                     <div className={`
                       p-4 rounded-xl 
                       bg-gradient-to-br ${feature.gradient.from} ${feature.gradient.to}
@@ -370,6 +369,7 @@ const Work = () => {
                       text-2xl font-bold ml-4 
                       bg-gradient-to-r ${feature.gradient.text} 
                       bg-clip-text text-transparent
+                      break-words overflow-hidden whitespace-normal
                     `}>
                       {feature.title}
                     </h3>

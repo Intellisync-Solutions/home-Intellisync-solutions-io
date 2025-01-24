@@ -73,7 +73,7 @@ export const SEO = ({
   image = '/og-image.jpg',
   url = SITE_URL,
   type = 'website',
-  lang = 'en-US',
+  lang = 'en-CDN',
   publishDate,
   author,
   structuredData,

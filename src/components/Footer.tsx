@@ -3,14 +3,13 @@ import { Link } from 'react-router-dom';
 import { 
   Twitter, 
   Linkedin, 
-  Github, 
   Mail, 
   MapPin, 
 
 } from 'lucide-react';
 
 const Footer: React.FC = () => {
-  const currentYear = 2024;
+  const currentYear = 2025;
   const socialLinks = [
     { 
       icon: Twitter, 
@@ -22,11 +21,7 @@ const Footer: React.FC = () => {
       href: "https://linkedin.com/in/yourusername", 
       label: "LinkedIn" 
     },
-    { 
-      icon: Github, 
-      href: "https://github.com/yourusername", 
-      label: "GitHub" 
-    }
+  
   ];
 
   const footerLinks = [
