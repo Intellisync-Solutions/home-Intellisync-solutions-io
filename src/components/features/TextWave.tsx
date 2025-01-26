@@ -4,7 +4,7 @@ import { motion, Transition } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 export type TextShimmerWaveProps = {
-  children: string;
+  children: React.ReactNode;
   as?: React.ElementType;
   className?: string;
   duration?: number;
@@ -44,46 +44,48 @@ export function TextShimmerWave({
       )}
       style={{ color: 'var(--base-color)' }}
     >
-      {children.split('').map((char, i) => {
-        const delay = (i * duration * (1 / spread)) / children.length;
+      {typeof children === 'string'
+        ? children.split('').map((char, i) => {
+            const delay = (i * duration * (1 / spread)) / children.length;
 
-        return (
-          <motion.span
-            key={i}
-            className={cn(
-              'inline-block whitespace-pre [transform-style:preserve-3d]'
-            )}
-            initial={{
-              translateZ: 0,
-              scale: 1,
-              rotateY: 0,
-              color: 'var(--base-color)',
-            }}
-            animate={{
-              translateZ: [0, zDistance, 0],
-              translateX: [0, xDistance, 0],
-              translateY: [0, yDistance, 0],
-              scale: [1, scaleDistance, 1],
-              rotateY: [0, rotateYDistance, 0],
-              color: [
-                'var(--base-color)',
-                'var(--base-gradient-color)',
-                'var(--base-color)',
-              ],
-            }}
-            transition={{
-              duration: duration,
-              repeat: Infinity,
-              repeatDelay: (children.length * 0.05) / spread,
-              delay,
-              ease: 'easeInOut',
-              ...transition,
-            }}
-          >
-            {char}
-          </motion.span>
-        );
-      })}
+            return (
+              <motion.span
+                key={i}
+                className={cn(
+                  'inline-block whitespace-pre [transform-style:preserve-3d]'
+                )}
+                initial={{
+                  translateZ: 0,
+                  scale: 1,
+                  rotateY: 0,
+                  color: 'var(--base-color)',
+                }}
+                animate={{
+                  translateZ: [0, zDistance, 0],
+                  translateX: [0, xDistance, 0],
+                  translateY: [0, yDistance, 0],
+                  scale: [1, scaleDistance, 1],
+                  rotateY: [0, rotateYDistance, 0],
+                  color: [
+                    'var(--base-color)',
+                    'var(--base-gradient-color)',
+                    'var(--base-color)',
+                  ],
+                }}
+                transition={{
+                  duration: duration,
+                  repeat: Infinity,
+                  repeatDelay: (children.length * 0.05) / spread,
+                  delay,
+                  ease: 'easeInOut',
+                  ...transition,
+                }}
+              >
+                {char}
+              </motion.span>
+            );
+          })
+        : children}
     </MotionComponent>
   );
 }

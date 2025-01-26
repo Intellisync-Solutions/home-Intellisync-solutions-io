@@ -276,9 +276,9 @@ const OverviewSection = () => {
               </h3>
               <div className="space-y-3">
                 {[
-                  { label: 'Total AI Assistants', value: '127' },
-                  { label: 'Active Users', value: '1,245' },
-                  { label: 'Models Deployed', value: '342' }
+                  { label: 'Total AI Assistants', value: '40' },
+                  { label: 'Active Users', value: '15' },
+                  { label: 'Models Deployed', value: '40' }
                 ].map((stat) => (
                   <div 
                     key={stat.label} 

@@ -32,7 +32,7 @@ const NotFoundPage: React.FC = () => {
         </motion.div>
 
         <h1 className="text-6xl font-bold text-white mb-4 drop-shadow-lg">
-          <TextEffect preset="fade">🎉 HURRAY! 🎉 You found the page you were looking for! Honestly, this is like finding $20 in your pocket… but better. Go ahead, do a little happy dance—we won’t judge! 💃🕺</TextEffect>
+          <TextEffect preset="fade">404: Page Not Found</TextEffect>
         </h1>
         
         <p className="text-2xl text-white mb-8 max-w-2xl mx-auto px-4">

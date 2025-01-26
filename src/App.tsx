@@ -11,12 +11,27 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
 import Work from './pages/Work';
-import ButtonShowcase from './pages/work/ButtonShowcase/ButtonShowcase';
-import CardShowcase from './pages/work/CardShowcase/CardShowcase';
-import FormShowcase from './pages/work/FormShowcase/FormShowcase';
-import NavigationShowcase from './pages/work/NavigationShowcase/NavigationShowcase';
-import PageShowcase from './pages/work/PageDesignShowcase/PagesShowcase/PageShowcase';
-import PageDesignDetail from './pages/work/PageDesignShowcase/PageDesignDetail';
+import { lazy } from 'react';
+const AllDemos = lazy(() => import('./pages/work/AllDemos'));
+const ButtonShowcase = lazy(() => import('./pages/work/ButtonShowcases/ButtonShowcase'));
+const CardShowcase = lazy(() => import('./pages/work/CardShowcase/CardShowcase'));
+const FormShowcase = lazy(() => import('./pages/work/FormShowcase/FormShowcase'));
+const NavigationShowcase = lazy(() => import('./pages/work/NavigationShowcase/NavigationShowcase'));
+const PageShowcase = lazy(() => import('./pages/work/PageDesignShowcase/PagesShowcase/PageShowcase'));
+const PageDesignDetail = lazy(() => import('./pages/work/PageDesignShowcase/PageDesignDetail'));
+
+// AI Model Pages
+const ProfessorPixel = lazy(() => import('./pages/AIModels/ProfessorPixel'));
+const CourtsideClara = lazy(() => import('./pages/AIModels/CourtsideClaraPage'));
+const ByteGuru = lazy(() => import('./pages/AIModels/ByteGuruPage'));
+const HerHighnessHistoriaPage = lazy(() => import('./pages/AIModels/HerHighnessHistoriaPage'));
+const ChefByte = lazy(() => import('./pages/AIModels/ChefBytePage'));
+const ScriptSage = lazy(() => import('./pages/AIModels/ScriptSagePage'));
+const CoachCalm = lazy(() => import('./pages/AIModels/CoachCalmPage'));
+const DrData = lazy(() => import('./pages/AIModels/DrDataPage'));
+const TrendyTina = lazy(() => import('./pages/AIModels/TrendyTinaPage'));
+const PlayGround = lazy(() => import('./pages/AIModels/PlayGroundPage'));
+
 import Contact from './pages/Contact';
 import SaasDashboard from './pages/work/PageDesignShowcase/SaasShowcase/SaasDashboard';
 import ModernPortfolio from './pages/work/PageDesignShowcase/PortfolioShowcase/ModernPortfolio';
@@ -37,6 +52,7 @@ import TermsOfService from './pages/TermsOfService';
 import NotFound from './pages/NotFound';
 import GPTBuilder from './pages/GPTBuilder/GPTBuilder';
 import Blog from './pages/Blog/Blog';
+import GPTStore from './pages/GPTStore/GPTStore';
 import { useState, useEffect } from 'react';
 import SplashPage from './components/PageSections/SplashPage/SplashPage';
 import { PageLayout } from './components/layout/PageLayout';
@@ -81,6 +97,7 @@ const App = () => {
                     <Route path="/about" element={<About />} />
                     <Route path="/services" element={<Services />} />
                     <Route path="/work" element={<Work />} />
+                    <Route path="/work/demos" element={<AllDemos />} />
                     <Route path="/work/buttons" element={<ButtonShowcase />} />
                     <Route path="/work/cards" element={<CardShowcase />} />
                     <Route path="/work/forms" element={<FormShowcase />} />
@@ -102,11 +119,25 @@ const App = () => {
                     <Route path="/ai/models/personas/teacher" element={<TeacherModel />} />
                     <Route path="/ai/models/personas/literary" element={<LiteraryModel />} />
                     <Route path="/ai/models/personas/historical" element={<HistoricalModel />} />
-                    <Route path="/historical-model" element={<HistoricalModel />} />
+                    <Route path="/ai/models/personas/chef-byte" element={<ChefByte />} />
+                    <Route path="/ai-models/her-highness-historia" element={<HerHighnessHistoriaPage />} />
+                    <Route path="/ai-models/historia" element={<HerHighnessHistoriaPage />} />
+                    <Route path="/ai-models/professor-pixel" element={<ProfessorPixel />} />
+                    <Route path="/ai-models/courtside-clara" element={<CourtsideClara />} />
+                    <Route path="/ai-models/byte-guru" element={<ByteGuru />} />
+                    <Route path="/ai-models/chef-byte" element={<ChefByte />} />
+                    <Route path="/ai-models/chefbyte" element={<ChefByte />} />
+                    <Route path="/ai-models/script-sage" element={<ScriptSage />} />
+                    <Route path="/ai-models/coach-calm" element={<CoachCalm />} />
+                    <Route path="/ai-models/dr-data" element={<DrData />} />
+                    <Route path="/ai-models/trendy-tina" element={<TrendyTina />} />
+                    <Route path="/ai-models/playground" element={<PlayGround />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/blog" element={<Blog />} />
                     {/* GPT Builder Page */}
                     <Route path="/gpt-builder" element={<GPTBuilder />} />
+                    {/* GPT Store Page */}
+                    <Route path="/gpt-store" element={<GPTStore />} />
                     {/* Legal Pages */}
                     <Route path="/privacy" element={<PrivacyPolicy />} />
                     <Route path="/terms" element={<TermsOfService />} />
