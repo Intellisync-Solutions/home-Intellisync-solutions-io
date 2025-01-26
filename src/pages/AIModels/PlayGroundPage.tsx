@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Gamepad2, Puzzle, Star, Smile } from 'lucide-react';
 import { SEO } from '../../components/SEO';
-import { TextShimmerWave } from '../../components/features/TextWave' from '../../components/SEO';
+import { TextShimmerWave } from '../../components/features/TextWave';
 
 const PlayGroundPage: React.FC = () => {
   const features = [
@@ -47,7 +47,7 @@ const PlayGroundPage: React.FC = () => {
             Play Ground
           </TextShimmerWave>
         </div>
-
+      </motion.div>
       <div className="grid md:grid-cols-3 gap-8">
         {features.map((feature, index) => (
           <motion.div
